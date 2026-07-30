@@ -1,0 +1,88 @@
+[
+  {
+    "run_timestamp": "2026-05-25T18:46:09.204Z",
+    "status": "OPTIMIZATION_COMPLETE",
+    "files_improved": [
+      "index.html",
+      "_config.yml",
+      "404.html",
+      "compound-interest.html",
+      "google-indexer.js",
+      "insights.html",
+      "mortgage-calculator.html",
+      "percentage.html",
+      "playwright.config.js",
+      "privacy.html",
+      "tailwind.config.js",
+      "terms.html",
+      "tools.html",
+      "unit-converter.html"
+    ]
+  },
+  {
+    "run_timestamp": "2026-05-26T03:10:03.218Z",
+    "status": "ARTICLE_PUBLISHED",
+    "published_topic": "AI Job Vulnerability Calculator",
+    "file_created": "_posts/2026-05-26-ai-job-vulnerability-calculato.md"
+  },
+  {
+    "run_timestamp": "2026-05-26T03:14:04.240Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Global Sovereign Debt Crisis",
+    "file_created": "_posts/2026-05-26-global-sovereign-debt-crisis.md"
+  },
+  {
+    "run_timestamp": "2026-05-31T02:14:03.838Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Economic Impact of AI Regulation",
+    "file_created": "_posts/2026-05-31-economic-impact-of-ai-regulation.md"
+  },
+  {
+    "run_timestamp": "2026-06-07T02:30:22.120Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Critical Mineral Supply Chain Volatility and Reshoring Efforts",
+    "file_created": "_posts/2026-06-07-critical-mineral-supply-chain-volat.md"
+  },
+  {
+    "run_timestamp": "2026-06-14T02:33:51.532Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Global Water Scarcity and Geopolitical Tensions",
+    "file_created": "_posts/2026-06-14-global-water-scarcity-and-geopoliti.md"
+  },
+  {
+    "run_timestamp": "2026-06-21T02:36:29.267Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Escalating Global Food Price Inflation Driven by Climate Extremes",
+    "file_created": "_posts/2026-06-21-escalating-global-food-price-inflat.md"
+  },
+  {
+    "run_timestamp": "2026-06-28T02:15:24.093Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Ethical Implications and Global Governance Frameworks for Advanced AI/AGI",
+    "file_created": "_posts/2026-06-28-ethical-implications-and-global-gov.md"
+  },
+  {
+    "run_timestamp": "2026-07-05T01:56:39.353Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Persistent Global Housing Market Instability",
+    "file_created": "_posts/2026-07-05-persistent-global-housing-market-in.md"
+  },
+  {
+    "run_timestamp": "2026-07-12T01:29:36.685Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Global Carbon Border Adjustment Mechanisms (CBAM) Impacts",
+    "file_created": "_posts/2026-07-12-global-carbon-border-adjustment-mec.md"
+  },
+  {
+    "run_timestamp": "2026-07-19T01:27:28.441Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Global Resurgence of Nuclear Energy (Small Modular Reactors - SMRs)",
+    "file_created": "_posts/2026-07-19-global-resurgence-of-nuclear-energy.md"
+  },
+  {
+    "run_timestamp": "2026-07-26T01:44:08.012Z",
+    "status": "ARTICLE_PUBLISHED_WITH_TEMPLATE",
+    "published_topic": "Widespread Adoption of Central Bank Digital Currencies (CBDCs)",
+    "file_created": "_posts/2026-07-26-widespread-adoption-of-central-bank.md"
+  }
+]
