@@ -8,8 +8,13 @@ const BmiCalculator = lazy(() => import('./pages/BmiCalculator'));
 const TipCalculator = lazy(() => import('./pages/TipCalculator'));
 const SalaryCalculator = lazy(() => import('./pages/SalaryCalculator'));
 const AgeCalculator = lazy(() => import('./pages/AgeCalculator'));
+const ContactUs = lazy(() => import('./pages/ContactUs'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
 
 import { useI18n } from './contexts/i18n';
+import Footer from './components/Footer';
 
 function App() {
   const { lang, setLang, t } = useI18n();
@@ -75,9 +80,15 @@ function App() {
           <Route path="/tip-calculator" element={<TipCalculator />} />
           <Route path="/salary-calculator" element={<SalaryCalculator />} />
           <Route path="/age-calculator" element={<AgeCalculator />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/about" element={<AboutUs />} />
         </Routes>
         </Suspense>
       </div>
+
+      <Footer />
     </div>
   );
 }
