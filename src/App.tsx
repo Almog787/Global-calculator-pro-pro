@@ -29,13 +29,13 @@ function App() {
       </header>
 
       <div className="space-y-8 mt-6">
-        <PercentageFinder />
-        <div className="max-w-4xl mx-auto border-t border-slate-200"></div>
         <MortgageCalculator />
         <div className="max-w-4xl mx-auto border-t border-slate-200"></div>
-        <UnitConverter />
+        <PercentageFinder />
         <div className="max-w-4xl mx-auto border-t border-slate-200"></div>
         <CompoundInterest />
+        <div className="max-w-4xl mx-auto border-t border-slate-200"></div>
+        <UnitConverter />
       </div>
     </div>
   );

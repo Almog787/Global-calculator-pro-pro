@@ -42,7 +42,7 @@ export default function MortgageCalculator() {
   }, [principal, rate, years]);
 
   const defaultCurrency = lang === 'he' ? 'ILS' : lang === 'fr' || lang === 'es' ? 'EUR' : 'USD';
-  const currencyFormat = new Intl.NumberFormat(lang, { style: 'currency', currency: defaultCurrency, maximumFractionDigits: 0 });
+  const currencyFormat = new Intl.NumberFormat(lang, { style: 'currency', currency: defaultCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
     <main className="w-full max-w-4xl mx-auto px-4 md:px-6 flex-grow">

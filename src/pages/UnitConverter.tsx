@@ -3,14 +3,14 @@ import { useI18n } from '../i18n';
 
 const conversions: Record<string, Record<string, (v: number) => number>> = {
   length: {
-    'm-ft': v => v * 3.28084,
-    'ft-m': v => v / 3.28084,
-    'km-mi': v => v * 0.621371,
-    'mi-km': v => v / 0.621371,
+    'm-ft': v => v * 3.2808398950131,
+    'ft-m': v => v / 3.2808398950131,
+    'km-mi': v => v * 0.62137119223733,
+    'mi-km': v => v / 0.62137119223733,
   },
   weight: {
-    'kg-lbs': v => v * 2.20462,
-    'lbs-kg': v => v / 2.20462,
+    'kg-lbs': v => v * 2.2046226218488,
+    'lbs-kg': v => v / 2.2046226218488,
   },
   temp: {
     'c-f': v => (v * 9/5) + 32,

@@ -225,12 +225,26 @@ type I18nContextType = {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
+function getInitialLanguage(): Language {
+  if (typeof window === 'undefined') return 'en';
+  
+  const savedLang = localStorage.getItem('globalcalc_lang') as Language;
+  if (savedLang && translations[savedLang]) return savedLang;
+
+  const browserLang = navigator.language.split('-')[0];
+  if (['en', 'he', 'es', 'fr', 'ar'].includes(browserLang)) {
+    return browserLang as Language;
+  }
+  return 'en';
+}
+
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Language>('he');
+  const [lang, setLang] = useState<Language>(getInitialLanguage());
 
   useEffect(() => {
     document.documentElement.dir = translations[lang].dir;
     document.documentElement.lang = lang;
+    localStorage.setItem('globalcalc_lang', lang);
   }, [lang]);
 
   const value = {
