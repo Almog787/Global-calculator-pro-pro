@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useI18n } from '../i18n';
+import { useI18n } from '../contexts/i18n';
 
 export default function CompoundInterest() {
   const { t, lang } = useI18n();
@@ -53,6 +53,7 @@ export default function CompoundInterest() {
   return (
     <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
       <Helmet>
+        <link rel="canonical" href="https://globalcalcpro.com/compound-interest" />
         <title>{t.compoundTitle} | {t.title}</title>
         <meta name="description" content={t.compoundDesc} />
       </Helmet>

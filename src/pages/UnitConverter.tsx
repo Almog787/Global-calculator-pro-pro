@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { useI18n } from '../i18n';
+import { useI18n } from '../contexts/i18n';
 
 const conversions: Record<string, Record<string, (v: number) => number>> = {
   length: {
@@ -52,6 +52,7 @@ export default function UnitConverter() {
   return (
     <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
       <Helmet>
+        <link rel="canonical" href="https://globalcalcpro.com/unit-converter" />
         <title>{t.unitConvTitle} | {t.title}</title>
         <meta name="description" content={t.unitConvDesc} />
       </Helmet>

@@ -3,7 +3,7 @@ import MortgageCalculator from './pages/MortgageCalculator';
 import CompoundInterest from './pages/CompoundInterest';
 import PercentageFinder from './pages/PercentageFinder';
 import UnitConverter from './pages/UnitConverter';
-import { useI18n } from './i18n';
+import { useI18n } from './contexts/i18n';
 
 function App() {
   const { lang, setLang, t } = useI18n();
