@@ -95,9 +95,9 @@ export default function MortgageCalculator() {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center items-center min-h-[300px] border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
-        <div className="w-full h-full min-h-[300px]" dir="ltr">
-          <ResponsiveContainer width="100%" height="100%">
+      <div className="flex-1 flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
+        <div className="w-full h-[320px]" dir="ltr">
+          <ResponsiveContainer width="100%" height={320}>
             <PieChart>
               <Pie
                 data={chartData}

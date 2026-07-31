@@ -128,9 +128,9 @@ export default function CompoundInterest() {
         </div>
       </div>
 
-      <div className="flex-[1.5] flex flex-col justify-center items-center min-h-[400px] border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
-        <div className="w-full h-full min-h-[400px]" dir="ltr">
-          <ResponsiveContainer width="100%" height="100%">
+      <div className="flex-[1.5] flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
+        <div className="w-full h-[360px]" dir="ltr">
+          <ResponsiveContainer width="100%" height={360}>
             <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorContributions" x1="0" y1="0" x2="0" y2="1">

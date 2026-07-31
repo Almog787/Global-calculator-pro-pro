@@ -1,5 +1,7 @@
 # Global Calc Pro 🧮
 
+🌐 **Website:** [https://globalcalcpro.com](https://globalcalcpro.com)
+
 [![English](https://img.shields.io/badge/Language-English-blue)](#english) [![Hebrew](https://img.shields.io/badge/Language-%D7%A2%D7%91%D7%A8%D7%99%D7%AA-blue)](#hebrew)
 
 ---
@@ -8,7 +10,7 @@
 ## 🇬🇧 English
 
 ### Overview
-**Global Calc Pro** is a modern, fast, and fully responsive suite of online calculators. It is designed to provide users with essential mathematical tools in a clean, elegant, and distraction-free interface. Built with modern web technologies, it ensures high performance and SEO-friendly routing.
+**Global Calc Pro** ([globalcalcpro.com](https://globalcalcpro.com)) is a modern, fast, and fully responsive suite of online calculators. It is designed to provide users with essential mathematical tools in a clean, elegant, and distraction-free interface. Built with modern web technologies, it ensures high performance and SEO-friendly routing.
 
 ### 🌟 Features
 - **Mortgage Calculator:** Calculate your monthly payments and total interest easily.
@@ -49,7 +51,7 @@
 ## 🇮🇱 עברית
 
 ### תקציר
-**Global Calc Pro** היא חבילת מחשבונים אינטרנטית מודרנית, מהירה ומותאמת לכלל המסכים. היא נועדה לספק למשתמשים כלים מתמטיים חיוניים בממשק נקי, אלגנטי ונטול הסחות דעת. המערכת בנויה עם טכנולוגיות הווב העדכניות ביותר, מה שמבטיח ביצועים גבוהים והתאמה מלאה למנועי חיפוש (SEO).
+**Global Calc Pro** ([https://globalcalcpro.com](https://globalcalcpro.com)) היא חבילת מחשבונים אינטרנטית מודרנית, מהירה ומותאמת לכלל המסכים. היא נועדה לספק למשתמשים כלים מתמטיים חיוניים בממשק נקי, אלגנטי ונטול הסחות דעת. המערכת בנויה עם טכנולוגיות הווב העדכניות ביותר, מה שמבטיח ביצועים גבוהים והתאמה מלאה למנועי חיפוש (SEO).
 
 ### 🌟 יכולות מרכזיות
 - **מחשבון משכנתא:** חישוב תשלומים חודשיים וסך ריבית בקלות.
