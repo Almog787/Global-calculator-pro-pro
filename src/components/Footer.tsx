@@ -16,6 +16,7 @@ export default function Footer() {
   ];
 
   const legalLinks = [
+    { path: '/suggest', label: t.suggestionsTitle },
     { path: '/about', label: t.aboutTitle },
     { path: '/contact', label: t.contactTitle },
     { path: '/privacy-policy', label: t.privacyTitle },

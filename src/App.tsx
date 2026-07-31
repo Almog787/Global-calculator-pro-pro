@@ -12,6 +12,7 @@ const ContactUs = lazy(() => import('./pages/ContactUs'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
+const SuggestFeature = lazy(() => import('./pages/SuggestFeature'));
 
 import { useI18n } from './contexts/i18n';
 import Footer from './components/Footer';
@@ -38,17 +39,26 @@ function App() {
           <Link to="/" className="text-2xl font-black font-headline tracking-tight text-stone-900">
             {t.title}<span className="text-blue-600">.</span>
           </Link>
-          <select 
-            value={lang} 
-            onChange={(e) => setLang(e.target.value as any)}
-            className="bg-stone-100 border-none text-stone-700 text-sm rounded-lg px-4 py-2 cursor-pointer focus:ring-2 focus:ring-blue-500 transition-all font-medium"
-          >
-            <option value="he">עברית</option>
-            <option value="en">English</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="ar">العربية</option>
-          </select>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/suggest"
+              className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold rounded-lg transition-colors border border-blue-200/80 shadow-xs"
+            >
+              <span className="material-symbols-outlined text-base">lightbulb</span>
+              <span className="hidden sm:inline">{t.suggestionsTitle || 'Suggest Feature'}</span>
+            </Link>
+            <select 
+              value={lang} 
+              onChange={(e) => setLang(e.target.value as any)}
+              className="bg-stone-100 border-none text-stone-700 text-sm rounded-lg px-3 py-2 cursor-pointer focus:ring-2 focus:ring-blue-500 transition-all font-medium"
+            >
+              <option value="he">עברית</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="fr">Français</option>
+              <option value="ar">العربية</option>
+            </select>
+          </div>
         </div>
         <div className="max-w-5xl mx-auto px-4 md:px-6 mt-2">
           <nav className="flex space-x-2 md:space-x-4 rtl:space-x-reverse overflow-x-auto scrollbar-hide">
@@ -84,6 +94,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/suggest" element={<SuggestFeature />} />
         </Routes>
         </Suspense>
       </div>
