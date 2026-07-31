@@ -1,87 +1,94 @@
 # Global Calc Pro 🧮
 
-🌐 **Website:** [https://globalcalcpro.com](https://globalcalcpro.com)
-
-[![English](https://img.shields.io/badge/Language-English-blue)](#english) [![Hebrew](https://img.shields.io/badge/Language-%D7%A2%D7%91%D7%A8%D7%99%D7%AA-blue)](#hebrew)
-
----
-
-<a name="english"></a>
-## 🇬🇧 English
-
-### Overview
-**Global Calc Pro** ([globalcalcpro.com](https://globalcalcpro.com)) is a modern, fast, and fully responsive suite of online calculators. It is designed to provide users with essential mathematical tools in a clean, elegant, and distraction-free interface. Built with modern web technologies, it ensures high performance and SEO-friendly routing.
-
-### 🌟 Features
-- **Mortgage Calculator:** Calculate your monthly payments and total interest easily.
-- **Compound Interest Calculator:** Visualize the growth of your investments over time.
-- **Percentage Finder:** Quickly solve percentage-based problems (e.g., X% of Y, percentage change).
-- **Unit Converter:** Convert seamlessly between Length, Weight, and Temperature.
-- **Multilingual Support:** Fully supports English, Hebrew (RTL), Spanish, French, and Arabic.
-- **SEO Optimized:** Server-side routing paths, dynamic meta tags using React Helmet, and an automated sitemap.
-
-### 🛠️ Tech Stack
-- **Frontend Framework:** React 19 + Vite
-- **Routing:** React Router DOM (v6)
-- **Styling:** Tailwind CSS (with Chivo & Public Sans fonts)
-- **SEO & Head Management:** React Helmet Async
-- **Language Support:** Custom i18n Context with RTL/LTR dynamic layout
-
-### 🚀 Getting Started
-1. **Clone the repository** (if applicable):
-   ```bash
-   git clone <repo-url>
-   ```
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-3. **Run the development server:**
-   ```bash
-   npm run dev
-   ```
-4. **Build for production:**
-   ```bash
-   npm run build
-   ```
+[![Official Website](https://img.shields.io/badge/Website-globalcalcpro.com-0066FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://globalcalcpro.com)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![SEO Ready](https://img.shields.io/badge/SEO-Optimized-emerald?style=for-the-badge&logo=google&logoColor=white)](https://globalcalcpro.com)
 
 ---
 
-<a name="hebrew"></a>
-## 🇮🇱 עברית
+## 🌐 Official Website
+👉 **[https://globalcalcpro.com](https://globalcalcpro.com)**
 
-### תקציר
-**Global Calc Pro** ([https://globalcalcpro.com](https://globalcalcpro.com)) היא חבילת מחשבונים אינטרנטית מודרנית, מהירה ומותאמת לכלל המסכים. היא נועדה לספק למשתמשים כלים מתמטיים חיוניים בממשק נקי, אלגנטי ונטול הסחות דעת. המערכת בנויה עם טכנולוגיות הווב העדכניות ביותר, מה שמבטיח ביצועים גבוהים והתאמה מלאה למנועי חיפוש (SEO).
+---
 
-### 🌟 יכולות מרכזיות
-- **מחשבון משכנתא:** חישוב תשלומים חודשיים וסך ריבית בקלות.
-- **מחשבון ריבית דריבית:** הדמיית צמיחת ההשקעות שלך לאורך זמן.
-- **מחשבון אחוזים:** פתרון מהיר של בעיות מבוססות אחוזים (לדוגמה, X% מתוך Y, שינוי באחוזים).
-- **ממיר יחידות:** המרה חלקה בין יחידות אורך, משקל וטמפרטורה.
-- **תמיכה בריבוי שפות:** תמיכה מלאה בעברית (RTL), אנגלית, ספרדית, צרפתית וערבית.
-- **מותאם ל-SEO (קידום אתרים):** ניתוב דפים מתקדם, תגיות Meta דינמיות באמצעות React Helmet ומפת אתר מעודכנת.
+## 🚀 Overview
 
-### 🛠️ טכנולוגיות
-- **סביבת פיתוח:** React 19 + Vite
-- **ניתוב (Routing):** React Router DOM
-- **עיצוב:** Tailwind CSS (גופנים: Chivo & Public Sans)
-- **ניהול SEO (קידום אתרים):** React Helmet Async
-- **ניהול שפות:** Custom i18n Context לתמיכה אוטומטית בכיווני קריאה (RTL/LTR)
+**Global Calc Pro** is a next-generation, high-performance web suite of precision online calculators and converters. Built with a modern, client-first architecture, Global Calc Pro delivers instantaneous computations, interactive visual charting, and an intuitive, distraction-free user experience tailored for users worldwide.
 
-### 🚀 מדריך התקנה
-1. **שכפול המאגר:**
-   ```bash
-   git clone <repo-url>
-   ```
-2. **התקנת ספריות:**
-   ```bash
-   npm install
-   ```
-3. **הפעלת שרת פיתוח:**
-   ```bash
-   npm run dev
-   ```
-4. **בנייה לגרסת ייצור (Production):**
-   ```bash
-   npm run build
-   ```
+Whether computing long-term mortgage schedules, analyzing compound interest growth, estimating salary distributions, or performing multi-unit conversions, Global Calc Pro combines mathematical rigor with elegant design and complete internationalization.
+
+---
+
+## ✨ Key Features & Calculators
+
+### 🏡 Financial & Real Estate Tools
+* **Mortgage Calculator**: Calculate exact monthly payments, total interest over time, and home loan amortization schedules with real-time visual pie charts.
+* **Compound Interest Calculator**: Forecast investment growth over annual or multi-year terms with dynamic stacked visual area charts and year-by-year detailed breakdowns.
+* **Salary & Income Calculator**: Convert hourly wage to daily, weekly, monthly, and annual gross earnings seamlessly.
+
+### 📐 Everyday Mathematics & Converters
+* **Percentage Calculator**: Solve complex percent calculations instantly—including percent change, percentage of total, and ratio adjustments.
+* **Universal Unit Converter**: Real-time conversions across physical dimensions including Length, Weight, Temperature, and Volume.
+
+### 🩺 Health & Lifestyle Tools
+* **BMI Calculator**: Determine Body Mass Index with color-coded health status gauges and personalized wellness ranges.
+* **Age Calculator**: Precise calculation of age down to exact years, months, weeks, and days, including upcoming birthday countdowns.
+* **Tip & Bill Splitter**: Instant meal tip calculation with per-person bill splitting for groups.
+
+---
+
+## 🌍 Global Usability & SEO Infrastructure
+
+* **Multi-Language Engine**: Built-in support for 5 major global languages:
+  * 🇬🇧 **English**
+  * 🇮🇱 **Hebrew** *(Native RTL layout support)*
+  * 🇪🇸 **Spanish**
+  * 🇫🇷 **French**
+  * 🇦🇪 **Arabic** *(Native RTL layout support)*
+* **Automated Search Engine Indexing**: Integrated with the **Google Search Console Indexing API** to automatically trigger URL indexing upon every deployment build.
+* **SEO Excellence**: Fully dynamic Open Graph metadata, dynamic document titles (`react-helmet-async`), automated `sitemap.xml`, and clean, static fallback routing (`404.html` redirection).
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend Framework** | React 19 + TypeScript |
+| **Build Tooling** | Vite 6 |
+| **Styling & UI** | Tailwind CSS v4, Google Fonts (Chivo, Public Sans) |
+| **Data Visualization** | Recharts (Responsive Area & Pie Charts) |
+| **Routing** | React Router DOM v6 |
+| **SEO & Head Management** | React Helmet Async, Custom Google Indexing API Integration |
+| **Deployment** | Static Hosting Ready (GitHub Pages, Cloudflare Pages, Vercel, Netlify) |
+
+---
+
+## 💻 Local Development & Build Commands
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/Almog787/GlobalCalcPro.git
+cd GlobalCalcPro
+```
+
+### 2. Install dependencies
+```bash
+npm install
+```
+
+### 3. Start the development server
+```bash
+npm run dev
+```
+
+### 4. Build for production & index site
+```bash
+npm run build
+```
+
+---
+
+© **Global Calc Pro** — Precision Mathematical Tools for Everyone.
