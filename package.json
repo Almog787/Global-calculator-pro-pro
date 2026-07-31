@@ -1,0 +1,33 @@
+{
+  "name": "global-calc-pro",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build && cp dist/index.html dist/404.html && node scripts/index-site.js",
+    "index-site": "node scripts/index-site.js",
+    "index-pages": "node scripts/index-pages.js",
+    "preview": "vite preview",
+    "test": "echo \"No tests specified yet\" && exit 0"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "googleapis": "^173.0.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-helmet-async": "^3.0.0",
+    "react-router-dom": "^7.18.2",
+    "recharts": "^3.10.1",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.5",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.25",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.0"
+  }
+}
