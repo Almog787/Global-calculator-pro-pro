@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          lfs: true # Ensures full download if the ZIP is tracked via Git LFS
+          fetch-depth: 0 # Fetches full git history for reliable force pushing
 
       - name: Verify ZIP file exists
         run: |
@@ -27,16 +30,24 @@ jobs:
 
       - name: Extract and sync files
         run: |
-          # Create a temporary directory for extraction
+          # Create temporary directory for extraction
           mkdir -p temp_extracted
           
-          # Extract the ZIP file into the temp directory
+          # Extract ZIP archive
           unzip -o global-calculator-pro.zip -d temp_extracted/
 
-          # Remove .github folder from extracted content to prevent permission conflicts
+          # Remove .github directory from extracted files to avoid permissions issue
           rm -rf temp_extracted/.github
 
-          # Remove all existing files in root except preserved directories/files
+          # Detect if ZIP contents are wrapped inside a single top-level folder and flatten it
+          INSIDE_ITEMS=(temp_extracted/*)
+          if [ ${#INSIDE_ITEMS[@]} -eq 1 ] && [ -d "${INSIDE_ITEMS[0]}" ]; then
+            echo "Detected nested directory inside ZIP: ${INSIDE_ITEMS[0]}. Moving contents to root..."
+            mv ${INSIDE_ITEMS[0]}/* temp_extracted/ 2>/dev/null || true
+            mv ${INSIDE_ITEMS[0]}/.* temp_extracted/ 2>/dev/null || true
+          fi
+
+          # Clean existing repository files except git system files and the zip itself
           find . -mindepth 1 -maxdepth 1 \
             ! -name '.git' \
             ! -name '.github' \
@@ -44,23 +55,30 @@ jobs:
             ! -name 'temp_extracted' \
             -exec rm -rf {} +
 
-          # Copy extracted content to the repository root
+          # Copy extracted files to repository root
           cp -a temp_extracted/. .
-
-          # Clean up temporary extraction folder
           rm -rf temp_extracted
+
+          # Log extracted files to Action summary for verification
+          echo "=== Files present in root after extraction ==="
+          ls -la
 
       - name: Commit and Push changes
         run: |
-          # Configure Git as the GitHub Actions bot
+          # Configure Git identities
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Stage all additions, updates, and deletions
+          # Stage all changes
           git add -A
           
-          # Commit changes; bypass if there are no differences
-          git commit -m "Sync repository to match global-calculator-pro.zip contents" || echo "No changes to commit"
+          # Print status log
+          git status
           
-          # Push the updated state to the main branch
-          git push origin main
+          # Check if there are actual changes before committing
+          if git diff --staged --quiet; then
+            echo "No changes detected between ZIP content and repository."
+          else
+            git commit -m "Sync repository to match global-calculator-pro.zip contents"
+            git push --force origin main
+          fi
