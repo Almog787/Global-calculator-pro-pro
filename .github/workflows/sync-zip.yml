@@ -21,38 +21,48 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - name: Extract and Overwrite Files By Matching Names
+      - name: Wipe Existing Files and Unpack ZIP
         run: |
-          # 1. Create a temporary directory and extract the ZIP contents
+          # 1. Create a temporary folder and extract the ZIP
           mkdir -p temp_extracted
           unzip -o global-calculator-pro.zip -d temp_extracted/
 
-          # 2. Remove .github directory from extracted files to avoid permission conflicts
+          # 2. Remove .github directory from extracted ZIP if present (prevents permission errors)
           rm -rf temp_extracted/.github
 
-          # 3. Flatten directory if files inside ZIP are wrapped in a single root folder
+          # 3. Flatten inner directory if ZIP contents are nested inside a single folder
           INSIDE_ITEMS=(temp_extracted/*)
           if [ ${#INSIDE_ITEMS[@]} -eq 1 ] && [ -d "${INSIDE_ITEMS[0]}" ]; then
             mv ${INSIDE_ITEMS[0]}/* temp_extracted/ 2>/dev/null || true
             mv ${INSIDE_ITEMS[0]}/.* temp_extracted/ 2>/dev/null || true
           fi
 
-          # 4. Direct overwrite: Match relative paths and overwrite matching files verbosely (-v)
-          echo "=== Replacing files by matching relative paths and names ==="
-          cp -rvf temp_extracted/. .
+          # 4. Total deletion: Remove all files and folders in root except .git, .github, and the ZIP
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name '.git' \
+            ! -name '.github' \
+            ! -name 'global-calculator-pro.zip' \
+            ! -name 'temp_extracted' \
+            -exec rm -rf {} +
 
-          # 5. Clean up temporary folder
+          # 5. Copy extracted files from ZIP into repository root
+          cp -a temp_extracted/. .
           rm -rf temp_extracted
+
+          # 6. Generate a timestamp file to guarantee a modified file on every execution
+          echo "Last sync execution: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > .sync_timestamp
 
       - name: Commit and Force Push
         run: |
-          # Configure Git identities for Actions bot
+          # Configure Git bot credentials
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Stage all updated files
+          # Stage all changes (deletions, additions, modifications)
           git add -A
           
-          # Commit and force push changes
-          git commit -m "Overwrite matching files from global-calculator-pro.zip" || echo "No file content differences detected by Git"
+          # Force commit using --allow-empty to guarantee a new commit on every run
+          git commit --allow-empty -m "Replaced repository files with ZIP contents [$(date -u +'%Y-%m-%d %H:%M:%S UTC')]"
+          
+          # Force push to origin main
           git push --force origin main
