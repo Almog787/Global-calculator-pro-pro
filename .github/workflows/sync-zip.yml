@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  workflows: write # Grants permission to create or update files in .github/workflows/
 
 jobs:
   sync-zip:
@@ -45,7 +46,7 @@ jobs:
             ! -name 'temp_extracted' \
             -exec rm -rf {} +
 
-          # Copy the new extracted files to the root directory (including hidden files)
+          # Copy the new extracted files to the root directory
           cp -a temp_extracted/. .
 
           # Clean up the temporary folder
