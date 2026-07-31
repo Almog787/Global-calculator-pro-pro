@@ -1,0 +1,57 @@
+name: Sync Repo with ZIP
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'global-calculator-pro.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract and sync files
+        run: |
+          # Create a temporary directory for extraction
+          mkdir -p temp_extracted
+          
+          # Extract the ZIP file into the temp directory
+          unzip -o global-calculator-pro.zip -d temp_extracted/
+
+          # Remove all existing files in the root directory 
+          # while safely preserving .git, .github, the zip file, and the temp folder
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name '.git' \
+            ! -name '.github' \
+            ! -name 'global-calculator-pro.zip' \
+            ! -name 'temp_extracted' \
+            -exec rm -rf {} +
+
+          # Copy the new extracted files to the root directory (including hidden files)
+          cp -a temp_extracted/. .
+
+          # Clean up the temporary folder
+          rm -rf temp_extracted
+
+      - name: Commit and Push changes
+        run: |
+          # Configure Git as the GitHub Actions bot
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Stage all additions, updates, and deletions
+          git add -A
+          
+          # Commit changes; bypass if there are no differences
+          git commit -m "Sync repository to match global-calculator-pro.zip contents" || echo "No changes to commit"
+          
+          # Push the updated state to the main branch
+          git push origin main
