@@ -1,12 +1,15 @@
 name: Sync Repo with ZIP
 
 on:
+  # Enables manual execution via the GitHub Actions UI ("Run workflow" button)
+  workflow_dispatch:
+
+  # Triggers automatically when global-calculator-pro.zip is updated on the main branch
   push:
     branches:
       - main
     paths:
       - 'global-calculator-pro.zip'
-  workflow_dispatch:
 
 permissions:
   contents: write
@@ -17,6 +20,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Verify ZIP file exists
+        run: |
+          if [ ! -f "global-calculator-pro.zip" ]; then
+            echo "Error: global-calculator-pro.zip was not found in the root directory."
+            exit 1
+          fi
 
       - name: Extract and sync files
         run: |
