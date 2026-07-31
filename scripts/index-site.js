@@ -1,8 +1,34 @@
 import { google } from 'googleapis';
 import fs from 'fs';
+import path from 'path';
+
+// Try loading local .env if available
+try {
+  if (fs.existsSync('.env')) {
+    const envContent = fs.readFileSync('.env', 'utf8');
+    envContent.split('\n').forEach((line) => {
+      const match = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/);
+      if (match) {
+        const key = match[1];
+        let value = match[2] || '';
+        if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
+        if (value.startsWith("'") && value.endsWith("'")) value = value.slice(1, -1);
+        if (!process.env[key]) {
+          process.env[key] = value;
+        }
+      }
+    });
+  }
+} catch (e) {
+  // Ignore env read error
+}
 
 async function indexSite() {
-  const serviceAccountKeyRaw = process.env.GOOGLE_SERVICE_ACCOUNT_KEY;
+  const serviceAccountKeyRaw =
+    process.env.GOOGLE_SERVICE_ACCOUNT_KEY ||
+    process.env.GCP_SA_KEY ||
+    process.env.SERVICE_ACCOUNT_KEY ||
+    process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
   if (!serviceAccountKeyRaw) {
     console.log('⚠️ GOOGLE_SERVICE_ACCOUNT_KEY environment variable is not set. Skipping Google Indexing submission.');
@@ -21,10 +47,22 @@ async function indexSite() {
       const decoded = Buffer.from(trimmed, 'base64').toString('utf8');
       credentials = JSON.parse(decoded);
     }
+
+    // Ensure private_key handles escaped newline characters from CI/CD secrets
+    if (credentials && credentials.private_key) {
+      credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+    }
   } catch (err) {
     console.error('❌ Failed to parse GOOGLE_SERVICE_ACCOUNT_KEY:', err.message);
     return;
   }
+
+  if (!credentials || !credentials.client_email || !credentials.private_key) {
+    console.error('❌ Invalid Service Account JSON: Missing client_email or private_key.');
+    return;
+  }
+
+  console.log(`🔑 Service Account loaded for: ${credentials.client_email}`);
 
   // Extract URLs from sitemap if available or fallback to list
   let urls = [
@@ -45,8 +83,14 @@ async function indexSite() {
   ];
 
   try {
-    if (fs.existsSync('public/sitemap.xml')) {
-      const sitemapContent = fs.readFileSync('public/sitemap.xml', 'utf8');
+    const sitemapPath = fs.existsSync('dist/sitemap.xml')
+      ? 'dist/sitemap.xml'
+      : fs.existsSync('public/sitemap.xml')
+      ? 'public/sitemap.xml'
+      : null;
+
+    if (sitemapPath) {
+      const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
       const matches = sitemapContent.match(/<loc>(.*?)<\/loc>/g);
       if (matches && matches.length > 0) {
         urls = matches.map(m => m.replace(/<\/?loc>/g, '').trim());
