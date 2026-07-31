@@ -41,7 +41,7 @@ export default function UnitConverter() {
     return () => clearTimeout(handler);
   }, [val, cat, type]);
 
-  const numFormat = new Intl.NumberFormat(lang, { maximumFractionDigits: 4 });
+  const numFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { maximumFractionDigits: 4 });
 
   const categoryNames: Record<string, string> = {
     length: t.length,

@@ -85,7 +85,43 @@ export const translations: Translations = {
     yearsToGrow: 'Years to Grow',
     futureValue: 'Future Value',
     totalContributions: 'Total Contributions',
-    totalInterestEarned: 'Total Interest Earned'
+    totalInterestEarned: 'Total Interest Earned',
+
+    bmiTitle: 'BMI Calculator',
+    bmiDesc: 'Check your Body Mass Index.',
+    bmiExplanation: 'Enter your height and weight to calculate your BMI and see which category you fall into.',
+    height: 'Height',
+    weightBmi: 'Weight',
+    bmiResult: 'Your BMI',
+    bmiCategory: 'Category',
+
+    tipTitle: 'Tip Calculator',
+    tipDesc: 'Calculate tips and split bills easily.',
+    tipExplanation: 'Enter the bill amount and tip percentage to calculate the total and how much each person should pay.',
+    billAmount: 'Bill Amount',
+    tipPercentage: 'Tip %',
+    numberOfPeople: 'Number of People',
+    tipAmount: 'Tip Amount',
+    totalPerPerson: 'Total per Person',
+
+    salaryTitle: 'Salary Calculator',
+    salaryDesc: 'Convert hourly, weekly, monthly, and annual salaries.',
+    salaryExplanation: 'Enter your salary in any frequency to see the equivalent amount in other frequencies.',
+    salaryAmount: 'Salary Amount',
+    salaryFrequency: 'Frequency',
+    hourly: 'Hourly',
+    weekly: 'Weekly',
+    monthly: 'Monthly',
+    yearly: 'Yearly',
+
+    ageTitle: 'Age Calculator',
+    ageDesc: 'Calculate your exact age in years, months, and days.',
+    ageExplanation: 'Enter your date of birth to find out exactly how old you are today.',
+    dateOfBirth: 'Date of Birth',
+    exactAge: 'Exact Age',
+    yearsOld: 'Years',
+    monthsOld: 'Months',
+    daysOld: 'Days'
   },
   he: {
     dir: 'rtl',
@@ -123,7 +159,43 @@ export const translations: Translations = {
     yearsToGrow: 'שנות צמיחה',
     futureValue: 'ערך עתידי',
     totalContributions: 'סך הפקדות',
-    totalInterestEarned: 'סך ריבית שנצברה'
+    totalInterestEarned: 'סך ריבית שנצברה',
+
+    bmiTitle: 'מחשבון BMI',
+    bmiDesc: 'בדוק את מדד מסת הגוף שלך.',
+    bmiExplanation: 'הזן את הגובה והמשקל שלך כדי לחשב את ה-BMI שלך ולראות לאיזו קטגוריה אתה שייך.',
+    height: 'גובה',
+    weightBmi: 'משקל',
+    bmiResult: 'ה-BMI שלך',
+    bmiCategory: 'קטגוריה',
+
+    tipTitle: 'מחשבון טיפים',
+    tipDesc: 'חשב טיפים ופצל חשבונות בקלות.',
+    tipExplanation: 'הזן את סכום החשבון ואחוז הטיפ כדי לחשב את הסך הכל וכמה כל אדם צריך לשלם.',
+    billAmount: 'סכום החשבון',
+    tipPercentage: 'אחוז טיפ',
+    numberOfPeople: 'מספר אנשים',
+    tipAmount: 'סכום הטיפ',
+    totalPerPerson: 'סך הכל לאדם',
+
+    salaryTitle: 'מחשבון שכר',
+    salaryDesc: 'המרת שכר שעתי, שבועי, חודשי ושנתי.',
+    salaryExplanation: 'הזן את השכר שלך בכל תדירות כדי לראות את הסכום המקביל בתדירויות אחרות.',
+    salaryAmount: 'סכום השכר',
+    salaryFrequency: 'תדירות',
+    hourly: 'שעתי',
+    weekly: 'שבועי',
+    monthly: 'חודשי',
+    yearly: 'שנתי',
+
+    ageTitle: 'מחשבון גיל',
+    ageDesc: 'חשב את גילך המדויק בשנים, חודשים וימים.',
+    ageExplanation: 'הזן את תאריך הלידה שלך כדי לגלות בדיוק בן כמה אתה היום.',
+    dateOfBirth: 'תאריך לידה',
+    exactAge: 'גיל מדויק',
+    yearsOld: 'שנים',
+    monthsOld: 'חודשים',
+    daysOld: 'ימים'
   },
   es: {
     dir: 'ltr',
@@ -161,7 +233,43 @@ export const translations: Translations = {
     yearsToGrow: 'Años de Crecimiento',
     futureValue: 'Valor Futuro',
     totalContributions: 'Contribuciones Totales',
-    totalInterestEarned: 'Total de Intereses Ganados'
+    totalInterestEarned: 'Total de Intereses Ganados',
+
+    bmiTitle: 'Calculadora de IMC',
+    bmiDesc: 'Comprueba tu Índice de Masa Corporal.',
+    bmiExplanation: 'Ingresa tu altura y peso para calcular tu IMC y ver en qué categoría te encuentras.',
+    height: 'Altura',
+    weightBmi: 'Peso',
+    bmiResult: 'Tu IMC',
+    bmiCategory: 'Categoría',
+
+    tipTitle: 'Calculadora de Propinas',
+    tipDesc: 'Calcula propinas y divide cuentas fácilmente.',
+    tipExplanation: 'Ingresa el monto de la cuenta y el porcentaje de propina para calcular el total y cuánto debe pagar cada persona.',
+    billAmount: 'Monto de la Cuenta',
+    tipPercentage: '% de Propina',
+    numberOfPeople: 'Número de Personas',
+    tipAmount: 'Monto de Propina',
+    totalPerPerson: 'Total por Persona',
+
+    salaryTitle: 'Calculadora de Salario',
+    salaryDesc: 'Convierte salarios por hora, semanales, mensuales y anuales.',
+    salaryExplanation: 'Ingresa tu salario en cualquier frecuencia para ver el monto equivalente en otras frecuencias.',
+    salaryAmount: 'Monto del Salario',
+    salaryFrequency: 'Frecuencia',
+    hourly: 'Por Hora',
+    weekly: 'Semanal',
+    monthly: 'Mensual',
+    yearly: 'Anual',
+
+    ageTitle: 'Calculadora de Edad',
+    ageDesc: 'Calcula tu edad exacta en años, meses y días.',
+    ageExplanation: 'Ingresa tu fecha de nacimiento para descubrir exactamente cuántos años tienes hoy.',
+    dateOfBirth: 'Fecha de Nacimiento',
+    exactAge: 'Edad Exacta',
+    yearsOld: 'Años',
+    monthsOld: 'Meses',
+    daysOld: 'Días'
   },
   fr: {
     dir: 'ltr',
@@ -199,7 +307,43 @@ export const translations: Translations = {
     yearsToGrow: 'Années de Croissance',
     futureValue: 'Valeur Future',
     totalContributions: 'Contributions Totales',
-    totalInterestEarned: 'Total des Intérêts Gagnés'
+    totalInterestEarned: 'Total des Intérêts Gagnés',
+
+    bmiTitle: 'Calculatrice IMC',
+    bmiDesc: 'Vérifiez votre Indice de Masse Corporelle.',
+    bmiExplanation: 'Entrez votre taille et votre poids pour calculer votre IMC et voir dans quelle catégorie vous vous situez.',
+    height: 'Taille',
+    weightBmi: 'Poids',
+    bmiResult: 'Votre IMC',
+    bmiCategory: 'Catégorie',
+
+    tipTitle: 'Calculatrice de Pourboire',
+    tipDesc: 'Calculez les pourboires et divisez les additions facilement.',
+    tipExplanation: 'Entrez le montant de l\'addition et le pourcentage de pourboire pour calculer le total et combien chaque personne doit payer.',
+    billAmount: 'Montant de l\'Addition',
+    tipPercentage: '% de Pourboire',
+    numberOfPeople: 'Nombre de Personnes',
+    tipAmount: 'Montant du Pourboire',
+    totalPerPerson: 'Total par Personne',
+
+    salaryTitle: 'Calculatrice de Salaire',
+    salaryDesc: 'Convertissez les salaires horaires, hebdomadaires, mensuels et annuels.',
+    salaryExplanation: 'Entrez votre salaire pour n\'importe quelle fréquence afin de voir le montant équivalent pour d\'autres fréquences.',
+    salaryAmount: 'Montant du Salaire',
+    salaryFrequency: 'Fréquence',
+    hourly: 'Horaire',
+    weekly: 'Hebdomadaire',
+    monthly: 'Mensuel',
+    yearly: 'Annuel',
+
+    ageTitle: 'Calculatrice d\'Âge',
+    ageDesc: 'Calculez votre âge exact en années, mois et jours.',
+    ageExplanation: 'Entrez votre date de naissance pour découvrir exactement quel âge vous avez aujourd\'hui.',
+    dateOfBirth: 'Date de Naissance',
+    exactAge: 'Âge Exact',
+    yearsOld: 'Années',
+    monthsOld: 'Mois',
+    daysOld: 'Jours'
   },
   ar: {
     dir: 'rtl',
@@ -254,11 +398,8 @@ function getInitialLanguage(): Language {
   
   const savedLang = localStorage.getItem('globalcalc_lang') as Language;
   if (savedLang && translations[savedLang]) return savedLang;
-
-  const browserLang = navigator.language.split('-')[0];
-  if (['en', 'he', 'es', 'fr', 'ar'].includes(browserLang)) {
-    return browserLang as Language;
-  }
+  
+  // Default to American English explicitly
   return 'en';
 }
 
@@ -267,7 +408,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     document.documentElement.dir = translations[lang].dir;
-    document.documentElement.lang = lang;
+    document.documentElement.lang = lang === 'en' ? 'en-US' : lang;
     localStorage.setItem('globalcalc_lang', lang);
   }, [lang]);
 

@@ -3,6 +3,11 @@ import MortgageCalculator from './pages/MortgageCalculator';
 import CompoundInterest from './pages/CompoundInterest';
 import PercentageFinder from './pages/PercentageFinder';
 import UnitConverter from './pages/UnitConverter';
+import BmiCalculator from './pages/BmiCalculator';
+import TipCalculator from './pages/TipCalculator';
+import SalaryCalculator from './pages/SalaryCalculator';
+import AgeCalculator from './pages/AgeCalculator';
+
 import { useI18n } from './contexts/i18n';
 
 function App() {
@@ -14,6 +19,10 @@ function App() {
     { id: 'compound', path: '/compound-interest', label: t.compoundTitle },
     { id: 'percentage', path: '/percentage-finder', label: t.percFinderTitle },
     { id: 'unit', path: '/unit-converter', label: t.unitConvTitle },
+    { id: 'bmi', path: '/bmi-calculator', label: t.bmiTitle },
+    { id: 'tip', path: '/tip-calculator', label: t.tipTitle },
+    { id: 'salary', path: '/salary-calculator', label: t.salaryTitle },
+    { id: 'age', path: '/age-calculator', label: t.ageTitle },
   ];
 
   return (
@@ -60,6 +69,10 @@ function App() {
           <Route path="/compound-interest" element={<CompoundInterest />} />
           <Route path="/percentage-finder" element={<PercentageFinder />} />
           <Route path="/unit-converter" element={<UnitConverter />} />
+          <Route path="/bmi-calculator" element={<BmiCalculator />} />
+          <Route path="/tip-calculator" element={<TipCalculator />} />
+          <Route path="/salary-calculator" element={<SalaryCalculator />} />
+          <Route path="/age-calculator" element={<AgeCalculator />} />
         </Routes>
       </div>
     </div>

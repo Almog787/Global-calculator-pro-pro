@@ -30,7 +30,7 @@ export default function PercentageFinder() {
     return () => clearTimeout(handler);
   }, [val1A, val1B, val2A, val2B, val3A, val3B]);
 
-  const numFormat = new Intl.NumberFormat(lang, { maximumFractionDigits: 4 });
+  const numFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { maximumFractionDigits: 4 });
 
   return (
     <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
