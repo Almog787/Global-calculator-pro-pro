@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useI18n } from '../i18n';
 
 const conversions: Record<string, Record<string, (v: number) => number>> = {
   length: {
@@ -18,6 +19,7 @@ const conversions: Record<string, Record<string, (v: number) => number>> = {
 };
 
 export default function UnitConverter() {
+  const { t, lang } = useI18n();
   const [val, setVal] = useState(1);
   const [cat, setCat] = useState('length');
   const [type, setType] = useState('m-ft');
@@ -38,11 +40,19 @@ export default function UnitConverter() {
     return () => clearTimeout(handler);
   }, [val, cat, type]);
 
+  const numFormat = new Intl.NumberFormat(lang, { maximumFractionDigits: 4 });
+
+  const categoryNames: Record<string, string> = {
+    length: t.length,
+    weight: t.weight,
+    temp: t.temp
+  };
+
   return (
-    <main className="w-full max-w-2xl mx-auto px-6 py-16 flex-grow">
-      <div className="mb-12">
-        <h1 className="text-3xl md:text-4xl font-bold font-headline mb-3 text-slate-900">Unit Converter</h1>
-        <p className="text-slate-500">Quickly convert lengths, weights, and temperatures.</p>
+    <main className="w-full max-w-2xl mx-auto px-4 md:px-6 flex-grow">
+      <div className="mb-8 md:mb-12">
+        <h2 className="text-2xl md:text-4xl font-bold font-headline mb-3 text-slate-900">{t.unitConvTitle}</h2>
+        <p className="text-slate-500">{t.unitConvDesc}</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
@@ -53,31 +63,29 @@ export default function UnitConverter() {
               onClick={() => { setCat(c); setType(Object.keys(conversions[c])[0]); }}
               className={`flex-1 py-4 font-medium capitalize text-sm transition-colors ${cat === c ? 'bg-slate-50 text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 border-b-2 border-transparent'}`}
             >
-              {c}
+              {categoryNames[c]}
             </button>
           ))}
         </div>
-
-        <div className="p-8">
-          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 mb-6 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer">
+        <div className="p-5 md:p-8">
+          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 mb-6 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer" dir="ltr">
             {Object.keys(conversions[cat]).map(k => {
               const [from, to] = k.split('-');
-              return <option key={k} value={k}>{from.toUpperCase()} to {to.toUpperCase()}</option>
+              return <option key={k} value={k}>{from.toUpperCase()} ➝ {to.toUpperCase()}</option>
             })}
           </select>
-
           <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4">
-            <input type="number" value={val} onChange={e => setVal(Number(e.target.value))} className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-4 text-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-center md:text-left" />
+            <input type="number" value={val} onChange={e => setVal(Number(e.target.value))} className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-4 text-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-center md:text-left rtl:md:text-right" />
             
             <div className="hidden md:flex justify-center items-center text-slate-400">
-              <span className="material-symbols-outlined">arrow_forward</span>
+              <span className="material-symbols-outlined rtl:rotate-180">arrow_forward</span>
             </div>
             <div className="md:hidden flex justify-center items-center text-slate-400 py-1">
               <span className="material-symbols-outlined">arrow_downward</span>
             </div>
 
-            <div className="flex-1 bg-blue-50 border border-blue-100 text-blue-700 font-bold text-2xl px-4 py-4 rounded-lg text-center md:text-left truncate">
-              {!isNaN(res) ? res.toFixed(4) : '0'}
+            <div className="flex-1 bg-blue-50 border border-blue-100 text-blue-700 font-bold text-2xl px-4 py-4 rounded-lg text-center md:text-left rtl:md:text-right truncate" dir="ltr">
+              {!isNaN(res) ? numFormat.format(res) : '0'}
             </div>
           </div>
         </div>
