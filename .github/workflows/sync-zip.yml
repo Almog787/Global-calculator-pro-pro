@@ -18,36 +18,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          lfs: true # Ensures full download if the ZIP is tracked via Git LFS
-          fetch-depth: 0 # Fetches full git history for reliable force pushing
+          lfs: true
+          fetch-depth: 0
 
-      - name: Verify ZIP file exists
+      - name: Extract and Replace All Files
         run: |
-          if [ ! -f "global-calculator-pro.zip" ]; then
-            echo "Error: global-calculator-pro.zip was not found in the root directory."
-            exit 1
-          fi
-
-      - name: Extract and sync files
-        run: |
-          # Create temporary directory for extraction
+          # 1. יצירת תיקייה זמנית וחילוץ ה-ZIP
           mkdir -p temp_extracted
-          
-          # Extract ZIP archive
           unzip -o global-calculator-pro.zip -d temp_extracted/
 
-          # Remove .github directory from extracted files to avoid permissions issue
+          # 2. הסרת תיקיית .github מתוך ה-ZIP (למניעת שגיאות הרשאות ב-GitHub Actions)
           rm -rf temp_extracted/.github
 
-          # Detect if ZIP contents are wrapped inside a single top-level folder and flatten it
+          # 3. טיפול במצב שבו הקבצים בתוך ה-ZIP עטופים בתיקייה פנימית (Flattening)
           INSIDE_ITEMS=(temp_extracted/*)
           if [ ${#INSIDE_ITEMS[@]} -eq 1 ] && [ -d "${INSIDE_ITEMS[0]}" ]; then
-            echo "Detected nested directory inside ZIP: ${INSIDE_ITEMS[0]}. Moving contents to root..."
             mv ${INSIDE_ITEMS[0]}/* temp_extracted/ 2>/dev/null || true
             mv ${INSIDE_ITEMS[0]}/.* temp_extracted/ 2>/dev/null || true
           fi
 
-          # Clean existing repository files except git system files and the zip itself
+          # 4. מחיקת כל הקבצים הישנים במאגר (למעט תיקיית .git, .github וקובץ ה-ZIP)
           find . -mindepth 1 -maxdepth 1 \
             ! -name '.git' \
             ! -name '.github' \
@@ -55,30 +45,19 @@ jobs:
             ! -name 'temp_extracted' \
             -exec rm -rf {} +
 
-          # Copy extracted files to repository root
+          # 5. העתקת הקבצים החדשים לשורש המאגר וניקוי התיקייה הזמנית
           cp -a temp_extracted/. .
           rm -rf temp_extracted
 
-          # Log extracted files to Action summary for verification
-          echo "=== Files present in root after extraction ==="
-          ls -la
-
-      - name: Commit and Push changes
+      - name: Commit and Force Push
         run: |
-          # Configure Git identities
+          # הגדרת משתמש Git
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # Stage all changes
+          # הוספת כל הקבצים
           git add -A
           
-          # Print status log
-          git status
-          
-          # Check if there are actual changes before committing
-          if git diff --staged --quiet; then
-            echo "No changes detected between ZIP content and repository."
-          else
-            git commit -m "Sync repository to match global-calculator-pro.zip contents"
-            git push --force origin main
-          fi
+          # ביצוע Commit ו-Push בכוח ללא תנאים
+          git commit -m "Replace repository files with global-calculator-pro.zip contents" || echo "No changes"
+          git push --force origin main
