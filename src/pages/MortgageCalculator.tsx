@@ -28,6 +28,20 @@ export default function MortgageCalculator() {
     setTotalInterest(ti);
   }, [principal, rate, years]);
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'calculate', {
+          event_category: 'Mortgage Calculator',
+          principal,
+          rate,
+          years
+        });
+      }
+    }, 2000);
+    return () => clearTimeout(handler);
+  }, [principal, rate, years]);
+
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
   return (

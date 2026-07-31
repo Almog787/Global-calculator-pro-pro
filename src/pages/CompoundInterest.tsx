@@ -29,6 +29,21 @@ export default function CompoundInterest() {
     setTotalInterest(ti);
   }, [principal, rate, years, contribution]);
 
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'calculate', {
+          event_category: 'Compound Interest',
+          principal,
+          rate,
+          years,
+          contribution
+        });
+      }
+    }, 2000);
+    return () => clearTimeout(handler);
+  }, [principal, rate, years, contribution]);
+
   const currencyFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
 
   return (

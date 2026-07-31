@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const conversions: Record<string, Record<string, (v: number) => number>> = {
   length: {
@@ -23,6 +23,20 @@ export default function UnitConverter() {
   const [type, setType] = useState('m-ft');
 
   const res = conversions[cat]?.[type]?.(val) || 0;
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'calculate', {
+          event_category: 'Unit Converter',
+          category: cat,
+          conversion_type: type,
+          value: val
+        });
+      }
+    }, 2000);
+    return () => clearTimeout(handler);
+  }, [val, cat, type]);
 
   return (
     <main className="w-full max-w-2xl mx-auto px-6 py-16 flex-grow">

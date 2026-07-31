@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function PercentageFinder() {
   const [val1A, setVal1A] = useState(20);
@@ -12,6 +12,20 @@ export default function PercentageFinder() {
   const [val3A, setVal3A] = useState(100);
   const [val3B, setVal3B] = useState(120);
   const res3 = val3A !== 0 ? ((val3B - val3A) / Math.abs(val3A)) * 100 : 0;
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', 'calculate', {
+          event_category: 'Percentage Finder',
+          val1A, val1B,
+          val2A, val2B,
+          val3A, val3B
+        });
+      }
+    }, 2000);
+    return () => clearTimeout(handler);
+  }, [val1A, val1B, val2A, val2B, val3A, val3B]);
 
   return (
     <main className="w-full max-w-3xl mx-auto px-6 py-16 flex-grow">
