@@ -46,13 +46,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      # Install the required package for the indexing script
-      - name: Install Google APIs dependency
-        run: npm install googleapis
-
-      # Execute the script to notify Google after successful deployment
-      - name: Execute Google indexing script
-        env:
-          GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
-        run: node scripts/index-pages.js
