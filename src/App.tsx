@@ -1,12 +1,13 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import MortgageCalculator from './pages/MortgageCalculator';
-import CompoundInterest from './pages/CompoundInterest';
-import PercentageFinder from './pages/PercentageFinder';
-import UnitConverter from './pages/UnitConverter';
-import BmiCalculator from './pages/BmiCalculator';
-import TipCalculator from './pages/TipCalculator';
-import SalaryCalculator from './pages/SalaryCalculator';
-import AgeCalculator from './pages/AgeCalculator';
+const MortgageCalculator = lazy(() => import('./pages/MortgageCalculator'));
+const CompoundInterest = lazy(() => import('./pages/CompoundInterest'));
+const PercentageFinder = lazy(() => import('./pages/PercentageFinder'));
+const UnitConverter = lazy(() => import('./pages/UnitConverter'));
+const BmiCalculator = lazy(() => import('./pages/BmiCalculator'));
+const TipCalculator = lazy(() => import('./pages/TipCalculator'));
+const SalaryCalculator = lazy(() => import('./pages/SalaryCalculator'));
+const AgeCalculator = lazy(() => import('./pages/AgeCalculator'));
 
 import { useI18n } from './contexts/i18n';
 
@@ -63,6 +64,7 @@ function App() {
       </header>
 
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-8">
+        <Suspense fallback={<div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div></div>}>
         <Routes>
           <Route path="/" element={<Navigate to="/mortgage-calculator" replace />} />
           <Route path="/mortgage-calculator" element={<MortgageCalculator />} />
@@ -74,6 +76,7 @@ function App() {
           <Route path="/salary-calculator" element={<SalaryCalculator />} />
           <Route path="/age-calculator" element={<AgeCalculator />} />
         </Routes>
+        </Suspense>
       </div>
     </div>
   );
