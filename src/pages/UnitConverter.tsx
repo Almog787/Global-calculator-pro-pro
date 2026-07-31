@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useI18n } from '../i18n';
 
 const conversions: Record<string, Record<string, (v: number) => number>> = {
@@ -49,47 +50,56 @@ export default function UnitConverter() {
   };
 
   return (
-    <main className="w-full max-w-2xl mx-auto px-4 md:px-6 flex-grow">
-      <div className="mb-8 md:mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold font-headline mb-3 text-slate-900">{t.unitConvTitle}</h2>
-        <p className="text-slate-500">{t.unitConvDesc}</p>
+    <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
+      <Helmet>
+        <title>{t.unitConvTitle} | {t.title}</title>
+        <meta name="description" content={t.unitConvDesc} />
+      </Helmet>
+      <div className="mb-10">
+        <h2 className="text-2xl md:text-3xl font-headline text-stone-900 tracking-tight mb-3">{t.unitConvTitle}</h2>
+        <p className="text-stone-500 font-medium text-[15px] leading-relaxed max-w-sm">{t.unitConvExplanation}</p>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-        <div className="flex border-b border-slate-200">
-          {['length', 'weight', 'temp'].map(c => (
-            <button 
-              key={c}
-              onClick={() => { setCat(c); setType(Object.keys(conversions[c])[0]); }}
-              className={`flex-1 py-4 font-medium capitalize text-sm transition-colors ${cat === c ? 'bg-slate-50 text-blue-600 border-b-2 border-blue-600' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900 border-b-2 border-transparent'}`}
-            >
-              {categoryNames[c]}
-            </button>
-          ))}
-        </div>
-        <div className="p-5 md:p-8">
-          <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 mb-6 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all cursor-pointer" dir="ltr">
-            {Object.keys(conversions[cat]).map(k => {
-              const [from, to] = k.split('-');
-              return <option key={k} value={k}>{from.toUpperCase()} ➝ {to.toUpperCase()}</option>
-            })}
-          </select>
-          <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4">
-            <input type="number" value={val} onChange={e => setVal(Number(e.target.value))} className="flex-1 bg-slate-50 border border-slate-200 rounded-lg px-4 py-4 text-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-center md:text-left rtl:md:text-right" />
-            
-            <div className="hidden md:flex justify-center items-center text-slate-400">
-              <span className="material-symbols-outlined rtl:rotate-180">arrow_forward</span>
-            </div>
-            <div className="md:hidden flex justify-center items-center text-slate-400 py-1">
-              <span className="material-symbols-outlined">arrow_downward</span>
-            </div>
+      <div className="flex-1 flex flex-col justify-between">
+        <div className="space-y-8">
+          <div className="flex border-b border-stone-200">
+            {['length', 'weight', 'temp'].map(c => (
+              <button 
+                key={c}
+                onClick={() => { setCat(c); setType(Object.keys(conversions[c])[0]); }}
+                className={`flex-1 pb-3 pt-2 font-bold uppercase tracking-wider text-xs transition-colors border-b-2 -mb-[2px] ${cat === c ? 'text-stone-900 border-stone-900' : 'text-stone-400 border-transparent hover:text-stone-600'}`}
+              >
+                {categoryNames[c]}
+              </button>
+            ))}
+          </div>
 
-            <div className="flex-1 bg-blue-50 border border-blue-100 text-blue-700 font-bold text-2xl px-4 py-4 rounded-lg text-center md:text-left rtl:md:text-right truncate" dir="ltr">
+          <div>
+            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-stone-50/50 border-0 border-b-2 border-stone-200 px-3 py-3 text-stone-900 font-medium focus:ring-0 focus:border-stone-900 transition-colors cursor-pointer appearance-none" dir="ltr">
+              {Object.keys(conversions[cat]).map(k => {
+                const [from, to] = k.split('-');
+                return <option key={k} value={k}>{from.toUpperCase()} ➝ {to.toUpperCase()}</option>
+              })}
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-6">
+            <div>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">Input</label>
+              <input type="number" value={val} onChange={e => setVal(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-stone-200">
+          <div className="mb-2">
+            <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-2">Result</span>
+            <div className="text-4xl md:text-5xl font-headline font-bold text-stone-900 tracking-tight truncate" dir="ltr">
               {!isNaN(res) ? numFormat.format(res) : '0'}
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </article>
   );
 }

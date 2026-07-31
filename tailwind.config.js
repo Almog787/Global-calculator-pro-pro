@@ -10,8 +10,8 @@ module.exports = {
         "primary": "#004ac6" 
       },
       fontFamily: { 
-        "headline": ["Space Grotesk", "sans-serif"], 
-        "body": ["Manrope", "sans-serif"] 
+        "headline": ["Chivo", "sans-serif"], 
+        "body": ["Public Sans", "sans-serif"] 
       }
     },
   },

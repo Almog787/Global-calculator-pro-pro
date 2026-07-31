@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useI18n } from '../i18n';
 
 export default function PercentageFinder() {
@@ -32,57 +33,61 @@ export default function PercentageFinder() {
   const numFormat = new Intl.NumberFormat(lang, { maximumFractionDigits: 4 });
 
   return (
-    <main className="w-full max-w-3xl mx-auto px-4 md:px-6 flex-grow">
-      <div className="mb-8 md:mb-12">
-        <h2 className="text-2xl md:text-4xl font-bold font-headline mb-3 text-slate-900">{t.percFinderTitle}</h2>
-        <p className="text-slate-500">{t.percFinderDesc}</p>
+    <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
+      <Helmet>
+        <title>{t.percFinderTitle} | {t.title}</title>
+        <meta name="description" content={t.percFinderDesc} />
+      </Helmet>
+      <div className="mb-10">
+        <h2 className="text-2xl md:text-3xl font-headline text-stone-900 tracking-tight mb-3">{t.percFinderTitle}</h2>
+        <p className="text-stone-500 font-medium text-[15px] leading-relaxed max-w-sm">{t.percFinderExplanation}</p>
       </div>
 
-      <div className="space-y-6">
+      <div className="flex-1 flex flex-col space-y-10">
         {/* Calc 1 */}
-        <div className="bg-white rounded-2xl shadow-sm p-5 md:p-8 border border-slate-200">
-          <h3 className="text-lg font-bold font-headline mb-6 text-slate-900">{t.whatIs} X {t.percOf} Y?</h3>
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <span className="text-slate-600 font-medium whitespace-nowrap">{t.whatIs}</span>
-            <input type="number" value={val1A} onChange={e => setVal1A(Number(e.target.value))} className="w-full md:w-24 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
-            <span className="text-slate-600 font-medium whitespace-nowrap">{t.percOf}</span>
-            <input type="number" value={val1B} onChange={e => setVal1B(Number(e.target.value))} className="w-full md:w-32 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
-            <span className="text-slate-400 font-bold hidden md:block">=</span>
-            <div className="w-full md:w-auto bg-blue-50 text-blue-600 font-bold text-xl px-6 py-2 rounded-lg text-center flex-grow md:flex-grow-0 min-w-[120px]">
+        <div className="relative">
+          <h3 className="text-sm tracking-wider uppercase font-bold text-stone-400 mb-4">{t.whatIs} X {t.percOf} Y?</h3>
+          <div className="flex flex-col md:flex-row items-center gap-4 bg-stone-50/50 p-4 rounded-xl border border-stone-100">
+            <span className="text-stone-500 font-medium whitespace-nowrap">{t.whatIs}</span>
+            <input type="number" value={val1A} onChange={e => setVal1A(Number(e.target.value))} className="w-full md:w-24 bg-transparent border-0 border-b-2 border-stone-200 px-1 py-1 text-center text-xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            <span className="text-stone-500 font-medium whitespace-nowrap">{t.percOf}</span>
+            <input type="number" value={val1B} onChange={e => setVal1B(Number(e.target.value))} className="w-full md:w-32 bg-transparent border-0 border-b-2 border-stone-200 px-1 py-1 text-center text-xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            <span className="text-stone-300 font-bold hidden md:block">=</span>
+            <div className="w-full md:w-auto text-stone-900 font-bold text-2xl px-4 py-2 text-center md:text-right flex-grow min-w-[100px]">
               {!isNaN(res1) ? numFormat.format(res1) : '0'}
             </div>
           </div>
         </div>
 
         {/* Calc 2 */}
-        <div className="bg-white rounded-2xl shadow-sm p-5 md:p-8 border border-slate-200">
-          <h3 className="text-lg font-bold font-headline mb-6 text-slate-900">X {t.isWhatPercOf} Y?</h3>
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <input type="number" value={val2A} onChange={e => setVal2A(Number(e.target.value))} className="w-full md:w-32 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
-            <span className="text-slate-600 font-medium whitespace-nowrap">{t.isWhatPercOf}</span>
-            <input type="number" value={val2B} onChange={e => setVal2B(Number(e.target.value))} className="w-full md:w-32 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
-            <span className="text-slate-400 font-bold hidden md:block">=</span>
-            <div className="w-full md:w-auto bg-blue-50 text-blue-600 font-bold text-xl px-6 py-2 rounded-lg text-center flex-grow md:flex-grow-0 min-w-[120px]" dir="ltr">
+        <div className="relative">
+          <h3 className="text-sm tracking-wider uppercase font-bold text-stone-400 mb-4">X {t.isWhatPercOf} Y?</h3>
+          <div className="flex flex-col md:flex-row items-center gap-4 bg-stone-50/50 p-4 rounded-xl border border-stone-100">
+            <input type="number" value={val2A} onChange={e => setVal2A(Number(e.target.value))} className="w-full md:w-32 bg-transparent border-0 border-b-2 border-stone-200 px-1 py-1 text-center text-xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            <span className="text-stone-500 font-medium whitespace-nowrap">{t.isWhatPercOf}</span>
+            <input type="number" value={val2B} onChange={e => setVal2B(Number(e.target.value))} className="w-full md:w-32 bg-transparent border-0 border-b-2 border-stone-200 px-1 py-1 text-center text-xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            <span className="text-stone-300 font-bold hidden md:block">=</span>
+            <div className="w-full md:w-auto text-stone-900 font-bold text-2xl px-4 py-2 text-center md:text-right flex-grow min-w-[100px]" dir="ltr">
               {!isNaN(res2) ? numFormat.format(res2) : '0'}%
             </div>
           </div>
         </div>
 
         {/* Calc 3 */}
-        <div className="bg-white rounded-2xl shadow-sm p-5 md:p-8 border border-slate-200">
-          <h3 className="text-lg font-bold font-headline mb-6 text-slate-900">{t.percChange}</h3>
-          <div className="flex flex-col md:flex-row items-center gap-4">
-            <span className="text-slate-600 font-medium whitespace-nowrap">{t.from}</span>
-            <input type="number" value={val3A} onChange={e => setVal3A(Number(e.target.value))} className="w-full md:w-32 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
-            <span className="text-slate-600 font-medium whitespace-nowrap">{t.to}</span>
-            <input type="number" value={val3B} onChange={e => setVal3B(Number(e.target.value))} className="w-full md:w-32 bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-center focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500" />
-            <span className="text-slate-400 font-bold hidden md:block">=</span>
-            <div className={`w-full md:w-auto font-bold text-xl px-6 py-2 rounded-lg text-center flex-grow md:flex-grow-0 min-w-[120px] ${res3 >= 0 ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'}`} dir="ltr">
+        <div className="relative">
+          <h3 className="text-sm tracking-wider uppercase font-bold text-stone-400 mb-4">{t.percChange}</h3>
+          <div className="flex flex-col md:flex-row items-center gap-4 bg-stone-50/50 p-4 rounded-xl border border-stone-100">
+            <span className="text-stone-500 font-medium whitespace-nowrap">{t.from}</span>
+            <input type="number" value={val3A} onChange={e => setVal3A(Number(e.target.value))} className="w-full md:w-32 bg-transparent border-0 border-b-2 border-stone-200 px-1 py-1 text-center text-xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            <span className="text-stone-500 font-medium whitespace-nowrap">{t.to}</span>
+            <input type="number" value={val3B} onChange={e => setVal3B(Number(e.target.value))} className="w-full md:w-32 bg-transparent border-0 border-b-2 border-stone-200 px-1 py-1 text-center text-xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+            <span className="text-stone-300 font-bold hidden md:block">=</span>
+            <div className={`w-full md:w-auto font-bold text-2xl px-4 py-2 text-center md:text-right flex-grow min-w-[100px] ${res3 >= 0 ? 'text-emerald-600' : 'text-rose-600'}`} dir="ltr">
               {!isNaN(res3) ? (res3 > 0 ? '+' : '') + numFormat.format(res3) : '0'}%
             </div>
           </div>
         </div>
       </div>
-    </main>
+    </article>
   );
 }
