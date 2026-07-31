@@ -21,43 +21,38 @@ jobs:
           lfs: true
           fetch-depth: 0
 
-      - name: Extract and Replace All Files
+      - name: Extract and Overwrite Files By Matching Names
         run: |
-          # 1. יצירת תיקייה זמנית וחילוץ ה-ZIP
+          # 1. Create a temporary directory and extract the ZIP contents
           mkdir -p temp_extracted
           unzip -o global-calculator-pro.zip -d temp_extracted/
 
-          # 2. הסרת תיקיית .github מתוך ה-ZIP (למניעת שגיאות הרשאות ב-GitHub Actions)
+          # 2. Remove .github directory from extracted files to avoid permission conflicts
           rm -rf temp_extracted/.github
 
-          # 3. טיפול במצב שבו הקבצים בתוך ה-ZIP עטופים בתיקייה פנימית (Flattening)
+          # 3. Flatten directory if files inside ZIP are wrapped in a single root folder
           INSIDE_ITEMS=(temp_extracted/*)
           if [ ${#INSIDE_ITEMS[@]} -eq 1 ] && [ -d "${INSIDE_ITEMS[0]}" ]; then
             mv ${INSIDE_ITEMS[0]}/* temp_extracted/ 2>/dev/null || true
             mv ${INSIDE_ITEMS[0]}/.* temp_extracted/ 2>/dev/null || true
           fi
 
-          # 4. מחיקת כל הקבצים הישנים במאגר (למעט תיקיית .git, .github וקובץ ה-ZIP)
-          find . -mindepth 1 -maxdepth 1 \
-            ! -name '.git' \
-            ! -name '.github' \
-            ! -name 'global-calculator-pro.zip' \
-            ! -name 'temp_extracted' \
-            -exec rm -rf {} +
+          # 4. Direct overwrite: Match relative paths and overwrite matching files verbosely (-v)
+          echo "=== Replacing files by matching relative paths and names ==="
+          cp -rvf temp_extracted/. .
 
-          # 5. העתקת הקבצים החדשים לשורש המאגר וניקוי התיקייה הזמנית
-          cp -a temp_extracted/. .
+          # 5. Clean up temporary folder
           rm -rf temp_extracted
 
       - name: Commit and Force Push
         run: |
-          # הגדרת משתמש Git
+          # Configure Git identities for Actions bot
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # הוספת כל הקבצים
+          # Stage all updated files
           git add -A
           
-          # ביצוע Commit ו-Push בכוח ללא תנאים
-          git commit -m "Replace repository files with global-calculator-pro.zip contents" || echo "No changes"
+          # Commit and force push changes
+          git commit -m "Overwrite matching files from global-calculator-pro.zip" || echo "No file content differences detected by Git"
           git push --force origin main
