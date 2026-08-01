@@ -14,6 +14,8 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { useI18n } from '../contexts/i18n';
+import Breadcrumbs from '../components/Breadcrumbs';
+import RelatedCalculators from '../components/RelatedCalculators';
 
 ChartJS.register(
   CategoryScale,
@@ -172,7 +174,9 @@ export default function CompoundInterest() {
   };
 
   return (
-    <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
+    <div className="w-full">
+      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.compoundTitle }]} />
+      <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
       <Helmet>
         <link rel="canonical" href="https://globalcalcpro.com/compound-interest" />
         <title>{t.compoundTitle} | {t.title}</title>
@@ -230,5 +234,7 @@ export default function CompoundInterest() {
         </div>
       </div>
     </article>
+      <RelatedCalculators currentId="compound" />
+    </div>
   );
 }

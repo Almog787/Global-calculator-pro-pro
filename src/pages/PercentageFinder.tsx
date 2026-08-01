@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Decimal from 'decimal.js';
 import { useI18n } from '../contexts/i18n';
+import Breadcrumbs from '../components/Breadcrumbs';
+import RelatedCalculators from '../components/RelatedCalculators';
 
 export default function PercentageFinder() {
   const { t, lang } = useI18n();
@@ -60,7 +62,9 @@ export default function PercentageFinder() {
   const numFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { maximumFractionDigits: 4 });
 
   return (
-    <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
+    <div className="w-full">
+      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.percFinderTitle }]} />
+      <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
       <Helmet>
         <link rel="canonical" href="https://globalcalcpro.com/percentage-finder" />
         <title>{t.percFinderTitle} | {t.title}</title>
@@ -117,5 +121,7 @@ export default function PercentageFinder() {
         </div>
       </div>
     </article>
+      <RelatedCalculators currentId="percentage" />
+    </div>
   );
 }

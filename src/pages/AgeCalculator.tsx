@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useI18n } from '../contexts/i18n';
+import Breadcrumbs from '../components/Breadcrumbs';
+import RelatedCalculators from '../components/RelatedCalculators';
 
 export default function AgeCalculator() {
   const { t } = useI18n();
@@ -52,7 +54,9 @@ export default function AgeCalculator() {
   }, [dob]);
 
   return (
-    <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
+    <div className="w-full">
+      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.ageTitle }]} />
+      <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
       <Helmet>
         <link rel="canonical" href="https://globalcalcpro.com/age-calculator" />
         <title>{t.ageTitle} | {t.title}</title>
@@ -92,5 +96,7 @@ export default function AgeCalculator() {
         </div>
       </div>
     </article>
+      <RelatedCalculators currentId="age" />
+    </div>
   );
 }

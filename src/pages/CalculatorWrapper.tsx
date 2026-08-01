@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { Suspense, lazy, useMemo } from 'react';
 import NotFound from './NotFound';
+import Breadcrumbs from '../components/Breadcrumbs';
+import RelatedCalculators from '../components/RelatedCalculators';
+import { calculators } from '../data/calculators';
 
 // Using Vite's import.meta.glob to dynamically discover all calculators in the folder.
-// This eliminates the need for a middleman JSON file and automatically creates SEO-friendly URLs.
 const modules = import.meta.glob('./calculators/*.tsx');
 
 export default function CalculatorWrapper() {
@@ -30,13 +32,25 @@ export default function CalculatorWrapper() {
     return <NotFound />;
   }
 
+  const currentPath = `/calculators/${slug}`;
+  const calcData = calculators.find(c => c.path === currentPath);
+
   return (
-    <Suspense fallback={
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div>
-      </div>
-    }>
-      <Component />
-    </Suspense>
+    <div className="w-full">
+      <Breadcrumbs items={[
+        { label: 'Library', path: '/all' },
+        { label: calcData?.fallbackTitle || slug || 'Calculator' }
+      ]} />
+      
+      <Suspense fallback={
+        <div className="flex justify-center items-center h-64">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div>
+        </div>
+      }>
+        <Component />
+      </Suspense>
+
+      <RelatedCalculators currentId={currentPath} />
+    </div>
   );
 }

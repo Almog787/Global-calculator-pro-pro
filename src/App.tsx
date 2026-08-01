@@ -8,6 +8,7 @@ const BmiCalculator = lazy(() => import('./pages/BmiCalculator'));
 const TipCalculator = lazy(() => import('./pages/TipCalculator'));
 const SalaryCalculator = lazy(() => import('./pages/SalaryCalculator'));
 const AgeCalculator = lazy(() => import('./pages/AgeCalculator'));
+const AllCalculators = lazy(() => import('./pages/AllCalculators'));
 const CalculatorWrapper = lazy(() => import('./pages/CalculatorWrapper'));
 const ContactUs = lazy(() => import('./pages/ContactUs'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
@@ -18,12 +19,14 @@ const NotFound = lazy(() => import('./pages/NotFound'));
 
 import { useI18n } from './contexts/i18n';
 import Footer from './components/Footer';
+import SearchBar from './components/SearchBar';
 
 function App() {
   const { lang, setLang, t } = useI18n();
   const location = useLocation();
 
   const tabs = [
+    { id: 'all', path: '/all', label: 'All Tools' },
     { id: 'mortgage', path: '/mortgage-calculator', label: t.mortgageTitle },
     { id: 'compound', path: '/compound-interest', label: t.compoundTitle },
     { id: 'percentage', path: '/percentage-finder', label: t.percFinderTitle },
@@ -38,10 +41,13 @@ function App() {
     <div className={`min-h-screen bg-stone-50 font-body text-stone-900 pb-20 ${t.dir === 'rtl' ? 'rtl' : 'ltr'}`}>
       <header className="w-full bg-white border-b border-stone-200">
         <div className="max-w-5xl mx-auto px-4 md:px-6 pt-6 pb-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-black font-headline tracking-tight text-stone-900">
+          <Link to="/" className="text-2xl font-black font-headline tracking-tight text-stone-900 shrink-0">
             {t.title}<span className="text-blue-600">.</span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="hidden md:block flex-1 max-w-sm mx-4">
+            <SearchBar />
+          </div>
+          <div className="flex items-center gap-3 shrink-0">
             <Link
               to="/suggest"
               className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold rounded-lg transition-colors border border-blue-200/80 shadow-xs"
@@ -61,6 +67,9 @@ function App() {
               <option value="ar">العربية</option>
             </select>
           </div>
+        </div>
+        <div className="md:hidden px-4 mb-3 mt-1">
+          <SearchBar />
         </div>
         <div className="max-w-5xl mx-auto px-4 md:px-6 mt-2">
           <nav className="flex space-x-2 md:space-x-4 rtl:space-x-reverse overflow-x-auto scrollbar-hide">
@@ -83,7 +92,8 @@ function App() {
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-8">
         <Suspense fallback={<div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div></div>}>
         <Routes>
-          <Route path="/" element={<Navigate to="/mortgage-calculator" replace />} />
+          <Route path="/" element={<Navigate to="/all" replace />} />
+          <Route path="/all" element={<AllCalculators />} />
           <Route path="/mortgage-calculator" element={<MortgageCalculator />} />
           <Route path="/compound-interest" element={<CompoundInterest />} />
           <Route path="/percentage-finder" element={<PercentageFinder />} />
