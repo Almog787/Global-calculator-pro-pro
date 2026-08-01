@@ -19,6 +19,14 @@ export default function Footer() {
     { path: '/calculators/auto-loan', label: 'Auto Loan' },
     { path: '/calculators/roi', label: 'ROI Calculator' },
     { path: '/calculators/margin', label: 'Margin Calculator' },
+    { path: '/calculators/cap-rate', label: 'Cap Rate' },
+    { path: '/calculators/freelance-net-income', label: 'Freelance Net Income' },
+    { path: '/calculators/debt-snowball', label: 'Debt Snowball' },
+    { path: '/calculators/fuel-split', label: 'Fuel Split' },
+    { path: '/calculators/goal-savings', label: 'Goal Savings' },
+    { path: '/calculators/download-time', label: 'Download Time' },
+    { path: '/calculators/peltier-cooling', label: 'Peltier Cooling' },
+    { path: '/calculators/rent-vs-buy', label: 'Rent vs Buy' },
   ];
 
   const legalLinks = [
