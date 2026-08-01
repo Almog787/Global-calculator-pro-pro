@@ -1,20 +1,47 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import Decimal from 'decimal.js';
 import { useI18n } from '../contexts/i18n';
 
 export default function PercentageFinder() {
   const { t, lang } = useI18n();
   const [val1A, setVal1A] = useState(20);
   const [val1B, setVal1B] = useState(150);
-  const res1 = (val1A / 100) * val1B;
+  
+  const res1 = (() => {
+    try {
+      return new Decimal(val1A || 0).div(100).mul(val1B || 0).toNumber();
+    } catch {
+      return 0;
+    }
+  })();
 
   const [val2A, setVal2A] = useState(50);
   const [val2B, setVal2B] = useState(200);
-  const res2 = val2B !== 0 ? (val2A / val2B) * 100 : 0;
+
+  const res2 = (() => {
+    try {
+      const b = new Decimal(val2B || 0);
+      if (b.isZero()) return 0;
+      return new Decimal(val2A || 0).div(b).mul(100).toNumber();
+    } catch {
+      return 0;
+    }
+  })();
 
   const [val3A, setVal3A] = useState(100);
   const [val3B, setVal3B] = useState(120);
-  const res3 = val3A !== 0 ? ((val3B - val3A) / Math.abs(val3A)) * 100 : 0;
+
+  const res3 = (() => {
+    try {
+      const a = new Decimal(val3A || 0);
+      if (a.isZero()) return 0;
+      const b = new Decimal(val3B || 0);
+      return b.sub(a).div(a.abs()).mul(100).toNumber();
+    } catch {
+      return 0;
+    }
+  })();
 
   useEffect(() => {
     const handler = setTimeout(() => {

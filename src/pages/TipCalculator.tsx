@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import Decimal from 'decimal.js';
 import { useI18n } from '../contexts/i18n';
 
 export default function TipCalculator() {
@@ -12,11 +13,19 @@ export default function TipCalculator() {
   const [totalPerPerson, setTotalPerPerson] = useState(0);
 
   useEffect(() => {
-    const tip = bill * (tipPercent / 100);
-    const total = bill + tip;
-    
-    setTipAmount(tip);
-    setTotalPerPerson(people > 0 ? total / people : 0);
+    try {
+      const decBill = new Decimal(bill || 0);
+      const decTipPercent = new Decimal(tipPercent || 0).div(100);
+      const decTip = decBill.mul(decTipPercent);
+      const decTotal = decBill.add(decTip);
+      const decPeople = new Decimal(Math.max(1, people || 1));
+
+      setTipAmount(decTip.toNumber());
+      setTotalPerPerson(decTotal.div(decPeople).toNumber());
+    } catch {
+      setTipAmount(0);
+      setTotalPerPerson(0);
+    }
   }, [bill, tipPercent, people]);
 
   useEffect(() => {

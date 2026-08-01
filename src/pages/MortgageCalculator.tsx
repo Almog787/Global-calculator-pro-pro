@@ -1,7 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip as RechartsTooltip, Legend } from 'recharts';
+import Decimal from 'decimal.js';
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Doughnut } from 'react-chartjs-2';
 import { useI18n } from '../contexts/i18n';
+
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend
+);
 
 export default function MortgageCalculator() {
   const { t, lang } = useI18n();
@@ -12,21 +25,29 @@ export default function MortgageCalculator() {
   const [totalInterest, setTotalInterest] = useState(0);
 
   useEffect(() => {
-    const monthlyRate = rate / 100 / 12;
-    const numberOfPayments = years * 12;
-    let mp = 0;
-    
-    if (monthlyRate === 0) {
-      mp = principal / numberOfPayments;
-    } else {
-      mp = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+    try {
+      const decP = new Decimal(principal || 0);
+      const decR = new Decimal(rate || 0).div(100).div(12);
+      const decN = new Decimal(years || 0).mul(12);
+
+      let mp = new Decimal(0);
+
+      if (decR.isZero()) {
+        mp = decN.isZero() ? new Decimal(0) : decP.div(decN);
+      } else if (!decN.isZero()) {
+        const rateFactor = decR.add(1).pow(decN.toNumber());
+        mp = decP.mul(decR.mul(rateFactor)).div(rateFactor.sub(1));
+      }
+
+      const totalPaid = mp.mul(decN);
+      const ti = totalPaid.sub(decP);
+
+      setMonthlyPayment(mp.isFinite() ? mp.toNumber() : 0);
+      setTotalInterest(ti.isFinite() ? ti.toNumber() : 0);
+    } catch {
+      setMonthlyPayment(0);
+      setTotalInterest(0);
     }
-    
-    if (isNaN(mp) || !isFinite(mp)) mp = 0;
-    const totalPaid = mp * numberOfPayments;
-    const ti = totalPaid - principal;
-    setMonthlyPayment(mp);
-    setTotalInterest(ti);
   }, [principal, rate, years]);
 
   useEffect(() => {
@@ -46,11 +67,32 @@ export default function MortgageCalculator() {
   const defaultCurrency = lang === 'he' ? 'ILS' : lang === 'fr' || lang === 'es' ? 'EUR' : 'USD';
   const currencyFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { style: 'currency', currency: defaultCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  const chartData = [
-    { name: t.loanAmount, value: principal },
-    { name: t.totalInterest, value: totalInterest }
-  ];
-  const COLORS = ['#2563eb', '#f59e0b'];
+  const chartData = {
+    labels: [t.loanAmount, t.totalInterest],
+    datasets: [
+      {
+        data: [principal, totalInterest],
+        backgroundColor: ['#2563eb', '#f59e0b'],
+        borderWidth: 0,
+      },
+    ],
+  };
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => `${context.label}: ${currencyFormat.format(context.raw || 0)}`,
+        },
+      },
+    },
+    cutout: '65%',
+  };
 
   return (
     <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
@@ -97,28 +139,7 @@ export default function MortgageCalculator() {
 
       <div className="flex-1 flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
         <div className="w-full h-[320px]" dir="ltr">
-          <ResponsiveContainer width="100%" height={320}>
-            <PieChart>
-              <Pie
-                data={chartData}
-                cx="50%"
-                cy="50%"
-                innerRadius={60}
-                outerRadius={100}
-                paddingAngle={5}
-                dataKey="value"
-              >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <RechartsTooltip 
-                formatter={(value: number) => currencyFormat.format(value)}
-                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-              />
-              <Legend verticalAlign="bottom" height={36} />
-            </PieChart>
-          </ResponsiveContainer>
+          <Doughnut data={chartData} options={chartOptions} />
         </div>
       </div>
     </article>

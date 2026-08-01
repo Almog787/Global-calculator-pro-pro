@@ -1,7 +1,30 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer, Legend } from 'recharts';
+import Decimal from 'decimal.js';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
 import { useI18n } from '../contexts/i18n';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
 export default function CompoundInterest() {
   const { t, lang } = useI18n();
@@ -15,22 +38,34 @@ export default function CompoundInterest() {
   const [totalInterest, setTotalInterest] = useState(0);
 
   useEffect(() => {
-    const r = rate / 100 / 12;
-    const n = years * 12;
-    let fv = 0;
-    
-    if (r === 0) {
-      fv = principal + (contribution * n);
-    } else {
-      fv = principal * Math.pow(1 + r, n) + contribution * ((Math.pow(1 + r, n) - 1) / r);
+    try {
+      const decP = new Decimal(principal || 0);
+      const decRate = new Decimal(rate || 0).div(100).div(12);
+      const decN = new Decimal(years || 0).mul(12);
+      const decContr = new Decimal(contribution || 0);
+
+      let fv = new Decimal(0);
+
+      if (decRate.isZero()) {
+        fv = decP.add(decContr.mul(decN));
+      } else {
+        const rateFactor = decRate.add(1).pow(decN.toNumber());
+        const pGrowth = decP.mul(rateFactor);
+        const cGrowth = decContr.mul(rateFactor.sub(1)).div(decRate);
+        fv = pGrowth.add(cGrowth);
+      }
+
+      const tc = decP.add(decContr.mul(decN));
+      const ti = fv.sub(tc);
+
+      setFutureValue(fv.isFinite() ? fv.toNumber() : 0);
+      setTotalContributions(tc.isFinite() ? tc.toNumber() : 0);
+      setTotalInterest(ti.isFinite() ? ti.toNumber() : 0);
+    } catch {
+      setFutureValue(0);
+      setTotalContributions(0);
+      setTotalInterest(0);
     }
-    
-    const tc = principal + (contribution * n);
-    const ti = fv - tc;
-    
-    setFutureValue(fv);
-    setTotalContributions(tc);
-    setTotalInterest(ti);
   }, [principal, rate, years, contribution]);
 
   useEffect(() => {
@@ -53,27 +88,88 @@ export default function CompoundInterest() {
   const compactCurrencyFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { style: 'currency', currency: defaultCurrency, notation: 'compact', compactDisplay: 'short', minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
   const chartData = useMemo(() => {
-    const data = [];
-    const r = rate / 100 / 12;
-    
+    const labels: string[] = [];
+    const contribData: number[] = [];
+    const interestData: number[] = [];
+
+    const decP = new Decimal(principal || 0);
+    const decRate = new Decimal(rate || 0).div(100).div(12);
+    const decContr = new Decimal(contribution || 0);
+
     for (let i = 0; i <= years; i++) {
+      labels.push(i === 0 ? '0' : `${i}Y`);
       const n = i * 12;
-      let fv = 0;
-      if (r === 0) {
-        fv = principal + (contribution * n);
+      let fv = new Decimal(0);
+
+      if (decRate.isZero()) {
+        fv = decP.add(decContr.mul(n));
       } else {
-        fv = principal * Math.pow(1 + r, n) + contribution * ((Math.pow(1 + r, n) - 1) / r);
+        const rateFactor = decRate.add(1).pow(n);
+        const pGrowth = decP.mul(rateFactor);
+        const cGrowth = decContr.mul(rateFactor.sub(1)).div(decRate);
+        fv = pGrowth.add(cGrowth);
       }
-      const tc = principal + (contribution * n);
-      const ti = fv - tc;
-      data.push({
-        year: i,
-        [t.totalContributions]: Math.round(tc),
-        [t.totalInterestEarned]: Math.round(ti)
-      });
+
+      const tc = decP.add(decContr.mul(n));
+      const ti = fv.sub(tc);
+
+      contribData.push(Math.round(tc.toNumber()));
+      interestData.push(Math.round(ti.toNumber()));
     }
-    return data;
+
+    return {
+      labels,
+      datasets: [
+        {
+          label: t.totalContributions,
+          data: contribData,
+          borderColor: '#2563eb',
+          backgroundColor: 'rgba(37, 99, 235, 0.15)',
+          fill: true,
+          tension: 0.3,
+        },
+        {
+          label: t.totalInterestEarned,
+          data: interestData,
+          borderColor: '#f59e0b',
+          backgroundColor: 'rgba(245, 158, 11, 0.15)',
+          fill: true,
+          tension: 0.3,
+        },
+      ],
+    };
   }, [principal, rate, years, contribution, t.totalContributions, t.totalInterestEarned]);
+
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      tooltip: {
+        callbacks: {
+          label: (context: any) => `${context.dataset.label}: ${currencyFormat.format(context.raw || 0)}`,
+        },
+      },
+    },
+    scales: {
+      y: {
+        ticks: {
+          callback: (val: any) => compactCurrencyFormat.format(val),
+          font: { size: 11 },
+        },
+        grid: {
+          color: '#f3f4f6',
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
+  };
 
   return (
     <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
@@ -130,43 +226,7 @@ export default function CompoundInterest() {
 
       <div className="flex-[1.5] flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
         <div className="w-full h-[360px]" dir="ltr">
-          <ResponsiveContainer width="100%" height={360}>
-            <AreaChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <defs>
-                <linearGradient id="colorContributions" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#2563eb" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#2563eb" stopOpacity={0}/>
-                </linearGradient>
-                <linearGradient id="colorInterest" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#f59e0b" stopOpacity={0.3}/>
-                  <stop offset="95%" stopColor="#f59e0b" stopOpacity={0}/>
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e5e5" />
-              <XAxis 
-                dataKey="year" 
-                tick={{ fill: '#78716c', fontSize: 12 }} 
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(val) => val === 0 ? '0' : `${val}Y`}
-              />
-              <YAxis 
-                tick={{ fill: '#78716c', fontSize: 12 }} 
-                tickLine={false}
-                axisLine={false}
-                tickFormatter={(val) => compactCurrencyFormat.format(val)}
-                width={80}
-              />
-              <RechartsTooltip 
-                formatter={(value: number) => currencyFormat.format(value)}
-                labelFormatter={(label) => `${label} Years`}
-                contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-              />
-              <Legend verticalAlign="top" height={36} />
-              <Area type="monotone" dataKey={t.totalContributions} stackId="1" stroke="#2563eb" fill="url(#colorContributions)" strokeWidth={2} />
-              <Area type="monotone" dataKey={t.totalInterestEarned} stackId="1" stroke="#f59e0b" fill="url(#colorInterest)" strokeWidth={2} />
-            </AreaChart>
-          </ResponsiveContainer>
+          <Line data={chartData} options={chartOptions} />
         </div>
       </div>
     </article>
