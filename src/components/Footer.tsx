@@ -15,6 +15,12 @@ export default function Footer() {
     { path: '/age-calculator', label: t.ageTitle },
   ];
 
+  const extraCalculators = [
+    { path: '/calculators/auto-loan', label: 'Auto Loan' },
+    { path: '/calculators/roi', label: 'ROI Calculator' },
+    { path: '/calculators/margin', label: 'Margin Calculator' },
+  ];
+
   const legalLinks = [
     { path: '/suggest', label: t.suggestionsTitle },
     { path: '/about', label: t.aboutTitle },
@@ -43,15 +49,26 @@ export default function Footer() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-stone-400">
               {t.footerCalculators}
             </h3>
-            <ul className="grid grid-cols-1 gap-2 text-sm text-stone-600">
-              {calculatorLinks.map((link) => (
-                <li key={link.path}>
-                  <Link to={link.path} className="hover:text-stone-900 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+              <ul className="grid grid-cols-1 gap-2 text-sm text-stone-600">
+                {calculatorLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link to={link.path} className="hover:text-stone-900 transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ul className="grid grid-cols-1 gap-2 text-sm text-stone-600">
+                {extraCalculators.map((link) => (
+                  <li key={link.path}>
+                    <Link to={link.path} className="hover:text-stone-900 transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* Legal & Info Nav */}

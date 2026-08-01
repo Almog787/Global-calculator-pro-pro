@@ -8,6 +8,7 @@ const BmiCalculator = lazy(() => import('./pages/BmiCalculator'));
 const TipCalculator = lazy(() => import('./pages/TipCalculator'));
 const SalaryCalculator = lazy(() => import('./pages/SalaryCalculator'));
 const AgeCalculator = lazy(() => import('./pages/AgeCalculator'));
+const CalculatorWrapper = lazy(() => import('./pages/CalculatorWrapper'));
 const ContactUs = lazy(() => import('./pages/ContactUs'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
@@ -91,6 +92,7 @@ function App() {
           <Route path="/tip-calculator" element={<TipCalculator />} />
           <Route path="/salary-calculator" element={<SalaryCalculator />} />
           <Route path="/age-calculator" element={<AgeCalculator />} />
+          <Route path="/calculators/:slug" element={<CalculatorWrapper />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
