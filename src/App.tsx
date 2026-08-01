@@ -13,6 +13,7 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const AboutUs = lazy(() => import('./pages/AboutUs'));
 const SuggestFeature = lazy(() => import('./pages/SuggestFeature'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 import { useI18n } from './contexts/i18n';
 import Footer from './components/Footer';
@@ -95,6 +96,7 @@ function App() {
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/suggest" element={<SuggestFeature />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
       </div>

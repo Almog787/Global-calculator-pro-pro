@@ -43,8 +43,13 @@ type Translations = {
     monthlyContribution: string;
     yearsToGrow: string;
     futureValue: string;
-    totalContributions: string;
-    totalInterestEarned: string;
+    footerCalculators?: string;
+    footerLegal?: string;
+    footerRights?: string;
+    footerDisclaimer?: string;
+    notFoundTitle?: string;
+    notFoundDesc?: string;
+    backToHome?: string;
   }
 };
 
@@ -145,6 +150,9 @@ export const translations: Translations = {
     footerLegal: 'Legal & Info',
     footerRights: 'All rights reserved.',
     footerDisclaimer: 'Calculations provided on this site are for informational purposes only.',
+    notFoundTitle: 'Page Not Found',
+    notFoundDesc: 'The page you are looking for does not exist or has been moved.',
+    backToHome: 'Back to Home',
   },
   he: {
     dir: 'rtl',
@@ -242,6 +250,9 @@ export const translations: Translations = {
     footerLegal: 'מידע ומשפטי',
     footerRights: 'כל הזכויות שמורות.',
     footerDisclaimer: 'החישובים המסופקים באתר זה נועדו למטרות מידע בלבד.',
+    notFoundTitle: 'העמוד לא נמצא',
+    notFoundDesc: 'העמוד שחיפשת אינו קיים או שהועבר לכתובת אחרת.',
+    backToHome: 'חזרה לדף הבית',
   },
   es: {
     dir: 'ltr',
@@ -339,6 +350,9 @@ export const translations: Translations = {
     footerLegal: 'Información y Legal',
     footerRights: 'Todos los derechos reservados.',
     footerDisclaimer: 'Los cálculos proporcionados son solo para fines informativos.',
+    notFoundTitle: 'Página no encontrada',
+    notFoundDesc: 'La página que buscas no existe o ha sido movida.',
+    backToHome: 'Volver al Inicio',
   },
   fr: {
     dir: 'ltr',
@@ -436,6 +450,9 @@ export const translations: Translations = {
     footerLegal: 'Informations Légales',
     footerRights: 'Tous droits réservés.',
     footerDisclaimer: 'Les calculs fournis sur ce site sont à titre indicatif uniquement.',
+    notFoundTitle: 'Page non trouvée',
+    notFoundDesc: 'La page que vous recherchez n\'existe pas ou a été déplacée.',
+    backToHome: 'Retour à l\'Accueil',
   },
   ar: {
     dir: 'rtl',
@@ -473,7 +490,10 @@ export const translations: Translations = {
     yearsToGrow: 'سنوات النمو',
     futureValue: 'القيمة المستقبلية',
     totalContributions: 'إجمالي المساهمات',
-    totalInterestEarned: 'إجمالي الفائدة المكتسبة'
+    totalInterestEarned: 'إجمالي الفائدة المكتسبة',
+    notFoundTitle: 'الصفحة غير موجودة',
+    notFoundDesc: 'الصفحة التي تبحث عنها غير موجودة أو تم نقلها.',
+    backToHome: 'العودة إلى الصفحة الرئيسية',
   }
 };
 
