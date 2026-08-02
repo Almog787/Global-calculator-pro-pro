@@ -79,6 +79,7 @@ export default function FreelanceNetIncome() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

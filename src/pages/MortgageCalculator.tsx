@@ -23,10 +23,8 @@ export default function MortgageCalculator() {
   const [principal, setPrincipal] = useState(300000);
   const [rate, setRate] = useState(6.5);
   const [years, setYears] = useState(30);
-  const [monthlyPayment, setMonthlyPayment] = useState(0);
-  const [totalInterest, setTotalInterest] = useState(0);
 
-  useEffect(() => {
+  const { monthlyPayment, totalInterest } = useMemo(() => {
     try {
       const decP = new Decimal(principal || 0);
       const decR = new Decimal(rate || 0).div(100).div(12);
@@ -44,11 +42,12 @@ export default function MortgageCalculator() {
       const totalPaid = mp.mul(decN);
       const ti = totalPaid.sub(decP);
 
-      setMonthlyPayment(mp.isFinite() ? mp.toNumber() : 0);
-      setTotalInterest(ti.isFinite() ? ti.toNumber() : 0);
+      return {
+        monthlyPayment: mp.isFinite() ? mp.toNumber() : 0,
+        totalInterest: ti.isFinite() ? ti.toNumber() : 0
+      };
     } catch {
-      setMonthlyPayment(0);
-      setTotalInterest(0);
+      return { monthlyPayment: 0, totalInterest: 0 };
     }
   }, [principal, rate, years]);
 
@@ -81,6 +80,7 @@ export default function MortgageCalculator() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

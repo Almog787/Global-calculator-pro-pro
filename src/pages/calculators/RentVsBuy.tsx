@@ -113,6 +113,7 @@ export default function RentVsBuy() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

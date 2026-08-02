@@ -141,6 +141,7 @@ export default function DebtSnowball() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

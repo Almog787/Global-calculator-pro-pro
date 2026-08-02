@@ -29,14 +29,7 @@ export default function SalaryCalculator() {
   const [amount, setAmount] = useState(50000);
   const [frequency, setFrequency] = useState('yearly');
   
-  const [results, setResults] = useState({
-    hourly: 0,
-    weekly: 0,
-    monthly: 0,
-    yearly: 0
-  });
-
-  useEffect(() => {
+  const results = useMemo(() => {
     try {
       const decAmt = new Decimal(amount || 0);
       let decYearly = new Decimal(0);
@@ -62,9 +55,9 @@ export default function SalaryCalculator() {
       const monthly = decYearly.div(12).toNumber();
       const yearly = decYearly.toNumber();
 
-      setResults({ hourly, weekly, monthly, yearly });
+      return { hourly, weekly, monthly, yearly };
     } catch {
-      setResults({ hourly: 0, weekly: 0, monthly: 0, yearly: 0 });
+      return { hourly: 0, weekly: 0, monthly: 0, yearly: 0 };
     }
   }, [amount, frequency]);
 
@@ -97,6 +90,7 @@ export default function SalaryCalculator() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

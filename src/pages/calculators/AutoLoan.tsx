@@ -131,6 +131,7 @@ export default function AutoLoan() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

@@ -4,6 +4,7 @@ import NotFound from './NotFound';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
 import { calculators } from '../data/calculators';
+import SkeletonLoader from '../components/SkeletonLoader';
 
 // Using Vite's import.meta.glob to dynamically discover all calculators in the folder.
 const modules = import.meta.glob('./calculators/*.tsx');
@@ -42,11 +43,7 @@ export default function CalculatorWrapper() {
         { label: calcData?.fallbackTitle || slug || 'Calculator' }
       ]} />
       
-      <Suspense fallback={
-        <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div>
-        </div>
-      }>
+      <Suspense fallback={<SkeletonLoader />}>
         <Component />
       </Suspense>
 

@@ -35,11 +35,7 @@ export default function CompoundInterest() {
   const [years, setYears] = useState(10);
   const [contribution, setContribution] = useState(500);
 
-  const [futureValue, setFutureValue] = useState(0);
-  const [totalContributions, setTotalContributions] = useState(0);
-  const [totalInterest, setTotalInterest] = useState(0);
-
-  useEffect(() => {
+  const { futureValue, totalContributions, totalInterest } = useMemo(() => {
     try {
       const decP = new Decimal(principal || 0);
       const decRate = new Decimal(rate || 0).div(100).div(12);
@@ -60,13 +56,13 @@ export default function CompoundInterest() {
       const tc = decP.add(decContr.mul(decN));
       const ti = fv.sub(tc);
 
-      setFutureValue(fv.isFinite() ? fv.toNumber() : 0);
-      setTotalContributions(tc.isFinite() ? tc.toNumber() : 0);
-      setTotalInterest(ti.isFinite() ? ti.toNumber() : 0);
+      return {
+        futureValue: fv.isFinite() ? fv.toNumber() : 0,
+        totalContributions: tc.isFinite() ? tc.toNumber() : 0,
+        totalInterest: ti.isFinite() ? ti.toNumber() : 0
+      };
     } catch {
-      setFutureValue(0);
-      setTotalContributions(0);
-      setTotalInterest(0);
+      return { futureValue: 0, totalContributions: 0, totalInterest: 0 };
     }
   }, [principal, rate, years, contribution]);
 
@@ -143,6 +139,7 @@ export default function CompoundInterest() {
   }, [principal, rate, years, contribution, t.totalContributions, t.totalInterestEarned]);
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

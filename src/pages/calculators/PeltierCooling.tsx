@@ -83,6 +83,7 @@ export default function PeltierCooling() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

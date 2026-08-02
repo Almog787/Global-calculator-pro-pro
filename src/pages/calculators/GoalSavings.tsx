@@ -117,6 +117,7 @@ export default function GoalSavings() {
   }, [initial, years, rate, results.monthly, goal]);
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

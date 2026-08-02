@@ -21,6 +21,8 @@ import { useI18n } from './contexts/i18n';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 
+import SkeletonLoader from './components/SkeletonLoader';
+
 function App() {
   const { lang, setLang, t } = useI18n();
   const location = useLocation();
@@ -90,7 +92,7 @@ function App() {
       </header>
 
       <div className="max-w-5xl mx-auto px-4 md:px-6 py-8">
-        <Suspense fallback={<div className="flex justify-center items-center h-64"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-stone-900"></div></div>}>
+        <Suspense fallback={<SkeletonLoader />}>
         <Routes>
           <Route path="/" element={<Navigate to="/all" replace />} />
           <Route path="/all" element={<AllCalculators />} />

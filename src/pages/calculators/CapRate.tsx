@@ -75,6 +75,7 @@ export default function CapRate() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

@@ -99,6 +99,7 @@ export default function DownloadTime() {
   };
 
   const chartOptions = {
+    animation: false,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
