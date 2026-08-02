@@ -34,7 +34,24 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <style>
+        body { margin: 0; padding: 0; background-color: #fafaf9; }
+        .global-preloader { display: flex; flex-direction: column; min-height: 100vh; font-family: 'Public Sans', sans-serif; }
+        .global-header { height: 72px; background: #fff; border-bottom: 1px solid #e7e5e4; width: 100%; }
+        .global-content { max-width: 64rem; margin: 0 auto; padding: 2rem 1rem; width: 100%; box-sizing: border-box; }
+        .global-title { height: 2rem; width: 15rem; background: #e7e5e4; border-radius: 0.25rem; margin-bottom: 1.5rem; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .global-box { height: 20rem; width: 100%; background: #fff; border-radius: 1rem; border: 1px solid #f5f5f4; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+      </style>
+      <div class="global-preloader">
+        <div class="global-header"></div>
+        <div class="global-content">
+          <div class="global-title"></div>
+          <div class="global-box"></div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

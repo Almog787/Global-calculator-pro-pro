@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useDeferredValue, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Doughnut } from 'react-chartjs-2';
 import { useI18n } from '../../contexts/i18n';
@@ -162,6 +162,8 @@ export default function DebtSnowball() {
     return `${yrs > 0 ? yrs + 'y ' : ''}${mos}m`;
   };
 
+  const deferredChartData = useDeferredValue(chartData);
+
   return (
     <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
       <Helmet>
@@ -217,7 +219,7 @@ export default function DebtSnowball() {
            </div>
         </div>
         <div className="w-full h-[220px]" dir="ltr">
-          <Doughnut data={chartData} options={chartOptions} />
+          <Doughnut data={deferredChartData} options={chartOptions} />
         </div>
       </div>
     </article>

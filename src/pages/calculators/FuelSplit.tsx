@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useDeferredValue, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Decimal from 'decimal.js';
 import { Doughnut } from 'react-chartjs-2';
@@ -93,6 +93,8 @@ export default function FuelSplit() {
     cutout: '70%',
   };
 
+  const deferredChartData = useDeferredValue(chartData);
+
   return (
     <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
       <Helmet>
@@ -146,7 +148,7 @@ export default function FuelSplit() {
 
       <div className="flex-1 flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
         <div className="w-full h-[320px]" dir="ltr">
-          <Doughnut data={chartData} options={chartOptions} />
+          <Doughnut data={deferredChartData} options={chartOptions} />
         </div>
       </div>
     </article>

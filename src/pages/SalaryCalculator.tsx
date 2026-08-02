@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useDeferredValue, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Decimal from 'decimal.js';
 import {
@@ -121,6 +121,8 @@ export default function SalaryCalculator() {
     },
   };
 
+  const deferredChartData = useDeferredValue(chartData);
+
   return (
     <div className="w-full">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.salaryTitle }]} />
@@ -179,7 +181,7 @@ export default function SalaryCalculator() {
 
       <div className="flex-1 flex flex-col justify-center items-center border-t lg:border-t-0 lg:border-l lg:rtl:border-r lg:rtl:border-l-0 border-stone-200 pt-10 lg:pt-0 lg:pl-10 lg:rtl:pr-10 lg:rtl:pl-0">
         <div className="w-full h-[320px]" dir="ltr">
-          <Bar data={chartData} options={chartOptions} />
+          <Bar data={deferredChartData} options={chartOptions} />
         </div>
       </div>
     </article>
