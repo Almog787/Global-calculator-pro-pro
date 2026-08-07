@@ -144,6 +144,42 @@ export default function AllCalculators() {
         </p>
       </section>
 
+      {/* PWA Promotion Banner */}
+      <section className="mb-stack-lg bg-primary-container text-on-primary-container rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 shadow-sm border border-outline-variant/50 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute -top-12 -right-12 text-primary-fixed opacity-10 pointer-events-none rtl:-left-12 rtl:right-auto">
+          <span className="material-symbols-outlined text-[150px]">apps</span>
+        </div>
+
+        <div className="flex-grow z-10 text-center md:text-left rtl:md:text-right">
+          <h2 className="font-headline-lg-mobile md:font-headline-lg mb-2 text-primary-fixed">{t.pwaPromoTitle}</h2>
+          <p className="font-body-md text-on-primary-container/80 mb-4 max-w-xl">{t.pwaPromoDesc}</p>
+          
+          <ul className="flex flex-col md:flex-row gap-3 md:gap-6 font-label-sm text-on-primary-container/90 mb-4">
+            <li className="flex items-center justify-center md:justify-start gap-2">
+              <span className="material-symbols-outlined text-secondary-fixed text-lg">bolt</span>
+              {(t as any).pwaPromoBen1 || 'Fast loading & offline'}
+            </li>
+            <li className="flex items-center justify-center md:justify-start gap-2">
+              <span className="material-symbols-outlined text-secondary-fixed text-lg">no_sim</span>
+              {(t as any).pwaPromoBen2 || 'No app store'}
+            </li>
+            <li className="flex items-center justify-center md:justify-start gap-2">
+              <span className="material-symbols-outlined text-secondary-fixed text-lg">sd_storage</span>
+              {(t as any).pwaPromoBen3 || 'Minimal storage'}
+            </li>
+          </ul>
+          
+          <div className="bg-surface/10 rounded-lg p-3 md:inline-block">
+            <p className="font-label-bold text-sm mb-1">{t.dir === 'rtl' ? 'איך מתקינים?' : 'How to install?'}</p>
+            <ol className="font-body-md text-sm list-decimal list-inside text-on-primary-container/90 space-y-1">
+              <li>{(t as any).pwaPromoStep1 || 'Tap browser menu (⋮)'}</li>
+              <li>{(t as any).pwaPromoStep2 || 'Select "Add to Home Screen"'}</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
       {/* Category Filters */}
       <section className="mb-stack-lg overflow-x-auto pb-4 scrollbar-hide">
         <div className="flex gap-4 min-w-max">

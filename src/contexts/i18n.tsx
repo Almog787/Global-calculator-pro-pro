@@ -140,6 +140,14 @@ export type Translations = {
     catMath: string;
     catTech: string;
     catLifestyle: string;
+    pwaPromoTitle: string;
+    pwaPromoDesc: string;
+    pwaPromoBen1: string;
+    pwaPromoBen2: string;
+    pwaPromoBen3: string;
+    pwaPromoStep1: string;
+    pwaPromoStep2: string;
+
     libraryTitle: string;
     librarySubtitle: string;
   }
@@ -271,6 +279,14 @@ export const translations: Translations = {
     catMath: 'Math & Conversions',
     catTech: 'Tech & Engineering',
     catLifestyle: 'Lifestyle & Everyday',
+    pwaPromoTitle: 'Install Our App',
+    pwaPromoDesc: 'You can install our calculators directly to your phone or desktop for quick access anytime.',
+    pwaPromoBen1: 'Fast loading & offline access',
+    pwaPromoBen2: 'No app store required',
+    pwaPromoBen3: 'Takes up minimal storage space',
+    pwaPromoStep1: 'Tap the share menu or browser menu (⋮)',
+    pwaPromoStep2: 'Select "Add to Home Screen" or "Install App"',
+
     libraryTitle: 'Calculator Library',
     librarySubtitle: 'Find the perfect tool for your calculations.',
   },
@@ -399,6 +415,14 @@ export const translations: Translations = {
     catMath: 'מתמטיקה והמרות',
     catTech: 'טכנולוגיה והנדסה',
     catLifestyle: 'לייפסטייל ויום-יום',
+    pwaPromoTitle: 'התקן את האפליקציה שלנו',
+    pwaPromoDesc: 'ניתן להתקין את המחשבונים שלנו ישירות לטלפון או למחשב לגישה מהירה בכל עת.',
+    pwaPromoBen1: 'טעינה מהירה וגישה ללא חיבור לאינטרנט',
+    pwaPromoBen2: 'ללא צורך בהורדה מחנות אפליקציות',
+    pwaPromoBen3: 'תופס מעט מאוד שטח אחסון',
+    pwaPromoStep1: 'לחץ על תפריט הדפדפן (⋮) או על כפתור השיתוף',
+    pwaPromoStep2: 'בחר ״הוסף למסך הבית״ או ״התקן אפליקציה״',
+
     libraryTitle: 'ספריית המחשבונים',
     librarySubtitle: 'מצא את הכלי המושלם לחישובים שלך.',
   },
@@ -527,6 +551,14 @@ export const translations: Translations = {
     catMath: 'Matemáticas y Conversiones',
     catTech: 'Tecnología e Ingeniería',
     catLifestyle: 'Estilo de vida',
+    pwaPromoTitle: 'Instala Nuestra App',
+    pwaPromoDesc: 'Puedes instalar nuestras calculadoras directamente en tu teléfono o PC para un acceso rápido en cualquier momento.',
+    pwaPromoBen1: 'Carga rápida y acceso sin conexión',
+    pwaPromoBen2: 'No requiere tienda de aplicaciones',
+    pwaPromoBen3: 'Ocupa muy poco espacio de almacenamiento',
+    pwaPromoStep1: 'Toca el menú del navegador (⋮) o el botón de compartir',
+    pwaPromoStep2: 'Selecciona "Agregar a la pantalla de inicio" o "Instalar aplicación"',
+
     libraryTitle: 'Biblioteca de Calculadoras',
     librarySubtitle: 'Encuentre la herramienta perfecta para sus cálculos.',
   },
@@ -655,6 +687,14 @@ export const translations: Translations = {
     catMath: 'Maths & Conversions',
     catTech: 'Tech & Ingénierie',
     catLifestyle: 'Mode de vie',
+    pwaPromoTitle: 'Installez Notre Application',
+    pwaPromoDesc: 'Vous pouvez installer nos calculatrices directement sur votre téléphone ou PC pour un accès rapide à tout moment.',
+    pwaPromoBen1: 'Chargement rapide et accès hors ligne',
+    pwaPromoBen2: 'Aucune boutique d\'applications requise',
+    pwaPromoBen3: 'Prend très peu d\'espace de stockage',
+    pwaPromoStep1: 'Appuyez sur le menu du navigateur (⋮) ou sur le bouton de partage',
+    pwaPromoStep2: 'Sélectionnez "Ajouter à l\'écran d\'accueil" ou "Installer l\'application"',
+
     libraryTitle: 'Bibliothèque de calculatrices',
     librarySubtitle: 'Trouvez l\'outil parfait pour vos calculs.',
   },
@@ -783,6 +823,14 @@ export const translations: Translations = {
     catMath: 'الرياضيات والتحويلات',
     catTech: 'التكنولوجيا والتقنية',
     catLifestyle: 'الحياة اليومية',
+    pwaPromoTitle: 'تثبيت تطبيقنا',
+    pwaPromoDesc: 'يمكنك تثبيت حاسباتنا مباشرة على هاتفك أو جهاز الكمبيوتر للوصول السريع في أي وقت.',
+    pwaPromoBen1: 'تحميل سريع ووصول بدون إنترنت',
+    pwaPromoBen2: 'لا يلزم متجر تطبيقات',
+    pwaPromoBen3: 'يشغل مساحة تخزين صغيرة جدًا',
+    pwaPromoStep1: 'اضغط على قائمة المتصفح (⋮) أو زر المشاركة',
+    pwaPromoStep2: 'حدد "إضافة إلى الشاشة الرئيسية" أو "تثبيت التطبيق"',
+
     libraryTitle: 'مكتبة الحاسبات',
     librarySubtitle: 'اعثر على أداة الحساب المثالية لاحتياجاتك.',
   }
