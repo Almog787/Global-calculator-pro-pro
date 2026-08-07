@@ -802,7 +802,7 @@ function getInitialLanguage(): Language {
   const savedLang = localStorage.getItem('globalcalc_lang') as Language;
   if (savedLang && translations[savedLang]) return savedLang;
   
-  return 'he';
+  return 'en';
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
