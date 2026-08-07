@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { useI18n } from '../contexts/i18n';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
+import CopyButton from '../components/CopyButton';
 
 const conversions: Record<string, Record<string, (v: number) => number>> = {
   length: {
@@ -23,11 +24,12 @@ const conversions: Record<string, Record<string, (v: number) => number>> = {
 
 export default function UnitConverter() {
   const { t, lang } = useI18n();
-  const [val, setVal] = useState(1);
+  const [val, setVal] = useState<number | ''>(1);
   const [cat, setCat] = useState('length');
   const [type, setType] = useState('m-ft');
 
-  const res = conversions[cat]?.[type]?.(val) || 0;
+  const numericVal = typeof val === 'number' ? val : 0;
+  const res = conversions[cat]?.[type]?.(numericVal) || 0;
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -36,12 +38,12 @@ export default function UnitConverter() {
           event_category: 'Unit Converter',
           category: cat,
           conversion_type: type,
-          value: val
+          value: numericVal
         });
       }
     }, 2000);
     return () => clearTimeout(handler);
-  }, [val, cat, type]);
+  }, [numericVal, cat, type]);
 
   const numFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { maximumFractionDigits: 4 });
 
@@ -52,60 +54,78 @@ export default function UnitConverter() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.unitConvTitle }]} />
-      <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/unit-converter" />
-        <title>{t.unitConvTitle} | {t.title}</title>
-        <meta name="description" content={t.unitConvDesc} />
-      </Helmet>
-      <div className="mb-10">
-        <h2 className="text-2xl md:text-3xl font-headline text-stone-900 tracking-tight mb-3">{t.unitConvTitle}</h2>
-        <p className="text-stone-500 font-medium text-[15px] leading-relaxed max-w-sm">{t.unitConvExplanation}</p>
-      </div>
+      <article className="w-full bg-white rounded-2xl p-6 md:p-8 shadow-xs border border-stone-200/80">
+        <Helmet>
+          <link rel="canonical" href="https://globalcalcpro.com/unit-converter" />
+          <title>{t.unitConvTitle} | {t.title}</title>
+          <meta name="description" content={t.unitConvDesc} />
+        </Helmet>
+        <div className="mb-8">
+          <h1 className="text-2xl md:text-3xl font-headline font-bold text-stone-900 tracking-tight mb-2">{t.unitConvTitle}</h1>
+          <p className="text-stone-500 text-sm md:text-base leading-relaxed max-w-lg">{t.unitConvExplanation}</p>
+        </div>
 
-      <div className="flex-1 flex flex-col justify-between">
-        <div className="space-y-8">
+        <div className="space-y-6">
           <div className="flex border-b border-stone-200">
             {['length', 'weight', 'temp'].map(c => (
-              <button 
+              <button
                 key={c}
+                type="button"
                 onClick={() => { setCat(c); setType(Object.keys(conversions[c])[0]); }}
-                className={`flex-1 pb-3 pt-2 font-bold uppercase tracking-wider text-xs transition-colors border-b-2 -mb-[2px] ${cat === c ? 'text-stone-900 border-stone-900' : 'text-stone-400 border-transparent hover:text-stone-600'}`}
+                className={`flex-1 pb-3 pt-2 font-bold uppercase tracking-wider text-xs transition-colors border-b-2 -mb-[2px] cursor-pointer ${cat === c ? 'text-blue-600 border-blue-600' : 'text-stone-400 border-transparent hover:text-stone-600'}`}
               >
                 {categoryNames[c]}
               </button>
             ))}
           </div>
 
-          <div>
-            <select value={type} onChange={e => setType(e.target.value)} className="w-full bg-stone-50/50 border-0 border-b-2 border-stone-200 px-3 py-3 text-stone-900 font-medium focus:ring-0 focus:border-stone-900 transition-colors cursor-pointer appearance-none" dir="ltr">
-              {Object.keys(conversions[cat]).map(k => {
-                const [from, to] = k.split('-');
-                return <option key={k} value={k}>{from.toUpperCase()} ➝ {to.toUpperCase()}</option>
-              })}
-            </select>
-          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div className="space-y-5 bg-stone-50/60 p-5 rounded-2xl border border-stone-200/60">
+              <div>
+                <label className="text-xs tracking-wider uppercase font-bold text-stone-500 mb-1.5 block">Conversion Type</label>
+                <select
+                  value={type}
+                  onChange={e => setType(e.target.value)}
+                  className="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-stone-900 font-bold focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all cursor-pointer"
+                  dir="ltr"
+                >
+                  {Object.keys(conversions[cat]).map(k => {
+                    const [from, to] = k.split('-');
+                    return <option key={k} value={k}>{from.toUpperCase()} ➝ {to.toUpperCase()}</option>;
+                  })}
+                </select>
+              </div>
 
-          <div className="flex flex-col gap-6">
-            <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">Input</label>
-              <input type="number" value={val} onChange={e => setVal(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+              <div>
+                <label className="text-xs tracking-wider uppercase font-bold text-stone-500 mb-1.5 block">Value to Convert</label>
+                <input
+                  type="number"
+                  value={val}
+                  onChange={e => setVal(e.target.value === '' ? '' : Number(e.target.value))}
+                  className="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xl font-bold text-stone-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all shadow-2xs"
+                />
+              </div>
+            </div>
+
+            <div className="bg-stone-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xs border border-stone-800 h-full">
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs tracking-wider uppercase font-bold text-stone-400">Converted Value</span>
+                  <CopyButton textToCopy={numFormat.format(res)} className="bg-stone-800 text-white border-stone-700 hover:bg-white hover:text-stone-900" />
+                </div>
+                <div className="text-3xl md:text-5xl font-headline font-bold text-blue-400 tracking-tight my-2 truncate" dir="ltr">
+                  {!isNaN(res) ? numFormat.format(res) : '0'}
+                </div>
+              </div>
+              <div className="text-xs text-stone-400 border-t border-stone-800 pt-3 font-mono">
+                {type.replace('-', ' ➝ ').toUpperCase()}
+              </div>
             </div>
           </div>
         </div>
-
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="mb-2">
-            <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-2">Result</span>
-            <div className="text-4xl md:text-5xl font-headline font-bold text-stone-900 tracking-tight truncate" dir="ltr">
-              {!isNaN(res) ? numFormat.format(res) : '0'}
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
       <RelatedCalculators currentId="unit" />
     </div>
   );

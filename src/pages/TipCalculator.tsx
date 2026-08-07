@@ -4,13 +4,15 @@ import Decimal from 'decimal.js';
 import { useI18n } from '../contexts/i18n';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
+import CopyButton from '../components/CopyButton';
+import PresetChips from '../components/PresetChips';
 
 export default function TipCalculator() {
   const { t, lang } = useI18n();
-  const [bill, setBill] = useState(100);
-  const [tipPercent, setTipPercent] = useState(15);
-  const [people, setPeople] = useState(1);
-  
+  const [bill, setBill] = useState<number | ''>(100);
+  const [tipPercent, setTipPercent] = useState<number | ''>(15);
+  const [people, setPeople] = useState<number | ''>(1);
+
   const [tipAmount, setTipAmount] = useState(0);
   const [totalPerPerson, setTotalPerPerson] = useState(0);
 
@@ -20,7 +22,7 @@ export default function TipCalculator() {
       const decTipPercent = new Decimal(tipPercent || 0).div(100);
       const decTip = decBill.mul(decTipPercent);
       const decTotal = decBill.add(decTip);
-      const decPeople = new Decimal(Math.max(1, people || 1));
+      const decPeople = new Decimal(Math.max(1, Number(people) || 1));
 
       setTipAmount(decTip.toNumber());
       setTotalPerPerson(decTotal.div(decPeople).toNumber());
@@ -48,47 +50,79 @@ export default function TipCalculator() {
   const currencyFormat = new Intl.NumberFormat(lang === 'en' ? 'en-US' : lang, { style: 'currency', currency: defaultCurrency, minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
   return (
-    <div className="w-full">
+    <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.tipTitle }]} />
-      <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/tip-calculator" />
-        <title>{t.tipTitle} | {t.title}</title>
-        <meta name="description" content={t.tipDesc} />
-      </Helmet>
-      <div className="mb-10">
-        <h2 className="text-2xl md:text-3xl font-headline text-stone-900 tracking-tight mb-3">{t.tipTitle}</h2>
-        <p className="text-stone-500 font-medium text-[15px] leading-relaxed max-w-sm">{t.tipExplanation}</p>
-      </div>
+      <article className="w-full bg-white rounded-2xl p-6 md:p-8 shadow-xs border border-stone-200/80">
+        <Helmet>
+          <link rel="canonical" href="https://globalcalcpro.com/tip-calculator" />
+          <title>{t.tipTitle} | {t.title}</title>
+          <meta name="description" content={t.tipDesc} />
+        </Helmet>
+        <div className="mb-8">
+          <h1 className="text-2xl md:text-3xl font-headline font-bold text-stone-900 tracking-tight mb-2">{t.tipTitle}</h1>
+          <p className="text-stone-500 text-sm md:text-base leading-relaxed max-w-lg">{t.tipExplanation}</p>
+        </div>
 
-      <div className="flex-1 flex flex-col justify-between">
-        <div className="space-y-8">
-          <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.billAmount}</label>
-            <input type="number" value={bill} onChange={e => setBill(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+          <div className="space-y-6 bg-stone-50/60 p-5 rounded-2xl border border-stone-200/60">
+            <div>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-500 mb-1.5 block">{t.billAmount}</label>
+              <input
+                type="number"
+                value={bill}
+                onChange={e => setBill(e.target.value === '' ? '' : Number(e.target.value))}
+                className="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xl font-bold text-stone-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+              />
+            </div>
+            <div>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-500 mb-1.5 block">{t.tipPercentage}</label>
+              <input
+                type="number"
+                value={tipPercent}
+                onChange={e => setTipPercent(e.target.value === '' ? '' : Number(e.target.value))}
+                className="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xl font-bold text-stone-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+              />
+              <PresetChips
+                className="mt-2.5"
+                presets={[10, 12, 15, 18, 20, 25]}
+                selectedValue={typeof tipPercent === 'number' ? tipPercent : undefined}
+                onSelect={(val) => setTipPercent(val)}
+              />
+            </div>
+            <div>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-500 mb-1.5 block">{t.numberOfPeople}</label>
+              <input
+                type="number"
+                value={people}
+                onChange={e => setPeople(e.target.value === '' ? '' : Math.max(1, Number(e.target.value)))}
+                className="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-xl font-bold text-stone-900 focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+              />
+            </div>
           </div>
-          <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.tipPercentage}</label>
-            <input type="number" value={tipPercent} onChange={e => setTipPercent(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
-          </div>
-          <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.numberOfPeople}</label>
-            <input type="number" value={people} onChange={e => setPeople(Math.max(1, Number(e.target.value)))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
+
+          <div className="bg-stone-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xs border border-stone-800 h-full">
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block">{t.totalPerPerson}</span>
+                <CopyButton textToCopy={currencyFormat.format(totalPerPerson)} className="bg-stone-800 text-white border-stone-700 hover:bg-white hover:text-stone-900" />
+              </div>
+              <div className="text-3xl md:text-5xl font-headline font-bold text-emerald-400 tracking-tight my-2" dir="ltr">
+                {currencyFormat.format(totalPerPerson)}
+              </div>
+            </div>
+
+            <div className="border-t border-stone-800 pt-4 mt-6">
+              <div className="flex items-center justify-between">
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block">{t.tipAmount}</span>
+                <CopyButton textToCopy={currencyFormat.format(tipAmount)} className="bg-stone-800 text-white border-stone-700 hover:bg-white hover:text-stone-900" />
+              </div>
+              <div className="text-xl md:text-2xl font-headline text-stone-200 mt-1 font-semibold" dir="ltr">
+                {currencyFormat.format(tipAmount)}
+              </div>
+            </div>
           </div>
         </div>
-        
-        <div className="mt-12 pt-8 border-t border-stone-200">
-          <div className="mb-6">
-            <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-2">{t.totalPerPerson}</span>
-            <div className="text-4xl md:text-5xl font-headline font-bold text-stone-900 tracking-tight" dir="ltr">{currencyFormat.format(totalPerPerson)}</div>
-          </div>
-          <div>
-            <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.tipAmount}</span>
-            <div className="text-lg md:text-xl font-headline text-stone-600" dir="ltr">{currencyFormat.format(tipAmount)}</div>
-          </div>
-        </div>
-      </div>
-    </article>
+      </article>
       <RelatedCalculators currentId="tip" />
     </div>
   );
