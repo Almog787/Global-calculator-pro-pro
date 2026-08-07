@@ -24,6 +24,36 @@ const localDict = {
     interestRate: 'ריבית שנתית (%)',
     monthlyContribution: 'הפקדה חודשית נדרשת',
     totalInterest: 'סך ריבית שנצברה',
+  },
+  es: {
+    title: 'Calculadora de Ahorro para Meta',
+    description: 'Calcula cuánto necesitas ahorrar mensualmente para alcanzar tu meta financiera.',
+    goalAmount: 'Meta de Ahorro',
+    initialSavings: 'Ahorro Inicial',
+    years: 'Años para Ahorrar',
+    interestRate: 'Tasa de Interés Anual (%)',
+    monthlyContribution: 'Aporte Mensual Requerido',
+    totalInterest: 'Total Intereses Ganados',
+  },
+  fr: {
+    title: 'Calculatrice d\'Épargne Objectif',
+    description: 'Calculez combien vous devez épargner chaque mois pour atteindre votre objectif.',
+    goalAmount: 'Objectif d\'Épargne',
+    initialSavings: 'Épargne Initiale',
+    years: 'Années d\'Épargne',
+    interestRate: 'Taux d\'Intérêt Annuel (%)',
+    monthlyContribution: 'Contribution Mensuelle Requise',
+    totalInterest: 'Total des Intérêts Gagnés',
+  },
+  ar: {
+    title: 'حاسبة الادخار للهدف',
+    description: 'احسب المبلغ الذي تحتاج إلى ادخاره شهرياً للوصول إلى هدفك المالي.',
+    goalAmount: 'المبلغ المستهدف للادخار',
+    initialSavings: 'الادخار الأولي',
+    years: 'سنوات الادخار',
+    interestRate: 'معدل الفائدة السنوي (%)',
+    monthlyContribution: 'المساهمة الشهرية المطلوبة',
+    totalInterest: 'إجمالي الفائدة المكتسبة',
   }
 };
 

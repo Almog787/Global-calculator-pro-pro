@@ -1,14 +1,15 @@
 import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 
-type Language = 'en' | 'he' | 'es' | 'fr' | 'ar';
+export type Language = 'en' | 'he' | 'es' | 'fr' | 'ar';
 
-type Translations = {
+export type Translations = {
   [key in Language]: {
     dir: 'ltr' | 'rtl';
     title: string;
-    // Common
     calculate: string;
     result: string;
+    allTools: string;
+    
     // Percentage Finder
     percFinderTitle: string;
     percFinderDesc: string;
@@ -19,6 +20,7 @@ type Translations = {
     percChange: string;
     from: string;
     to: string;
+
     // Unit Converter
     unitConvTitle: string;
     unitConvDesc: string;
@@ -26,6 +28,7 @@ type Translations = {
     length: string;
     weight: string;
     temp: string;
+
     // Mortgage
     mortgageTitle: string;
     mortgageDesc: string;
@@ -35,6 +38,7 @@ type Translations = {
     loanTerm: string;
     monthlyPayment: string;
     totalInterest: string;
+
     // Compound Interest
     compoundTitle: string;
     compoundDesc: string;
@@ -43,13 +47,101 @@ type Translations = {
     monthlyContribution: string;
     yearsToGrow: string;
     futureValue: string;
-    footerCalculators?: string;
-    footerLegal?: string;
-    footerRights?: string;
-    footerDisclaimer?: string;
-    notFoundTitle?: string;
-    notFoundDesc?: string;
-    backToHome?: string;
+    totalContributions: string;
+    totalInterestEarned: string;
+
+    // BMI
+    bmiTitle: string;
+    bmiDesc: string;
+    bmiExplanation: string;
+    height: string;
+    weightBmi: string;
+    bmiResult: string;
+    bmiCategory: string;
+
+    // Tip
+    tipTitle: string;
+    tipDesc: string;
+    tipExplanation: string;
+    billAmount: string;
+    tipPercentage: string;
+    numberOfPeople: string;
+    tipAmount: string;
+    totalPerPerson: string;
+
+    // Salary
+    salaryTitle: string;
+    salaryDesc: string;
+    salaryExplanation: string;
+    salaryAmount: string;
+    salaryFrequency: string;
+    hourly: string;
+    weekly: string;
+    monthly: string;
+    yearly: string;
+
+    // Age
+    ageTitle: string;
+    ageDesc: string;
+    ageExplanation: string;
+    dateOfBirth: string;
+    exactAge: string;
+    yearsOld: string;
+    monthsOld: string;
+    daysOld: string;
+
+    // Contact & Legal & About & Suggestions
+    contactTitle: string;
+    contactDesc: string;
+    contactExplanation: string;
+    fullName: string;
+    emailAddress: string;
+    subject: string;
+    message: string;
+    sendMessage: string;
+    messageSentSuccess: string;
+    contactInfoNote: string;
+
+    privacyTitle: string;
+    privacyDesc: string;
+    termsTitle: string;
+    termsDesc: string;
+    aboutTitle: string;
+    aboutDesc: string;
+
+    suggestionsTitle: string;
+    suggestionsDesc: string;
+    suggestionsExplanation: string;
+    suggestionSuccess: string;
+    suggestionType: string;
+    suggestionTypeCalc: string;
+    suggestionTypeFeature: string;
+    suggestionTypeBug: string;
+    suggestionTitleField: string;
+    suggestionDetailsField: string;
+    submitGithubIssue: string;
+
+    // Footer
+    footerCalculators: string;
+    footerLegal: string;
+    footerRights: string;
+    footerDisclaimer: string;
+
+    // 404
+    notFoundTitle: string;
+    notFoundDesc: string;
+    backToHome: string;
+
+    // Categories
+    catAll: string;
+    catFinance: string;
+    catRealEstate: string;
+    catHealth: string;
+    catMath: string;
+    catTech: string;
+    catLifestyle: string;
+    libraryTitle: string;
+    librarySubtitle: string;
   }
 };
 
@@ -59,6 +151,8 @@ export const translations: Translations = {
     title: 'GlobalCalc',
     calculate: 'Calculate',
     result: 'Result',
+    allTools: 'All Tools',
+
     percFinderTitle: 'Percentage Finder',
     percFinderDesc: 'Fast and precise percentage calculations for everyday needs.',
     percFinderExplanation: 'Use this calculator to find percentages, calculate discounts, or determine the percentage difference between two numbers.',
@@ -68,12 +162,14 @@ export const translations: Translations = {
     percChange: 'Percentage Change',
     from: 'From',
     to: 'to',
+
     unitConvTitle: 'Unit Converter',
     unitConvDesc: 'Quickly convert lengths, weights, and temperatures.',
     unitConvExplanation: 'Select the category and units you want to convert from and to, then enter a value to instantly see the result.',
     length: 'Length',
     weight: 'Weight',
     temp: 'Temp',
+
     mortgageTitle: 'Mortgage Calculator',
     mortgageDesc: 'Estimate your monthly payment and total interest cost.',
     mortgageExplanation: 'Enter your loan amount, interest rate, and term to see your estimated monthly payment and the total interest you will pay over the life of the loan.',
@@ -82,6 +178,7 @@ export const translations: Translations = {
     loanTerm: 'Loan Term (Years)',
     monthlyPayment: 'Monthly Payment',
     totalInterest: 'Total Interest Paid',
+
     compoundTitle: 'Compound Interest',
     compoundDesc: 'Calculate the future value of your investments.',
     compoundExplanation: 'See how your money can grow over time with compound interest by inputting your initial investment, regular contributions, and expected return rate.',
@@ -127,7 +224,7 @@ export const translations: Translations = {
     yearsOld: 'Years',
     monthsOld: 'Months',
     daysOld: 'Days',
-    // Contact & Legal & About
+
     contactTitle: 'Contact Us',
     contactDesc: 'Get in touch with the GlobalCalc Pro team.',
     contactExplanation: 'Have a question, feedback, or suggestion? Send us a message using the form below.',
@@ -146,19 +243,44 @@ export const translations: Translations = {
     aboutTitle: 'About Us',
     aboutDesc: 'Discover GlobalCalc Pro - free, fast, and accessible online calculation tools.',
 
+    suggestionsTitle: 'Suggest a Feature',
+    suggestionsDesc: 'Submit feature ideas and calculator requests for GlobalCalc Pro.',
+    suggestionsExplanation: 'Have an idea for a new calculator or feature? Share your suggestion with us.',
+    suggestionSuccess: 'Thank you for your suggestion!',
+    suggestionType: 'Category',
+    suggestionTypeCalc: 'New Calculator Request',
+    suggestionTypeFeature: 'Feature / Improvement',
+    suggestionTypeBug: 'Bug / Issue Report',
+    suggestionTitleField: 'Suggestion Title',
+    suggestionDetailsField: 'Detailed Description',
+    submitGithubIssue: 'Submit Suggestion',
+
     footerCalculators: 'Calculators',
     footerLegal: 'Legal & Info',
     footerRights: 'All rights reserved.',
     footerDisclaimer: 'Calculations provided on this site are for informational purposes only.',
+
     notFoundTitle: 'Page Not Found',
     notFoundDesc: 'The page you are looking for does not exist or has been moved.',
     backToHome: 'Back to Home',
+
+    catAll: 'All Tools',
+    catFinance: 'Finance & Money',
+    catRealEstate: 'Real Estate',
+    catHealth: 'Health & Body',
+    catMath: 'Math & Conversions',
+    catTech: 'Tech & Engineering',
+    catLifestyle: 'Lifestyle & Everyday',
+    libraryTitle: 'Calculator Library',
+    librarySubtitle: 'Find the perfect tool for your calculations.',
   },
   he: {
     dir: 'rtl',
     title: 'GlobalCalc',
     calculate: 'חשב',
     result: 'תוצאה',
+    allTools: 'כל הכלים',
+
     percFinderTitle: 'מחשבון אחוזים',
     percFinderDesc: 'חישוב אחוזים מהיר ומדויק לצרכים יומיומיים.',
     percFinderExplanation: 'השתמשו במחשבון זה למציאת אחוזים, חישוב הנחות, או בדיקת אחוז שינוי בין שני מספרים.',
@@ -168,12 +290,14 @@ export const translations: Translations = {
     percChange: 'שינוי באחוזים',
     from: 'מ-',
     to: 'ל-',
+
     unitConvTitle: 'המרת מידות',
     unitConvDesc: 'המרת אורכים, משקלים וטמפרטורות בקלות.',
     unitConvExplanation: 'בחרו את הקטגוריה והיחידות שתרצו להמיר, ולאחר מכן הזינו ערך כדי לראות את התוצאה באופן מיידי.',
     length: 'אורך',
     weight: 'משקל',
     temp: 'טמפרטורה',
+
     mortgageTitle: 'מחשבון משכנתא',
     mortgageDesc: 'הערכת החזר חודשי וסך ריבית למשכנתא.',
     mortgageExplanation: 'הזינו את סכום ההלוואה, הריבית והתקופה כדי לראות את ההחזר החודשי המשוער וסך הריבית שתשלמו במהלך חיי ההלוואה.',
@@ -182,6 +306,7 @@ export const translations: Translations = {
     loanTerm: 'תקופת הלוואה (שנים)',
     monthlyPayment: 'החזר חודשי',
     totalInterest: 'סך ריבית לתשלום',
+
     compoundTitle: 'ריבית דריבית',
     compoundDesc: 'חישוב הערך העתידי של ההשקעות שלך.',
     compoundExplanation: 'בדקו כיצד הכסף שלכם יכול לצמוח לאורך זמן בעזרת ריבית דריבית, על ידי הזנת השקעה ראשונית, הפקדות קבועות וריבית צפויה.',
@@ -227,7 +352,7 @@ export const translations: Translations = {
     yearsOld: 'שנים',
     monthsOld: 'חודשים',
     daysOld: 'ימים',
-    // Contact & Legal & About
+
     contactTitle: 'צור קשר',
     contactDesc: 'צור קשר עם צוות GlobalCalc Pro.',
     contactExplanation: 'יש לך שאלה, משוב או הצעה? שלח לנו הודעה באמצעות הטופס למטה.',
@@ -246,19 +371,44 @@ export const translations: Translations = {
     aboutTitle: 'אודותינו',
     aboutDesc: 'גלה את GlobalCalc Pro - כלי חישוב מקוונים חינמיים, מהירים ונגישים.',
 
+    suggestionsTitle: 'הצע תכונה',
+    suggestionsDesc: 'שלח רעיונות לתכונות ובקשות למחשבונים עבור GlobalCalc Pro.',
+    suggestionsExplanation: 'יש לך רעיון למחשבון חדש או לתכונה חדשה? שתף אותנו בהצעה שלך.',
+    suggestionSuccess: 'תודה רבה על ההצעה שלך!',
+    suggestionType: 'קטגוריה',
+    suggestionTypeCalc: 'בקשה למחשבון חדש',
+    suggestionTypeFeature: 'תכונה / שיפור',
+    suggestionTypeBug: 'דיווח על תקלה',
+    suggestionTitleField: 'כותרת ההצעה',
+    suggestionDetailsField: 'תיאור מפורט',
+    submitGithubIssue: 'שלח הצעה',
+
     footerCalculators: 'מחשבונים',
     footerLegal: 'מידע ומשפטי',
     footerRights: 'כל הזכויות שמורות.',
     footerDisclaimer: 'החישובים המסופקים באתר זה נועדו למטרות מידע בלבד.',
+
     notFoundTitle: 'העמוד לא נמצא',
     notFoundDesc: 'העמוד שחיפשת אינו קיים או שהועבר לכתובת אחרת.',
     backToHome: 'חזרה לדף הבית',
+
+    catAll: 'כל הכלים',
+    catFinance: 'פיננסים וכסף',
+    catRealEstate: 'נדל״ן ומשכנתאות',
+    catHealth: 'בריאות וכושר',
+    catMath: 'מתמטיקה והמרות',
+    catTech: 'טכנולוגיה והנדסה',
+    catLifestyle: 'לייפסטייל ויום-יום',
+    libraryTitle: 'ספריית המחשבונים',
+    librarySubtitle: 'מצא את הכלי המושלם לחישובים שלך.',
   },
   es: {
     dir: 'ltr',
     title: 'GlobalCalc',
     calculate: 'Calcular',
     result: 'Resultado',
+    allTools: 'Todas las herramientas',
+
     percFinderTitle: 'Calculadora de Porcentajes',
     percFinderDesc: 'Cálculos de porcentajes rápidos y precisos para necesidades diarias.',
     percFinderExplanation: 'Utilice esta calculadora para encontrar porcentajes, calcular descuentos o determinar la diferencia porcentual entre dos números.',
@@ -268,12 +418,14 @@ export const translations: Translations = {
     percChange: 'Cambio Porcentual',
     from: 'De',
     to: 'a',
+
     unitConvTitle: 'Convertidor de Unidades',
     unitConvDesc: 'Convierte rápidamente longitudes, pesos y temperaturas.',
     unitConvExplanation: 'Seleccione la categoría y las unidades que desea convertir, luego ingrese un valor para ver el resultado al instante.',
     length: 'Longitud',
     weight: 'Peso',
     temp: 'Temp',
+
     mortgageTitle: 'Calculadora de Hipotecas',
     mortgageDesc: 'Estima tu pago mensual y el costo total de los intereses.',
     mortgageExplanation: 'Ingrese el monto del préstamo, la tasa de interés y el plazo para ver su pago mensual estimado y el interés total que pagará durante la vigencia del préstamo.',
@@ -282,6 +434,7 @@ export const translations: Translations = {
     loanTerm: 'Plazo del Préstamo (Años)',
     monthlyPayment: 'Pago Mensual',
     totalInterest: 'Total de Intereses Pagados',
+
     compoundTitle: 'Interés Compuesto',
     compoundDesc: 'Calcula el valor futuro de tus inversiones.',
     compoundExplanation: 'Vea cómo su dinero puede crecer con el tiempo con interés compuesto ingresando su inversión inicial, contribuciones regulares y tasa de retorno esperada.',
@@ -327,7 +480,7 @@ export const translations: Translations = {
     yearsOld: 'Años',
     monthsOld: 'Meses',
     daysOld: 'Días',
-    // Contact & Legal & About
+
     contactTitle: 'Contacto',
     contactDesc: 'Póngase en contacto con el equipo de GlobalCalc Pro.',
     contactExplanation: '¿Tiene preguntas, comentarios o sugerencias? Envíenos un mensaje con el formulario.',
@@ -346,19 +499,44 @@ export const translations: Translations = {
     aboutTitle: 'Sobre Nosotros',
     aboutDesc: 'Descubra GlobalCalc Pro: herramientas de cálculo en línea gratuitas, rápidas y accesibles.',
 
+    suggestionsTitle: 'Sugerir una función',
+    suggestionsDesc: 'Envíe ideas de funciones y solicitudes de calculadoras para GlobalCalc Pro.',
+    suggestionsExplanation: '¿Tiene una idea para una nueva calculadora o función? Comparta su sugerencia con nosotros.',
+    suggestionSuccess: '¡Muchas gracias por su sugerencia!',
+    suggestionType: 'Categoría',
+    suggestionTypeCalc: 'Solicitud de nueva calculadora',
+    suggestionTypeFeature: 'Función / Mejora',
+    suggestionTypeBug: 'Reporte de error',
+    suggestionTitleField: 'Título de la sugerencia',
+    suggestionDetailsField: 'Descripción detallada',
+    submitGithubIssue: 'Enviar sugerencia',
+
     footerCalculators: 'Calculadoras',
     footerLegal: 'Información y Legal',
     footerRights: 'Todos los derechos reservados.',
     footerDisclaimer: 'Los cálculos proporcionados son solo para fines informativos.',
+
     notFoundTitle: 'Página no encontrada',
     notFoundDesc: 'La página que buscas no existe o ha sido movida.',
     backToHome: 'Volver al Inicio',
+
+    catAll: 'Todas las herramientas',
+    catFinance: 'Finanzas y Dinero',
+    catRealEstate: 'Bienes Raíces',
+    catHealth: 'Salud y Cuerpo',
+    catMath: 'Matemáticas y Conversiones',
+    catTech: 'Tecnología e Ingeniería',
+    catLifestyle: 'Estilo de vida',
+    libraryTitle: 'Biblioteca de Calculadoras',
+    librarySubtitle: 'Encuentre la herramienta perfecta para sus cálculos.',
   },
   fr: {
     dir: 'ltr',
     title: 'GlobalCalc',
     calculate: 'Calculer',
     result: 'Résultat',
+    allTools: 'Tous les outils',
+
     percFinderTitle: 'Calculatrice de Pourcentages',
     percFinderDesc: 'Calculs de pourcentage rapides et précis pour les besoins quotidiens.',
     percFinderExplanation: 'Utilisez cette calculatrice pour trouver des pourcentages, calculer des remises ou déterminer la différence en pourcentage entre deux nombres.',
@@ -368,12 +546,14 @@ export const translations: Translations = {
     percChange: 'Changement en Pourcentage',
     from: 'De',
     to: 'à',
+
     unitConvTitle: 'Convertisseur d\'Unités',
     unitConvDesc: 'Convertissez rapidement longueurs, poids et températures.',
     unitConvExplanation: 'Sélectionnez la catégorie et les unités que vous souhaitez convertir, puis entrez une valeur pour voir instantanément le résultat.',
     length: 'Longueur',
     weight: 'Poids',
     temp: 'Temp',
+
     mortgageTitle: 'Calculatrice Hypothécaire',
     mortgageDesc: 'Estimez votre paiement mensuel et le coût total des intérêts.',
     mortgageExplanation: 'Entrez le montant de votre prêt, le taux d\'intérêt et la durée pour voir votre paiement mensuel estimé et les intérêts totaux que vous paierez sur la durée du prêt.',
@@ -382,6 +562,7 @@ export const translations: Translations = {
     loanTerm: 'Durée du Prêt (Années)',
     monthlyPayment: 'Paiement Mensuel',
     totalInterest: 'Total des Intérêts Payés',
+
     compoundTitle: 'Intérêts Composés',
     compoundDesc: 'Calculez la valeur future de vos investissements.',
     compoundExplanation: 'Voyez comment votre argent peut fructifier au fil du temps grâce aux intérêts composés en entrant votre investissement initial, vos contributions régulières et le taux de rendement attendu.',
@@ -427,7 +608,7 @@ export const translations: Translations = {
     yearsOld: 'Années',
     monthsOld: 'Mois',
     daysOld: 'Jours',
-    // Contact & Legal & About
+
     contactTitle: 'Contactez-nous',
     contactDesc: 'Prenez contact avec l\'équipe de GlobalCalc Pro.',
     contactExplanation: 'Vous avez une question, une remarque ou une suggestion ? Envoyez-nous un message ci-dessous.',
@@ -446,19 +627,44 @@ export const translations: Translations = {
     aboutTitle: 'À Propos',
     aboutDesc: 'Découvrez GlobalCalc Pro - des outils de calcul en ligne gratuits, rapides et accessibles.',
 
+    suggestionsTitle: 'Suggérer une fonctionnalité',
+    suggestionsDesc: 'Proposez des idées de fonctionnalités et de calculatrices pour GlobalCalc Pro.',
+    suggestionsExplanation: 'Vous avez une idée de nouvelle calculatrice ou fonctionnalité ? Partagez-la avec nous.',
+    suggestionSuccess: 'Merci beaucoup pour votre suggestion !',
+    suggestionType: 'Catégorie',
+    suggestionTypeCalc: 'Demande de nouvelle calculatrice',
+    suggestionTypeFeature: 'Fonctionnalité / Amélioration',
+    suggestionTypeBug: 'Rapport de bug',
+    suggestionTitleField: 'Titre de la suggestion',
+    suggestionDetailsField: 'Description détaillée',
+    submitGithubIssue: 'Envoyer la suggestion',
+
     footerCalculators: 'Calculatrices',
     footerLegal: 'Informations Légales',
     footerRights: 'Tous droits réservés.',
     footerDisclaimer: 'Les calculs fournis sur ce site sont à titre indicatif uniquement.',
+
     notFoundTitle: 'Page non trouvée',
     notFoundDesc: 'La page que vous recherchez n\'existe pas ou a été déplacée.',
     backToHome: 'Retour à l\'Accueil',
+
+    catAll: 'Tous les outils',
+    catFinance: 'Finance & Argent',
+    catRealEstate: 'Immobilier',
+    catHealth: 'Santé & Corps',
+    catMath: 'Maths & Conversions',
+    catTech: 'Tech & Ingénierie',
+    catLifestyle: 'Mode de vie',
+    libraryTitle: 'Bibliothèque de calculatrices',
+    librarySubtitle: 'Trouvez l\'outil parfait pour vos calculs.',
   },
   ar: {
     dir: 'rtl',
     title: 'GlobalCalc',
     calculate: 'احسب',
     result: 'النتيجة',
+    allTools: 'جميع الأدوات',
+
     percFinderTitle: 'حاسبة النسب المئوية',
     percFinderDesc: 'حسابات نسبة مئوية سريعة ودقيقة للاحتياجات اليومية.',
     percFinderExplanation: 'استخدم هذه الحاسبة للعثور على النسب المئوية، وحساب الخصومات، أو تحديد الفرق بالنسبة المئوية بين رقمين.',
@@ -468,12 +674,14 @@ export const translations: Translations = {
     percChange: 'نسبة التغير',
     from: 'من',
     to: 'إلى',
+
     unitConvTitle: 'محول الوحدات',
     unitConvDesc: 'تحويل الأطوال والأوزان ودرجات الحرارة بسرعة.',
     unitConvExplanation: 'حدد الفئة والوحدات التي ترغب في التحويل منها وإليها، ثم أدخل قيمة لرؤية النتيجة فوراً.',
     length: 'الطول',
     weight: 'الوزن',
     temp: 'الحرارة',
+
     mortgageTitle: 'حاسبة الرهن العقاري',
     mortgageDesc: 'تقدير الدفع الشهري وإجمالي تكلفة الفائدة.',
     mortgageExplanation: 'أدخل مبلغ القرض، ومعدل الفائدة، والمدة لمعرفة الدفعة الشهرية المقدرة وإجمالي الفائدة التي ستدفعها على مدار فترة القرض.',
@@ -482,6 +690,7 @@ export const translations: Translations = {
     loanTerm: 'مدة القرض (سنوات)',
     monthlyPayment: 'الدفع الشهري',
     totalInterest: 'إجمالي الفائدة المدفوعة',
+
     compoundTitle: 'الفائدة المركبة',
     compoundDesc: 'احسب القيمة المستقبلية لاستثماراتك.',
     compoundExplanation: 'شاهد كيف يمكن لأموالك أن تنمو بمرور الوقت مع الفائدة المركبة عن طريق إدخال استثمارك الأولي، والمساهمات المنتظمة، ومعدل العائد المتوقع.',
@@ -491,9 +700,91 @@ export const translations: Translations = {
     futureValue: 'القيمة المستقبلية',
     totalContributions: 'إجمالي المساهمات',
     totalInterestEarned: 'إجمالي الفائدة المكتسبة',
+
+    bmiTitle: 'حاسبة مؤشر كتلة الجسم',
+    bmiDesc: 'تحقق من مؤشر كتلة الجسم الخاص بك (BMI).',
+    bmiExplanation: 'أدخل طولك ووزنك لحساب مؤشر كتلة الجسم ومعرفة الفئة التي تنتمي إليها.',
+    height: 'الطول',
+    weightBmi: 'الوزن',
+    bmiResult: 'مؤشر كتلة الجسم',
+    bmiCategory: 'الفئة',
+
+    tipTitle: 'حاسبة الإكرامية',
+    tipDesc: 'احسب الإكراميات وقسم الفواتير بسهولة.',
+    tipExplanation: 'أدخل مبلغ الفاتورة ونسبة الإكرامية لحساب الإجمالي والمبلغ المطلوب من كل شخص.',
+    billAmount: 'مبلغ الفاتورة',
+    tipPercentage: 'نسبة الإكرامية %',
+    numberOfPeople: 'عدد الأشخاص',
+    tipAmount: 'مبلغ الإكرامية',
+    totalPerPerson: 'الإجمالي لكل شخص',
+
+    salaryTitle: 'حاسبة الراتب',
+    salaryDesc: 'تحويل الراتب بالساعة، الأسبوعي، الشهري، والسنوي.',
+    salaryExplanation: 'أدخل راتبك بأي تكرار لمعرفة المبلغ المكافئ بالتكرارات الأخرى.',
+    salaryAmount: 'مبلغ الراتب',
+    salaryFrequency: 'التكرار',
+    hourly: 'بالساعة',
+    weekly: 'أسبوعي',
+    monthly: 'شهري',
+    yearly: 'سنوي',
+
+    ageTitle: 'حاسبة العمر',
+    ageDesc: 'احسب عمرك بالتفصيل بالسنوات والأشهر والأيام.',
+    ageExplanation: 'أدخل تاريخ ميلادك لمعرفة عمرك بالضبط اليوم.',
+    dateOfBirth: 'تاريخ الميلاد',
+    exactAge: 'العمر الدقيق',
+    yearsOld: 'سنوات',
+    monthsOld: 'أشهر',
+    daysOld: 'أيام',
+
+    contactTitle: 'اتصل بنا',
+    contactDesc: 'تواصل مع فريق GlobalCalc Pro.',
+    contactExplanation: 'هل لديك سؤال أو ملاحظات أو اقتراح؟ أرسل لنا رسالة باستخدام النموذج أدناه.',
+    fullName: 'الاسم الكامل',
+    emailAddress: 'البريد الإلكتروني',
+    subject: 'الموضوع',
+    message: 'الرسالة',
+    sendMessage: 'إرسال الرسالة',
+    messageSentSuccess: 'شكراً لك! تم إرسال رسالتك بنجاح.',
+    contactInfoNote: 'سيتم تحديث تفاصيل الاتصال قريباً. يمكنك استخدام النموذج أعلاه لأي استفسارات.',
+
+    privacyTitle: 'سياسة الخصوصية',
+    privacyDesc: 'تعرف على كيفية حماية GlobalCalc Pro لخصوصيتك وبياناتك.',
+    termsTitle: 'شروط الخدمة',
+    termsDesc: 'اقرأ الشروط والأحكام الخاصة بنا لاستخدام GlobalCalc Pro.',
+    aboutTitle: 'من نحن',
+    aboutDesc: 'اكتشف GlobalCalc Pro - أدوات حساب مجانية وسريعة وسهلة الاستخدام عبر الإنترنت.',
+
+    suggestionsTitle: 'اقتراح ميزة',
+    suggestionsDesc: 'أرسل أفكار الميزات وطلبات الحاسبات لـ GlobalCalc Pro.',
+    suggestionsExplanation: 'هل لديك فكرة لحاسبة أو ميزة جديدة؟ شارك اقتراحك معنا.',
+    suggestionSuccess: 'شكراً لك على اقتراحك!',
+    suggestionType: 'الفئة',
+    suggestionTypeCalc: 'طلب حاسبة جديدة',
+    suggestionTypeFeature: 'طلب ميزة / تحسين',
+    suggestionTypeBug: 'الإبلاغ عن خطأ',
+    suggestionTitleField: 'عنوان الاقتراح',
+    suggestionDetailsField: 'الوصف التفصيلي',
+    submitGithubIssue: 'إرسال الاقتراح',
+
+    footerCalculators: 'الحاسبات',
+    footerLegal: 'معلومات وقانوني',
+    footerRights: 'جميع الحقوق محفوظة.',
+    footerDisclaimer: 'الحسابات المقدمة في هذا الموقع هي لأغراض إعلامية فقط.',
+
     notFoundTitle: 'الصفحة غير موجودة',
     notFoundDesc: 'الصفحة التي تبحث عنها غير موجودة أو تم نقلها.',
     backToHome: 'العودة إلى الصفحة الرئيسية',
+
+    catAll: 'جميع الأدوات',
+    catFinance: 'المالية والاستثمار',
+    catRealEstate: 'العقارات',
+    catHealth: 'الصحة والجسم',
+    catMath: 'الرياضيات والتحويلات',
+    catTech: 'التكنولوجيا والتقنية',
+    catLifestyle: 'الحياة اليومية',
+    libraryTitle: 'مكتبة الحاسبات',
+    librarySubtitle: 'اعثر على أداة الحساب المثالية لاحتياجاتك.',
   }
 };
 
@@ -511,15 +802,14 @@ function getInitialLanguage(): Language {
   const savedLang = localStorage.getItem('globalcalc_lang') as Language;
   if (savedLang && translations[savedLang]) return savedLang;
   
-  // Default to American English explicitly
-  return 'en';
+  return 'he';
 }
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Language>(getInitialLanguage());
 
   useEffect(() => {
-    document.documentElement.dir = translations[lang].dir;
+    document.documentElement.dir = translations[lang]?.dir || 'ltr';
     document.documentElement.lang = lang === 'en' ? 'en-US' : lang;
     localStorage.setItem('globalcalc_lang', lang);
   }, [lang]);
@@ -527,7 +817,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const value = {
     lang,
     setLang,
-    t: translations[lang]
+    t: translations[lang] || translations.en
   };
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;

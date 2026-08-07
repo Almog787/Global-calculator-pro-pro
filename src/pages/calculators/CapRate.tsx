@@ -22,6 +22,33 @@ const localDict = {
     operatingExpenses: 'הוצאות תפעול שנתיות',
     noi: 'הכנסה תפעולית נטו (NOI)',
     capRate: 'שיעור תשואה (%)',
+  },
+  es: {
+    title: 'Calculadora de Cap Rate',
+    description: 'Calcula la Tasa de Capitalización y el Ingreso Operativo Neto (NOI) para inversiones inmobiliarias.',
+    propertyValue: 'Valor de la Propiedad',
+    grossIncome: 'Ingreso Anual Bruto',
+    operatingExpenses: 'Gastos Operativos Anuales',
+    noi: 'Ingreso Operativo Neto (NOI)',
+    capRate: 'Cap Rate (%)',
+  },
+  fr: {
+    title: 'Calculatrice de Taux de Capitalisation',
+    description: 'Calculez le taux de capitalisation et le revenu net d\'exploitation (NOI) pour les investissements immobiliers.',
+    propertyValue: 'Valeur du Bien',
+    grossIncome: 'Revenu Annuel Brut',
+    operatingExpenses: 'Dépenses d\'Exploitation Annuelles',
+    noi: 'Revenu Net d\'Exploitation (NOI)',
+    capRate: 'Taux de Capitalisation (%)',
+  },
+  ar: {
+    title: 'حاسبة معدل الرأسمالية (Cap Rate)',
+    description: 'احسب معدل الرأسمالية وصافي الدخل التشغيلي (NOI) للاستثمارات العقارية.',
+    propertyValue: 'قيمة العقار',
+    grossIncome: 'الدخل السنوي الإجمالي',
+    operatingExpenses: 'المصروفات التشغيلية السنوية',
+    noi: 'صافي الدخل التشغيلي (NOI)',
+    capRate: 'معدل الرأسمالية (%)',
   }
 };
 

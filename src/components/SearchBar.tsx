@@ -9,7 +9,7 @@ export default function SearchBar() {
   const [results, setResults] = useState<CalculatorMeta[]>([]);
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const { t } = useI18n(); // if needed for placeholders
+  const { t } = useI18n();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -36,16 +36,25 @@ export default function SearchBar() {
     navigate(path);
   };
 
+  const getTitle = (calc: CalculatorMeta) => {
+    if (calc.titleKey && t[calc.titleKey as keyof typeof t]) {
+      return t[calc.titleKey as keyof typeof t] as string;
+    }
+    return calc.fallbackTitle;
+  };
+
+  const placeholderText = t.dir === 'rtl' ? 'חפש מחשבון...' : 'Search calculators...';
+
   return (
     <div className="relative w-full max-w-md" ref={ref}>
       <div className="relative">
-        <span className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+        <span className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-3 rtl:pl-0 rtl:pr-3 flex items-center pointer-events-none text-stone-400">
           <span className="material-symbols-outlined text-[18px]">search</span>
         </span>
         <input
           type="text"
-          className="w-full bg-stone-100/80 border-none text-stone-900 text-sm rounded-xl pl-10 pr-4 py-2 focus:ring-2 focus:ring-blue-500 transition-all font-medium placeholder:text-stone-400"
-          placeholder="Search calculators..."
+          className="w-full bg-stone-100/80 border-none text-stone-900 text-sm rounded-xl pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2 focus:ring-2 focus:ring-blue-500 transition-all font-medium placeholder:text-stone-400"
+          placeholder={placeholderText}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => {
@@ -62,10 +71,10 @@ export default function SearchBar() {
                 <li key={calc.id}>
                   <button
                     onClick={() => handleSelect(calc.path)}
-                    className="w-full text-left px-4 py-2 hover:bg-stone-50 focus:bg-stone-50 outline-none flex flex-col gap-0.5 transition-colors"
+                    className="w-full text-left rtl:text-right px-4 py-2 hover:bg-stone-50 focus:bg-stone-50 outline-none flex flex-col gap-0.5 transition-colors cursor-pointer"
                   >
                     <span className="text-sm font-bold text-stone-900">
-                      {calc.fallbackTitle}
+                      {getTitle(calc)}
                     </span>
                     <span className="text-xs text-stone-500 truncate">
                       {calc.description}
@@ -76,7 +85,7 @@ export default function SearchBar() {
             </ul>
           ) : (
             <div className="px-4 py-3 text-sm text-stone-500 text-center">
-              No calculators found.
+              {t.dir === 'rtl' ? 'לא נמצאו מחשבונים' : 'No calculators found.'}
             </div>
           )}
         </div>

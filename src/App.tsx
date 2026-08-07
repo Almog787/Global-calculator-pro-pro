@@ -28,7 +28,7 @@ function App() {
   const location = useLocation();
 
   const tabs = [
-    { id: 'all', path: '/all', label: 'All Tools' },
+    { id: 'all', path: '/all', label: t.allTools },
     { id: 'mortgage', path: '/mortgage-calculator', label: t.mortgageTitle },
     { id: 'compound', path: '/compound-interest', label: t.compoundTitle },
     { id: 'percentage', path: '/percentage-finder', label: t.percFinderTitle },
