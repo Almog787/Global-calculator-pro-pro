@@ -38,84 +38,33 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-white border-t border-stone-200 mt-16 pt-12 pb-12">
-      <div className="max-w-5xl mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-stone-100">
-          
-          {/* Brand Info */}
-          <div className="space-y-3">
-            <Link to="/" className="text-2xl font-black font-headline tracking-tight text-stone-900 inline-block">
-              {t.title}<span className="text-blue-600">.</span>
-            </Link>
-            <p className="text-xs text-stone-600 leading-relaxed max-w-xs">
-              {t.footerDisclaimer}
-            </p>
-          </div>
-
-          {/* Calculators Nav */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-stone-600">
-              {t.footerCalculators}
-            </h2>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-              <ul className="grid grid-cols-1 gap-2 text-sm text-stone-600">
-                {calculatorLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link to={link.path} className="hover:text-stone-900 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <ul className="grid grid-cols-1 gap-2 text-sm text-stone-600">
-                {extraCalculators.map((link) => (
-                  <li key={link.path}>
-                    <Link to={link.path} className="hover:text-stone-900 transition-colors">
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Legal & Info Nav */}
-          <div className="space-y-3">
-            <h2 className="text-xs font-bold uppercase tracking-wider text-stone-600">
-              {t.footerLegal}
-            </h2>
-            <ul className="space-y-2 text-sm text-stone-600">
-              {legalLinks.map((link) => (
-                <li key={link.path}>
-                  <Link to={link.path} className="hover:text-stone-900 transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
+    <footer className="bg-primary-container dark:bg-primary-container mt-stack-lg w-full">
+      <div className="flex flex-col md:flex-row justify-between items-center px-gutter py-stack-md max-w-container-max mx-auto gap-base">
+        {/* Brand & Copyright */}
+        <div className="flex flex-col items-center md:items-start gap-2">
+          <Link to="/" className="font-headline-md text-headline-md font-bold text-on-primary-container hover:text-secondary-fixed transition-colors duration-200 cursor-pointer">
+            {t.title}<span className="text-secondary-fixed">.</span>
+          </Link>
+          <p className="font-label-sm text-label-sm text-on-primary-container/80">
+            &copy; {new Date().getFullYear()} GlobalCalc. {t.footerRights}
+          </p>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-stone-600 gap-4">
-          <div>
-            &copy; {new Date().getFullYear()} GlobalCalc Pro. {t.footerRights}
-          </div>
-          <div className="flex space-x-4 rtl:space-x-reverse">
-            <Link to="/privacy-policy" className="text-stone-600 hover:text-stone-900 transition-colors">
-              {t.privacyTitle}
-            </Link>
-            <span>&bull;</span>
-            <Link to="/terms-of-service" className="text-stone-600 hover:text-stone-900 transition-colors">
-              {t.termsTitle}
-            </Link>
-            <span>&bull;</span>
-            <Link to="/contact" className="text-stone-600 hover:text-stone-900 transition-colors">
-              {t.contactTitle}
-            </Link>
-          </div>
-        </div>
+        {/* Links */}
+        <nav className="flex flex-wrap justify-center gap-4">
+          <Link to="/privacy-policy" className="font-label-sm text-label-sm text-on-primary-container/80 hover:text-secondary-fixed transition-colors cursor-pointer">
+            {t.privacyTitle}
+          </Link>
+          <Link to="/terms-of-service" className="font-label-sm text-label-sm text-on-primary-container/80 hover:text-secondary-fixed transition-colors cursor-pointer">
+            {t.termsTitle}
+          </Link>
+          <Link to="/contact" className="font-label-sm text-label-sm text-on-primary-container/80 hover:text-secondary-fixed transition-colors cursor-pointer">
+            {t.contactTitle}
+          </Link>
+          <Link to="/all" className="font-label-sm text-label-sm text-on-primary-container/80 hover:text-secondary-fixed transition-colors cursor-pointer">
+            {t.catAll}
+          </Link>
+        </nav>
       </div>
     </footer>
   );

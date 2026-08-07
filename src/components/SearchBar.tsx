@@ -46,14 +46,14 @@ export default function SearchBar() {
   const placeholderText = t.dir === 'rtl' ? 'חפש מחשבון...' : 'Search calculators...';
 
   return (
-    <div className="relative w-full max-w-md" ref={ref}>
+    <div className="relative w-full lg:w-64" ref={ref}>
       <div className="relative">
-        <span className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-3 rtl:pl-0 rtl:pr-3 flex items-center pointer-events-none text-stone-400">
+        <span className="absolute inset-y-0 left-0 rtl:left-auto rtl:right-0 pl-3 rtl:pl-0 rtl:pr-3 flex items-center pointer-events-none text-outline">
           <span className="material-symbols-outlined text-[18px]">search</span>
         </span>
         <input
           type="text"
-          className="w-full bg-stone-100/80 border-none text-stone-900 text-sm rounded-xl pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2 focus:ring-2 focus:ring-blue-500 transition-colors font-medium placeholder:text-stone-400"
+          className="w-full pr-10 pl-10 rtl:pr-10 rtl:pl-4 py-2 bg-surface-container-low border border-outline-variant rounded-full font-body-md text-body-md text-on-surface focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors h-10 lg:h-12 placeholder:text-on-surface-variant"
           placeholder={placeholderText}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -64,19 +64,19 @@ export default function SearchBar() {
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 mt-1 w-full bg-white rounded-xl shadow-lg border border-stone-200 overflow-hidden max-h-[300px] overflow-y-auto">
+        <div className="absolute z-50 mt-1 w-full bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant overflow-hidden max-h-[300px] overflow-y-auto">
           {results.length > 0 ? (
             <ul className="py-1">
               {results.map((calc) => (
                 <li key={calc.id}>
                   <button
                     onClick={() => handleSelect(calc.path)}
-                    className="w-full text-left rtl:text-right px-4 py-2 hover:bg-stone-50 focus:bg-stone-50 outline-none flex flex-col gap-0.5 transition-colors cursor-pointer"
+                    className="w-full text-left rtl:text-right px-4 py-2 hover:bg-surface-container focus:bg-surface-container outline-none flex flex-col gap-0.5 transition-colors cursor-pointer"
                   >
-                    <span className="text-sm font-bold text-stone-900">
+                    <span className="font-label-bold text-label-bold text-on-surface">
                       {getTitle(calc)}
                     </span>
-                    <span className="text-xs text-stone-500 truncate">
+                    <span className="font-label-sm text-label-sm text-on-surface-variant truncate">
                       {calc.description}
                     </span>
                   </button>
@@ -84,7 +84,7 @@ export default function SearchBar() {
               ))}
             </ul>
           ) : (
-            <div className="px-4 py-3 text-sm text-stone-500 text-center">
+            <div className="px-4 py-3 font-body-md text-body-md text-on-surface-variant text-center">
               {t.dir === 'rtl' ? 'לא נמצאו מחשבונים' : 'No calculators found.'}
             </div>
           )}

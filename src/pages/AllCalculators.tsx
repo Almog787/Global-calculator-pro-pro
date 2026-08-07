@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { calculators } from "../data/calculators";
 import { Helmet } from "react-helmet-async";
 import { useI18n } from "../contexts/i18n";
@@ -86,7 +86,18 @@ const dynamicTitles: Record<string, Record<string, string>> = {
 
 export default function AllCalculators() {
   const { t, lang } = useI18n();
+  const location = useLocation();
   const [activeCategory, setActiveCategory] = useState<string>("all");
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const category = params.get("category");
+    if (category) {
+      setActiveCategory(category);
+    } else {
+      setActiveCategory("all");
+    }
+  }, [location.search]);
 
   const categories = [
     { id: "all", label: t.catAll },
@@ -123,57 +134,62 @@ export default function AllCalculators() {
         />
       </Helmet>
 
-      <div className="mb-8">
-        <h1 className="text-3xl font-headline text-stone-900 tracking-tight mb-2 font-bold">
+      {/* Hero Section */}
+      <section className="mb-stack-lg text-center md:text-left rtl:md:text-right flex flex-col items-center md:items-start rtl:md:items-start">
+        <h1 className="font-display-lg text-display-lg text-primary mb-stack-sm tracking-tight">
           {t.libraryTitle}
         </h1>
-        <p className="text-stone-500 font-medium">
+        <p className="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
           {t.librarySubtitle}
         </p>
-      </div>
+      </section>
 
-      <div className="flex overflow-x-auto scrollbar-hide space-x-2 rtl:space-x-reverse mb-8 pb-2 border-b border-stone-200">
-        {categories.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            onClick={() => setActiveCategory(cat.id)}
-            className={`whitespace-nowrap px-4 py-2 rounded-full text-sm font-bold transition-colors cursor-pointer ${
-              activeCategory === cat.id
-                ? "bg-blue-600 text-white shadow-sm"
-                : "bg-stone-100 text-stone-600 hover:bg-stone-200"
-            }`}
-          >
-            {cat.label}
-          </button>
-        ))}
-      </div>
+      {/* Category Filters */}
+      <section className="mb-stack-lg overflow-x-auto pb-4 scrollbar-hide">
+        <div className="flex gap-4 min-w-max">
+          {categories.map((cat) => (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-6 py-2 rounded-full font-label-bold text-label-bold transition-all ${
+                activeCategory === cat.id
+                  ? "bg-secondary text-on-secondary hover:shadow-md hover:-translate-y-0.5"
+                  : "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container hover:text-on-surface shadow-sm border border-outline-variant hover:border-secondary"
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Calculator Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
         {filtered.map((calc) => {
           const title = getTitle(calc);
           return (
             <Link
               key={calc.id}
               to={calc.path}
-              className="group flex flex-col p-6 bg-white rounded-2xl border border-stone-200 shadow-xs hover:shadow-lg hover:border-blue-200 transition-all"
+              className="group block bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-outline-variant hover:border-secondary relative overflow-hidden flex flex-col h-full"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-lg font-bold font-headline text-stone-900 group-hover:text-blue-600 transition-colors">
+              <div className="flex justify-between items-start mb-4">
+                <h3 className="font-headline-md text-headline-md text-on-surface group-hover:text-secondary transition-colors">
                   {title}
-                </span>
-                <span className="material-symbols-outlined text-stone-300 group-hover:text-blue-500 rtl:rotate-180 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1">
-                  arrow_forward
+                </h3>
+                <span className="material-symbols-outlined text-outline-variant group-hover:text-secondary rtl:group-hover:-translate-x-1 ltr:group-hover:translate-x-1 transition-all">
+                  {t.dir === 'rtl' ? 'arrow_back' : 'arrow_forward'}
                 </span>
               </div>
-              <p className="text-sm text-stone-500 line-clamp-2 leading-relaxed">
+              <p className="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
                 {calc.description}
               </p>
-              <div className="mt-4 pt-4 border-t border-stone-100 flex gap-2 overflow-hidden">
+              <div className="flex flex-wrap gap-2 mt-auto">
                 {calc.tags.slice(0, 3).map((tag) => (
                   <span
                     key={tag}
-                    className="text-[10px] uppercase font-bold tracking-wider text-stone-700 bg-stone-100 px-2 py-1 rounded-md"
+                    className="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-sm text-label-sm uppercase tracking-wider"
                   >
                     {tag}
                   </span>
@@ -182,7 +198,7 @@ export default function AllCalculators() {
             </Link>
           );
         })}
-      </div>
+      </section>
     </div>
   );
 }
