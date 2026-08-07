@@ -53,7 +53,7 @@ export default function SearchBar() {
         </span>
         <input
           type="text"
-          className="w-full bg-stone-100/80 border-none text-stone-900 text-sm rounded-xl pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2 focus:ring-2 focus:ring-blue-500 transition-all font-medium placeholder:text-stone-400"
+          className="w-full bg-stone-100/80 border-none text-stone-900 text-sm rounded-xl pl-10 rtl:pl-4 rtl:pr-10 pr-4 py-2 focus:ring-2 focus:ring-blue-500 transition-colors font-medium placeholder:text-stone-400"
           placeholder={placeholderText}
           value={query}
           onChange={(e) => setQuery(e.target.value)}
