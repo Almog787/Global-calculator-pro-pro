@@ -42,7 +42,7 @@ export default function CompoundInterest() {
       const decN = new Decimal(years || 0).mul(12);
       const decContr = new Decimal(contribution || 0);
 
-      let fv = new Decimal(0);
+      let fv;
 
       if (decRate.isZero()) {
         fv = decP.add(decContr.mul(decN));
@@ -97,7 +97,7 @@ export default function CompoundInterest() {
     for (let i = 0; i <= years; i++) {
       labels.push(i === 0 ? '0' : `${i}Y`);
       const n = i * 12;
-      let fv = new Decimal(0);
+      let fv;
 
       if (decRate.isZero()) {
         fv = decP.add(decContr.mul(n));
@@ -139,7 +139,7 @@ export default function CompoundInterest() {
   }, [principal, rate, years, contribution, t.totalContributions, t.totalInterestEarned]);
 
   const chartOptions = {
-    animation: false,
+    animation: false as const,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

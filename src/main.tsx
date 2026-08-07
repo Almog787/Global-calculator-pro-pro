@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
 );
 
 // Register Service Worker for offline asset caching and speed improvements
-if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
   window.addEventListener('load', () => {
     navigator.serviceWorker
       .register('/sw.js')

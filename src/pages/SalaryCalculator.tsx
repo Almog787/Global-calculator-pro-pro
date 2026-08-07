@@ -1,4 +1,4 @@
-import { useState, useDeferredValue, useEffect } from 'react';
+import { useState, useDeferredValue, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Decimal from 'decimal.js';
 import {
@@ -90,7 +90,7 @@ export default function SalaryCalculator() {
   };
 
   const chartOptions = {
-    animation: false,
+    animation: false as const,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

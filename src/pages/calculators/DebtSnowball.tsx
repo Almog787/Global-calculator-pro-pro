@@ -103,7 +103,7 @@ export default function DebtSnowball() {
   useEffect(() => {
     const simulatePayoff = (isSnowball: boolean) => {
       // deep copy
-      let simDebts = debts.map(d => ({ ...d, bal: d.bal || 0, rate: (d.rate || 0)/100/12, min: d.min || 0 }))
+      const simDebts = debts.map(d => ({ ...d, bal: d.bal || 0, rate: (d.rate || 0)/100/12, min: d.min || 0 }))
                           .filter(d => d.bal > 0);
       
       simDebts.sort((a, b) => a.bal - b.bal); // Sort smallest to largest (Snowball)
@@ -145,7 +145,7 @@ export default function DebtSnowball() {
 
         // Apply snowball extra to smallest remaining
         if (isSnowball && currentExtra > 0) {
-          for (let d of simDebts) {
+          for (const d of simDebts) {
             if (d.bal > 0 && currentExtra > 0) {
               const payment = Math.min(d.bal, currentExtra);
               d.bal -= payment;
@@ -183,7 +183,7 @@ export default function DebtSnowball() {
   };
 
   const chartOptions = {
-    animation: false,
+    animation: false as const,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {

@@ -118,7 +118,7 @@ export default function GoalSavings() {
     for (let i = 0; i <= years; i++) {
       labels.push(i === 0 ? '0' : `${i}Y`);
       const m = i * 12;
-      let bal = new Decimal(0);
+      let bal;
       
       if (decRate.isZero()) {
         bal = decInitial.add(decMonthly.mul(m));
@@ -147,7 +147,7 @@ export default function GoalSavings() {
   }, [initial, years, rate, results.monthly, goal]);
 
   const chartOptions = {
-    animation: false,
+    animation: false as const,
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
