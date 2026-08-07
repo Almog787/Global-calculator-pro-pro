@@ -329,7 +329,7 @@ export default function PercentageFinder() {
                       className="w-full bg-white border border-stone-300 rounded-xl px-3.5 py-2.5 text-lg font-bold text-stone-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-2xs"
                       placeholder="e.g. 20"
                     />
-                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-400 font-bold text-sm">
+                    <span className="absolute right-3.5 top-1/2 -translate-y-1/2 text-stone-600 font-bold text-sm">
                       %
                     </span>
                   </div>

@@ -74,7 +74,7 @@ export default function UnitConverter() {
                 key={c}
                 type="button"
                 onClick={() => { setCat(c); setType(Object.keys(conversions[c])[0]); }}
-                className={`flex-1 pb-3 pt-2 font-bold uppercase tracking-wider text-xs transition-colors border-b-2 -mb-[2px] cursor-pointer ${cat === c ? 'text-blue-600 border-blue-600' : 'text-stone-400 border-transparent hover:text-stone-600'}`}
+                className={`flex-1 pb-3 pt-2 font-bold uppercase tracking-wider text-xs transition-colors border-b-2 -mb-[2px] cursor-pointer ${cat === c ? 'text-blue-600 border-blue-600' : 'text-stone-600 border-transparent hover:text-stone-900'}`}
               >
                 {categoryNames[c]}
               </button>
@@ -112,14 +112,14 @@ export default function UnitConverter() {
             <div className="bg-stone-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xs border border-stone-800 h-full">
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs tracking-wider uppercase font-bold text-stone-400">Converted Value</span>
+                  <span className="text-xs tracking-wider uppercase font-bold text-stone-600">Converted Value</span>
                   <CopyButton textToCopy={numFormat.format(res)} className="bg-stone-800 text-white border-stone-700 hover:bg-white hover:text-stone-900" />
                 </div>
                 <div className="text-3xl md:text-5xl font-headline font-bold text-blue-400 tracking-tight my-2 truncate" dir="ltr">
                   {!isNaN(res) ? numFormat.format(res) : '0'}
                 </div>
               </div>
-              <div className="text-xs text-stone-400 border-t border-stone-800 pt-3 font-mono">
+              <div className="text-xs text-stone-600 border-t border-stone-800 pt-3 font-mono">
                 {type.replace('-', ' ➝ ').toUpperCase()}
               </div>
             </div>

@@ -52,14 +52,16 @@ function App() {
           <div className="flex items-center gap-3 shrink-0">
             <Link
               to="/suggest"
+              aria-label={t.suggestionsTitle || 'Suggest Feature'}
               className="inline-flex items-center gap-1.5 px-3 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-bold rounded-lg transition-colors border border-blue-200/80 shadow-xs"
             >
-              <span className="material-symbols-outlined text-base">lightbulb</span>
-              <span className="hidden sm:inline">{t.suggestionsTitle || 'Suggest Feature'}</span>
+              <span className="material-symbols-outlined text-base" aria-hidden="true">lightbulb</span>
+              <span className="sr-only sm:not-sr-only sm:inline">{t.suggestionsTitle || 'Suggest Feature'}</span>
             </Link>
             <select 
               value={lang} 
               onChange={(e) => setLang(e.target.value as any)}
+              aria-label="Select Language"
               className="bg-stone-100 border-none text-stone-700 text-sm rounded-lg px-3 py-2 cursor-pointer focus:ring-2 focus:ring-blue-500 transition-all font-medium"
             >
               <option value="he">עברית</option>
@@ -74,7 +76,7 @@ function App() {
           <SearchBar />
         </div>
         <div className="max-w-5xl mx-auto px-4 md:px-6 mt-2">
-          <nav className="flex space-x-2 md:space-x-4 rtl:space-x-reverse overflow-x-auto scrollbar-hide">
+          <nav className="flex space-x-2 md:space-x-4 rtl:space-x-reverse overflow-x-auto scrollbar-hide" aria-label="Main Navigation">
             {tabs.map((tab) => {
               const isActive = location.pathname === tab.path;
               return (
@@ -91,7 +93,7 @@ function App() {
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto px-4 md:px-6 py-8">
+      <main id="main-content" className="max-w-5xl mx-auto px-4 md:px-6 py-8">
         <Suspense fallback={<SkeletonLoader />}>
         <Routes>
           <Route path="/" element={<Navigate to="/all" replace />} />
@@ -113,7 +115,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
-      </div>
+      </main>
 
       <Footer />
     </div>

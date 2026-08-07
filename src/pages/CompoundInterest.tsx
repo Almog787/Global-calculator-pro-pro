@@ -191,35 +191,35 @@ export default function CompoundInterest() {
         <div className="flex-1 flex flex-col justify-between">
           <div className="space-y-8">
             <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.initialInvestment}</label>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.initialInvestment}</label>
               <input type="number" value={principal} onChange={e => setPrincipal(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
             </div>
             <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.monthlyContribution}</label>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.monthlyContribution}</label>
               <input type="number" value={contribution} onChange={e => setContribution(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
             </div>
             <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.interestRate}</label>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.interestRate}</label>
               <input type="number" value={rate} onChange={e => setRate(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
             </div>
             <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.yearsToGrow}</label>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.yearsToGrow}</label>
               <input type="number" value={years} onChange={e => setYears(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
             </div>
           </div>
           
           <div className="mt-12 pt-8 border-t border-stone-200">
             <div className="mb-6">
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-2">{t.futureValue}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-2">{t.futureValue}</span>
               <div className="text-4xl md:text-5xl font-headline font-bold text-stone-900 tracking-tight" dir="ltr">{currencyFormat.format(futureValue)}</div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.totalContributions}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.totalContributions}</span>
                 <div className="text-lg md:text-xl font-headline text-stone-600" dir="ltr">{currencyFormat.format(totalContributions)}</div>
               </div>
               <div>
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.totalInterestEarned}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.totalInterestEarned}</span>
                 <div className="text-lg md:text-xl font-headline text-stone-600" dir="ltr">+{currencyFormat.format(totalInterest)}</div>
               </div>
             </div>

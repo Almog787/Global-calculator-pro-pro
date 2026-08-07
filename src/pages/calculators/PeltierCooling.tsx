@@ -121,23 +121,23 @@ export default function PeltierCooling() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.maxCooling}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.maxCooling}</label>
             <input type="number" value={qmax} onChange={e => setQmax(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.maxDeltaT}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.maxDeltaT}</label>
             <input type="number" value={deltaTmax} onChange={e => setDeltaTmax(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div className="md:col-span-2">
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.operatingDeltaT}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.operatingDeltaT}</label>
             <input type="number" value={operatingDeltaT} onChange={e => setOperatingDeltaT(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-blue-200 px-0 py-2 text-2xl font-headline text-blue-700 focus:ring-0 focus:border-blue-700 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.voltage}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.voltage}</label>
             <input type="number" value={voltage} onChange={e => setVoltage(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.current}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.current}</label>
             <input type="number" value={current} onChange={e => setCurrent(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
         </div>
@@ -145,15 +145,15 @@ export default function PeltierCooling() {
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div className="grid grid-cols-3 gap-x-4 gap-y-8">
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.coolingCapacity}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.coolingCapacity}</span>
               <div className="text-2xl md:text-3xl font-headline text-blue-600" dir="ltr">{results.capacity.toFixed(1)}W</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.powerConsumption}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.powerConsumption}</span>
               <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{results.power.toFixed(1)}W</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.cop}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.cop}</span>
               <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{results.cop.toFixed(2)}</div>
             </div>
           </div>

@@ -111,19 +111,19 @@ export default function FreelanceNetIncome() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.grossIncome}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.grossIncome}</label>
             <input type="number" value={gross} onChange={e => setGross(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.expenses}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.expenses}</label>
             <input type="number" value={expenses} onChange={e => setExpenses(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.incomeTaxRate}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.incomeTaxRate}</label>
             <input type="number" value={incomeTax} onChange={e => setIncomeTax(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.selfEmploymentTax}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.selfEmploymentTax}</label>
             <input type="number" value={seTax} onChange={e => setSeTax(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
         </div>
@@ -131,11 +131,11 @@ export default function FreelanceNetIncome() {
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div className="grid grid-cols-2 gap-x-4 gap-y-8">
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.netIncome}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.netIncome}</span>
               <div className="text-3xl md:text-4xl font-headline text-blue-600" dir="ltr">{currencyFormat.format(results.net)}</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.totalTaxes}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.totalTaxes}</span>
               <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.taxes)}</div>
             </div>
           </div>

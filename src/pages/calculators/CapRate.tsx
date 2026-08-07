@@ -107,15 +107,15 @@ export default function CapRate() {
 
         <div className="space-y-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.propertyValue}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.propertyValue}</label>
             <input type="number" value={propertyValue} onChange={e => setPropertyValue(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.grossIncome}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.grossIncome}</label>
             <input type="number" value={grossIncome} onChange={e => setGrossIncome(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.operatingExpenses}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.operatingExpenses}</label>
             <input type="number" value={operatingExpenses} onChange={e => setOperatingExpenses(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
         </div>
@@ -123,11 +123,11 @@ export default function CapRate() {
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div className="grid grid-cols-2 gap-x-4 gap-y-8">
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.capRate}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.capRate}</span>
               <div className="text-3xl md:text-4xl font-headline text-blue-600" dir="ltr">{percentFormat.format(results.capRate)}%</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.noi}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.noi}</span>
               <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.noi)}</div>
             </div>
           </div>

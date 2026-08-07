@@ -76,11 +76,11 @@ export default function AllCalculators() {
             <p className="text-sm text-stone-500 line-clamp-2 leading-relaxed">
               {calc.description}
             </p>
-            <div className="mt-4 pt-4 border-t border-stone-50 flex gap-2 overflow-hidden">
+            <div className="mt-4 pt-4 border-t border-stone-100 flex gap-2 overflow-hidden">
               {calc.tags.slice(0, 3).map((tag) => (
                 <span
                   key={tag}
-                  className="text-[10px] uppercase font-bold tracking-wider text-stone-400 bg-stone-50 px-2 py-1 rounded-md"
+                  className="text-[10px] uppercase font-bold tracking-wider text-stone-700 bg-stone-100 px-2 py-1 rounded-md"
                 >
                   {tag}
                 </span>

@@ -164,15 +164,15 @@ export default function Roi() {
 
         <div className="space-y-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.amountInvested}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.amountInvested}</label>
             <input type="number" value={invested} onChange={e => setInvested(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.amountReturned}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.amountReturned}</label>
             <input type="number" value={returned} onChange={e => setReturned(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.investmentLength}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.investmentLength}</label>
             <input type="number" value={years} onChange={e => setYears(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
         </div>
@@ -180,15 +180,15 @@ export default function Roi() {
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div className="grid grid-cols-2 gap-x-4 gap-y-8">
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.investmentGain}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.investmentGain}</span>
               <div className="text-2xl md:text-3xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.gain)}</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.roi}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.roi}</span>
               <div className="text-2xl md:text-3xl font-headline text-blue-600" dir="ltr">{percentFormat.format(results.roi)}%</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.annualizedRoi}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.annualizedRoi}</span>
               <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{percentFormat.format(results.annualizedRoi)}%</div>
             </div>
           </div>

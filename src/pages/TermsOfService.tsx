@@ -16,7 +16,7 @@ export default function TermsOfService() {
         {t.termsTitle}
       </h1>
 
-      <p className="text-sm text-stone-400">
+      <p className="text-sm text-stone-600">
         Last updated: July 31, 2026
       </p>
 

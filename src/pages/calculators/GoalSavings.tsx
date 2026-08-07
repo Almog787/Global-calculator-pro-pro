@@ -155,19 +155,19 @@ export default function GoalSavings() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.goalAmount}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.goalAmount}</label>
             <input type="number" value={goal} onChange={e => setGoal(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.initialSavings}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.initialSavings}</label>
             <input type="number" value={initial} onChange={e => setInitial(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.years}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.years}</label>
             <input type="number" value={years} onChange={e => setYears(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.interestRate}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.interestRate}</label>
             <input type="number" value={rate} onChange={e => setRate(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
         </div>
@@ -175,11 +175,11 @@ export default function GoalSavings() {
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div className="grid grid-cols-2 gap-x-4 gap-y-8">
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.monthlyContribution}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.monthlyContribution}</span>
               <div className="text-3xl md:text-4xl font-headline text-blue-600" dir="ltr">{currencyFormat.format(results.monthly)}</div>
             </div>
             <div>
-              <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.totalInterest}</span>
+              <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.totalInterest}</span>
               <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.totalInterest)}</div>
             </div>
           </div>

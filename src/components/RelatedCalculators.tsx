@@ -12,9 +12,9 @@ export default function RelatedCalculators({
 
   return (
     <div className="mt-12 pt-8 border-t border-stone-200">
-      <h3 className="text-sm font-bold uppercase tracking-wider text-stone-400 mb-6">
+      <h2 className="text-sm font-bold uppercase tracking-wider text-stone-600 mb-6">
         Related Calculators
-      </h3>
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {related.map((calc) => (
           <Link

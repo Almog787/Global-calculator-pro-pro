@@ -70,14 +70,14 @@ export default function AgeCalculator() {
       <div className="flex-1 flex flex-col justify-between">
         <div className="space-y-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.dateOfBirth}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.dateOfBirth}</label>
             <input type="date" value={dob} onChange={e => setDob(e.target.value)} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
         </div>
         
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div className="mb-6">
-            <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-4">{t.exactAge}</span>
+            <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-4">{t.exactAge}</span>
             <div className="grid grid-cols-3 gap-4 text-center">
               <div className="bg-stone-50 rounded-xl p-4 border border-stone-100">
                 <div className="text-4xl md:text-5xl font-headline font-bold text-stone-900 tracking-tight mb-1" dir="ltr">{age.years}</div>

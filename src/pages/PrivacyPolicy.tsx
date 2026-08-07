@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
         {t.privacyTitle}
       </h1>
 
-      <p className="text-sm text-stone-400">
+      <p className="text-sm text-stone-600">
         Last updated: July 31, 2026
       </p>
 

@@ -47,16 +47,16 @@ export default function Footer() {
             <Link to="/" className="text-2xl font-black font-headline tracking-tight text-stone-900 inline-block">
               {t.title}<span className="text-blue-600">.</span>
             </Link>
-            <p className="text-xs text-stone-500 leading-relaxed max-w-xs">
+            <p className="text-xs text-stone-600 leading-relaxed max-w-xs">
               {t.footerDisclaimer}
             </p>
           </div>
 
           {/* Calculators Nav */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-400">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-stone-600">
               {t.footerCalculators}
-            </h3>
+            </h2>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2">
               <ul className="grid grid-cols-1 gap-2 text-sm text-stone-600">
                 {calculatorLinks.map((link) => (
@@ -81,9 +81,9 @@ export default function Footer() {
 
           {/* Legal & Info Nav */}
           <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-400">
+            <h2 className="text-xs font-bold uppercase tracking-wider text-stone-600">
               {t.footerLegal}
-            </h3>
+            </h2>
             <ul className="space-y-2 text-sm text-stone-600">
               {legalLinks.map((link) => (
                 <li key={link.path}>
@@ -98,20 +98,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-stone-400 gap-4">
+        <div className="pt-6 flex flex-col md:flex-row justify-between items-center text-xs text-stone-600 gap-4">
           <div>
             &copy; {new Date().getFullYear()} GlobalCalc Pro. {t.footerRights}
           </div>
           <div className="flex space-x-4 rtl:space-x-reverse">
-            <Link to="/privacy-policy" className="hover:text-stone-600 transition-colors">
+            <Link to="/privacy-policy" className="text-stone-600 hover:text-stone-900 transition-colors">
               {t.privacyTitle}
             </Link>
             <span>&bull;</span>
-            <Link to="/terms-of-service" className="hover:text-stone-600 transition-colors">
+            <Link to="/terms-of-service" className="text-stone-600 hover:text-stone-900 transition-colors">
               {t.termsTitle}
             </Link>
             <span>&bull;</span>
-            <Link to="/contact" className="hover:text-stone-600 transition-colors">
+            <Link to="/contact" className="text-stone-600 hover:text-stone-900 transition-colors">
               {t.contactTitle}
             </Link>
           </div>

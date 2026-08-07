@@ -53,7 +53,7 @@ export default function NotFound() {
         </Link>
 
         {/* Auto Redirect Notice */}
-        <p id="not-found-countdown" className="text-xs text-stone-400 mt-5">
+        <p id="not-found-countdown" className="text-xs text-stone-600 mt-5">
           {t.dir === 'rtl' 
             ? `מעביר חזרה לדף הבית באופן אוטומטי תוך ${countdown} שניות...`
             : `Redirecting to home page automatically in ${countdown}s...`}

@@ -142,11 +142,11 @@ export default function SalaryCalculator() {
         <div className="flex-1 flex flex-col justify-between">
           <div className="space-y-8">
             <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.salaryAmount}</label>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.salaryAmount}</label>
               <input type="number" value={amount} onChange={e => setAmount(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
             </div>
             <div>
-              <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.salaryFrequency}</label>
+              <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.salaryFrequency}</label>
               <select value={frequency} onChange={e => setFrequency(e.target.value)} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl md:text-3xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors cursor-pointer">
                 <option value="hourly">{t.hourly}</option>
                 <option value="weekly">{t.weekly}</option>
@@ -159,19 +159,19 @@ export default function SalaryCalculator() {
           <div className="mt-12 pt-8 border-t border-stone-200">
             <div className="grid grid-cols-2 gap-x-4 gap-y-8">
               <div>
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.hourly}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.hourly}</span>
                 <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.hourly)}</div>
               </div>
               <div>
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.weekly}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.weekly}</span>
                 <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.weekly)}</div>
               </div>
               <div>
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.monthly}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.monthly}</span>
                 <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.monthly)}</div>
               </div>
               <div>
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.yearly}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.yearly}</span>
                 <div className="text-xl md:text-2xl font-headline text-stone-900" dir="ltr">{currencyFormat.format(results.yearly)}</div>
               </div>
             </div>

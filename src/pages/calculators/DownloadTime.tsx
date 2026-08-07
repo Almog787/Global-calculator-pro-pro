@@ -137,11 +137,11 @@ export default function DownloadTime() {
 
         <div className="grid grid-cols-2 gap-8">
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.fileSize}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.fileSize}</label>
             <input type="number" value={fileSize} onChange={e => setFileSize(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.fileUnit}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.fileUnit}</label>
             <select value={fileUnit} onChange={e => setFileUnit(e.target.value)} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors cursor-pointer">
               <option value="MB">MB</option>
               <option value="GB">GB</option>
@@ -150,11 +150,11 @@ export default function DownloadTime() {
           </div>
           
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.internetSpeed}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.internetSpeed}</label>
             <input type="number" value={speed} onChange={e => setSpeed(Number(e.target.value))} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors" />
           </div>
           <div>
-            <label className="text-xs tracking-wider uppercase font-bold text-stone-400 mb-1 block">{t.speedUnit}</label>
+            <label className="text-xs tracking-wider uppercase font-bold text-stone-600 mb-1 block">{t.speedUnit}</label>
             <select value={speedUnit} onChange={e => setSpeedUnit(e.target.value)} className="w-full bg-transparent border-0 border-b-2 border-stone-200 px-0 py-2 text-2xl font-headline text-stone-900 focus:ring-0 focus:border-stone-900 transition-colors cursor-pointer">
               <option value="Mbps">Mbps (Megabit/s)</option>
               <option value="MBps">MB/s (Megabyte/s)</option>
@@ -165,7 +165,7 @@ export default function DownloadTime() {
 
         <div className="mt-12 pt-8 border-t border-stone-200">
           <div>
-            <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block mb-1">{t.downloadTime}</span>
+            <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block mb-1">{t.downloadTime}</span>
             <div className="text-3xl md:text-5xl font-headline text-blue-600" dir="ltr">{results.formatted}</div>
           </div>
         </div>

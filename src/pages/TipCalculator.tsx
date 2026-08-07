@@ -103,7 +103,7 @@ export default function TipCalculator() {
           <div className="bg-stone-900 text-white rounded-2xl p-6 flex flex-col justify-between shadow-xs border border-stone-800 h-full">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block">{t.totalPerPerson}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block">{t.totalPerPerson}</span>
                 <CopyButton textToCopy={currencyFormat.format(totalPerPerson)} className="bg-stone-800 text-white border-stone-700 hover:bg-white hover:text-stone-900" />
               </div>
               <div className="text-3xl md:text-5xl font-headline font-bold text-emerald-400 tracking-tight my-2" dir="ltr">
@@ -113,7 +113,7 @@ export default function TipCalculator() {
 
             <div className="border-t border-stone-800 pt-4 mt-6">
               <div className="flex items-center justify-between">
-                <span className="text-xs tracking-wider uppercase font-bold text-stone-400 block">{t.tipAmount}</span>
+                <span className="text-xs tracking-wider uppercase font-bold text-stone-600 block">{t.tipAmount}</span>
                 <CopyButton textToCopy={currencyFormat.format(tipAmount)} className="bg-stone-800 text-white border-stone-700 hover:bg-white hover:text-stone-900" />
               </div>
               <div className="text-xl md:text-2xl font-headline text-stone-200 mt-1 font-semibold" dir="ltr">
