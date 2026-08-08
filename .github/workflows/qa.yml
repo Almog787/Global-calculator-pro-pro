@@ -36,10 +36,28 @@ jobs:
           BASE_URL: http://127.0.0.1:3000
 
       - name: Check for Broken Links
+        id: lychee
         uses: lycheeverse/lychee-action@v1.9.0
         with:
           args: --verbose --no-progress --exclude 'fonts.googleapis.com' --exclude 'fonts.gstatic.com' --exclude 'https://globalcalcpro.com.*' --exclude 'http://localhost.*' --exclude 'http://127.0.0.1.*' './dist/**/*.html'
+          output: lychee/out.md
           fail: true
+
+      - name: Add Test Summary to GitHub Actions Summary
+        if: always()
+        run: |
+          echo "## 🔍 Link Checker Summary / סיכום בדיקת קישורים" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Exclusion Rules / חוקים שהוחרגו:" >> $GITHUB_STEP_SUMMARY
+          echo "- \`fonts.googleapis.com\` / \`fonts.gstatic.com\` - External Google Fonts (פונטים חיצוניים)" >> $GITHUB_STEP_SUMMARY
+          echo "- \`https://globalcalcpro.com.*\` - Production URL (דומיין פרודקשן חיצוני)" >> $GITHUB_STEP_SUMMARY
+          echo "- \`http://localhost.*\` / \`http://127.0.0.1.*\`: Dynamic Vite JS bundles generated during static prerendering (נכס דינמי זמני בזמן prerender)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f lychee/out.md ]; then
+            cat lychee/out.md >> $GITHUB_STEP_SUMMARY
+          else
+            echo "No lychee report file found." >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Upload Test Results
         uses: actions/upload-artifact@v4
