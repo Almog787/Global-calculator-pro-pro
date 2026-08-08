@@ -17,7 +17,7 @@ const dynamicPaths = [];
 while ((match = pathRegex.exec(content)) !== null) {
   dynamicPaths.push(match[1]);
 }
-const staticPaths = ['/all', '/contact', '/privacy-policy', '/terms-of-service', '/about', '/suggest'];
+const staticPaths = ['/', '/all', '/contact', '/privacy-policy', '/terms-of-service', '/about', '/suggest'];
 const rawPaths = Array.from(new Set([...staticPaths, ...dynamicPaths]));
 const languages = ['en', 'he', 'es', 'fr', 'ar'];
 

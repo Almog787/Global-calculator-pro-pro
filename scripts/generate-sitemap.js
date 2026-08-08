@@ -16,6 +16,7 @@ while ((match = pathRegex.exec(content)) !== null) {
 
 // Predefined general paths
 const staticPaths = [
+  '/',
   '/all',
   '/contact',
   '/privacy-policy',
