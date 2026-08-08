@@ -66,7 +66,23 @@ server.listen(0, async () => {
   const port = server.address().port;
   console.log(`Static server listening on port ${port}`);
   
-  const browser = await chromium.launch();
+  let browser;
+  try {
+    browser = await chromium.launch();
+  } catch (err) {
+    console.log('Playwright chromium executable not found or failed to launch. Attempting auto-installation...');
+    try {
+      const { execSync } = await import('child_process');
+      execSync('npx playwright install chromium', { stdio: 'inherit' });
+      browser = await chromium.launch();
+    } catch (installErr) {
+      console.warn('Warning: Playwright browser could not be launched/installed for prerendering:', installErr.message);
+      console.warn('Skipping prerendering step and proceeding with SPA build output.');
+      server.close();
+      return;
+    }
+  }
+
   const context = await browser.newContext();
   const page = await context.newPage();
   
