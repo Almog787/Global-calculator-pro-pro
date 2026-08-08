@@ -96,8 +96,8 @@ server.listen(0, () => {
           await page.goto(url, { waitUntil: 'networkidle' });
           // Remove any script tags if you want pure static (optional)
           let html = await page.content();
-          // Clean up any absolute localhost URLs generated during Playwright rendering
-          const portRegex = new RegExp(`http:\\/\\/localhost:${port}`, 'g');
+          // Clean up any absolute localhost/127.0.0.1 URLs generated during Playwright rendering
+          const portRegex = new RegExp(`http:\\/\\/(localhost|127\\.0\\.0\\.1):${port}`, 'g');
           html = html.replace(portRegex, '');
           
           const routeDir = path.join(distPath, route);
