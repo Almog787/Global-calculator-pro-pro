@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
 
 export default function AgeCalculator() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [dob, setDob] = useState(() => {
     const d = new Date();
     d.setFullYear(d.getFullYear() - 30);

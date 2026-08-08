@@ -565,6 +565,7 @@ export const translations: Translations = {
 
     libraryTitle: 'Biblioteca de Calculadoras',
     librarySubtitle: 'Encuentre la herramienta perfecta para sus cálculos.',
+    faqTitle: 'Preguntas Frecuentes',
   },
   fr: {
     dir: 'ltr',
@@ -701,6 +702,7 @@ export const translations: Translations = {
 
     libraryTitle: 'Bibliothèque de calculatrices',
     librarySubtitle: 'Trouvez l\'outil parfait pour vos calculs.',
+    faqTitle: 'Foire Aux Questions',
   },
   ar: {
     dir: 'rtl',
@@ -837,6 +839,7 @@ export const translations: Translations = {
 
     libraryTitle: 'مكتبة الحاسبات',
     librarySubtitle: 'اعثر على أداة الحساب المثالية لاحتياجاتك.',
+    faqTitle: 'الأسئلة الشائعة',
   }
 };
 

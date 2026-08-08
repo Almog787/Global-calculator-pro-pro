@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
 
 export default function BmiCalculator() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [height, setHeight] = useState(175);
   const [weight, setWeight] = useState(70);
   const [bmi, setBmi] = useState(0);
