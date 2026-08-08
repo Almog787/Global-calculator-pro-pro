@@ -1,5 +1,5 @@
 import { useState, useDeferredValue, useEffect, useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import Decimal from 'decimal.js';
 import {
   Chart as ChartJS,
@@ -102,11 +102,20 @@ export default function MortgageCalculator() {
     <div className="w-full">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.mortgageTitle }]} />
       <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/mortgage-calculator" />
-        <title>{t.mortgageTitle} | {t.title}</title>
-        <meta name="description" content={t.mortgageDesc} />
-      </Helmet>
+      <SEO
+        title={t.mortgageTitle}
+        description={t.mortgageDesc}
+        canonicalUrl="/mortgage-calculator"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.mortgageTitle,
+          description: t.mortgageDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/mortgage-calculator"}`
+        }}
+      />
       
       <div className="flex-1 flex flex-col">
         <div className="mb-10">

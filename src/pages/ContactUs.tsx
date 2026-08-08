@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { useI18n } from '../contexts/i18n';
 
 export default function ContactUs() {
@@ -26,11 +26,20 @@ export default function ContactUs() {
 
   return (
     <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 max-w-2xl mx-auto space-y-8">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/contact" />
-        <title>{t.contactTitle} | {t.title}</title>
-        <meta name="description" content={t.contactDesc} />
-      </Helmet>
+      <SEO
+        title={t.contactTitle}
+        description={t.contactDesc}
+        canonicalUrl="/contact"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.contactTitle,
+          description: t.contactDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/contact"}`
+        }}
+      />
 
       <div>
         <h1 className="text-3xl md:text-4xl font-headline text-stone-900 tracking-tight mb-3 font-bold">

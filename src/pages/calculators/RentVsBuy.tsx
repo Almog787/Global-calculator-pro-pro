@@ -1,5 +1,5 @@
 import { useState, useDeferredValue, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
 import Decimal from 'decimal.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useI18n } from '../../contexts/i18n';
@@ -164,11 +164,20 @@ export default function RentVsBuy() {
 
   return (
     <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/calculators/rent-vs-buy" />
-        <title>{t.title} | {globalT.title}</title>
-        <meta name="description" content={t.description} />
-      </Helmet>
+      <SEO
+        title={t.title}
+        description={t.description}
+        canonicalUrl="/calculators/rent-vs-buy"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.title,
+          description: t.description,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/calculators/rent-vs-buy"}`
+        }}
+      />
 
       <div className="flex-[1.5] flex flex-col">
         <div className="mb-10">

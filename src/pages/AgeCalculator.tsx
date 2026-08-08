@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { useI18n } from '../contexts/i18n';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
@@ -57,11 +57,20 @@ export default function AgeCalculator() {
     <div className="w-full">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.ageTitle }]} />
       <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/age-calculator" />
-        <title>{t.ageTitle} | {t.title}</title>
-        <meta name="description" content={t.ageDesc} />
-      </Helmet>
+      <SEO
+        title={t.ageTitle}
+        description={t.ageDesc}
+        canonicalUrl="/age-calculator"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.ageTitle,
+          description: t.ageDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/age-calculator"}`
+        }}
+      />
       <div className="mb-10">
         <h2 className="text-2xl md:text-3xl font-headline text-stone-900 tracking-tight mb-3">{t.ageTitle}</h2>
         <p className="text-stone-500 font-medium text-[15px] leading-relaxed max-w-sm">{t.ageExplanation}</p>

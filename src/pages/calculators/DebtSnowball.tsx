@@ -1,5 +1,5 @@
 import { useState, useDeferredValue, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../../components/SEO';
 import { Doughnut } from 'react-chartjs-2';
 import { useI18n } from '../../contexts/i18n';
 
@@ -208,11 +208,20 @@ export default function DebtSnowball() {
 
   return (
     <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/calculators/debt-snowball" />
-        <title>{t.title} | {globalT.title}</title>
-        <meta name="description" content={t.description} />
-      </Helmet>
+      <SEO
+        title={t.title}
+        description={t.description}
+        canonicalUrl="/calculators/debt-snowball"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.title,
+          description: t.description,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/calculators/debt-snowball"}`
+        }}
+      />
 
       <div className="flex-[2] flex flex-col">
         <div className="mb-8">

@@ -1,5 +1,5 @@
 import { useState, useDeferredValue, useEffect, useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import Decimal from 'decimal.js';
 import {
   Chart as ChartJS,
@@ -176,11 +176,20 @@ export default function CompoundInterest() {
     <div className="w-full">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.compoundTitle }]} />
       <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/compound-interest" />
-        <title>{t.compoundTitle} | {t.title}</title>
-        <meta name="description" content={t.compoundDesc} />
-      </Helmet>
+      <SEO
+        title={t.compoundTitle}
+        description={t.compoundDesc}
+        canonicalUrl="/compound-interest"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.compoundTitle,
+          description: t.compoundDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/compound-interest"}`
+        }}
+      />
       
       <div className="flex-1 flex flex-col">
         <div className="mb-10">

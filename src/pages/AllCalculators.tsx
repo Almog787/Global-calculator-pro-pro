@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { calculators } from "../data/calculators";
-import { Helmet } from "react-helmet-async";
+import SEO from "../components/SEO";
 import { useI18n } from "../contexts/i18n";
 
 const dynamicTitles: Record<string, Record<string, string>> = {
@@ -126,13 +126,18 @@ export default function AllCalculators() {
 
   return (
     <div className="w-full">
-      <Helmet>
-        <title>{t.libraryTitle} | {t.title}</title>
-        <meta
-          name="description"
-          content={t.librarySubtitle}
-        />
-      </Helmet>
+      <SEO
+        title={t.libraryTitle}
+        description={t.librarySubtitle}
+        canonicalUrl="/all"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'CollectionPage',
+          name: t.libraryTitle,
+          description: t.librarySubtitle,
+          url: 'https://globalcalcpro.com/all'
+        }}
+      />
 
       {/* Hero Section */}
       <section className="mb-stack-lg text-center md:text-left rtl:md:text-right flex flex-col items-center md:items-start rtl:md:items-start">

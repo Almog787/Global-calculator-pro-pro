@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { useI18n } from '../contexts/i18n';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
@@ -57,11 +57,20 @@ export default function UnitConverter() {
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.unitConvTitle }]} />
       <article className="w-full bg-white rounded-2xl p-6 md:p-8 shadow-xs border border-stone-200/80">
-        <Helmet>
-          <link rel="canonical" href="https://globalcalcpro.com/unit-converter" />
-          <title>{t.unitConvTitle} | {t.title}</title>
-          <meta name="description" content={t.unitConvDesc} />
-        </Helmet>
+        <SEO
+        title={t.unitConvTitle}
+        description={t.unitConvDesc}
+        canonicalUrl="/unit-converter"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.unitConvTitle,
+          description: t.unitConvDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/unit-converter"}`
+        }}
+      />
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl font-headline font-bold text-stone-900 tracking-tight mb-2">{t.unitConvTitle}</h1>
           <p className="text-stone-500 text-sm md:text-base leading-relaxed max-w-lg">{t.unitConvExplanation}</p>

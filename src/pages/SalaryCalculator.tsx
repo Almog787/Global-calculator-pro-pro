@@ -1,5 +1,5 @@
 import { useState, useDeferredValue, useEffect, useMemo } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import Decimal from 'decimal.js';
 import {
   Chart as ChartJS,
@@ -127,11 +127,20 @@ export default function SalaryCalculator() {
     <div className="w-full">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.salaryTitle }]} />
       <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/salary-calculator" />
-        <title>{t.salaryTitle} | {t.title}</title>
-        <meta name="description" content={t.salaryDesc} />
-      </Helmet>
+      <SEO
+        title={t.salaryTitle}
+        description={t.salaryDesc}
+        canonicalUrl="/salary-calculator"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.salaryTitle,
+          description: t.salaryDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/salary-calculator"}`
+        }}
+      />
       
       <div className="flex-1 flex flex-col">
         <div className="mb-10">

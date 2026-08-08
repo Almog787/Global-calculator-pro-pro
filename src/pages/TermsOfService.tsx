@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { useI18n } from '../contexts/i18n';
 
 export default function TermsOfService() {
@@ -6,11 +6,20 @@ export default function TermsOfService() {
 
   return (
     <article className="w-full bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 max-w-3xl mx-auto space-y-6 text-stone-700">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/terms-of-service" />
-        <title>{t.termsTitle} | {t.title}</title>
-        <meta name="description" content={t.termsDesc} />
-      </Helmet>
+      <SEO
+        title={t.termsTitle}
+        description={t.termsDesc}
+        canonicalUrl="/terms-of-service"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.termsTitle,
+          description: t.termsDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/terms-of-service"}`
+        }}
+      />
 
       <h1 className="text-3xl md:text-4xl font-headline text-stone-900 tracking-tight font-bold">
         {t.termsTitle}

@@ -1,5 +1,5 @@
 import { useState, FormEvent } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { useI18n } from '../contexts/i18n';
 
 export default function SuggestFeature() {
@@ -27,11 +27,20 @@ export default function SuggestFeature() {
 
   return (
     <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 max-w-2xl mx-auto space-y-8">
-      <Helmet>
-        <link rel="canonical" href="https://globalcalcpro.com/suggest" />
-        <title>{t.suggestionsTitle || 'Suggest a Feature'} | {t.title}</title>
-        <meta name="description" content={t.suggestionsDesc || 'Submit feature ideas and calculator requests for GlobalCalc Pro.'} />
-      </Helmet>
+      <SEO
+        title={t.suggestionsTitle || 'Suggest a Feature'}
+        description={t.suggestionsDesc || 'Submit feature ideas and calculator requests for GlobalCalc Pro.'}
+        canonicalUrl="/suggest"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.suggestionsTitle || 'Suggest a Feature',
+          description: t.suggestionsDesc || 'Submit feature ideas and calculator requests for GlobalCalc Pro.',
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/suggest"}`
+        }}
+      />
 
       <div>
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold rounded-full mb-3">

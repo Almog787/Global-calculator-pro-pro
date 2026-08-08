@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import Decimal from 'decimal.js';
 import { useI18n } from '../contexts/i18n';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -205,23 +205,16 @@ export default function PercentageFinder() {
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.percFinderTitle }]} />
 
-      <Helmet>
-        <title>{isHebrew ? 'מחשבון אחוזים - איך לחשב אחוזים בקלות' : 'Percentage Calculator - How to Find a Percentage Easily'}</title>
-        <meta
-          name="description"
-          content={
+      <SEO
+        title={isHebrew ? 'מחשבון אחוזים - איך לחשב אחוזים בקלות' : 'Percentage Calculator - How to Find a Percentage Easily'}
+        description={
             isHebrew
               ? 'מחשבון אחוזים חינמי ומדויק. למדו איך לחשב אחוזים, שינוי באחוזים, הנחות ומחיר סופי עם נוסחאות והסברים שלב אחר שלב.'
               : 'Free online percentage calculator. Calculate percentage of a number, percentage change, discount prices, and learn how to find percentages with formulas and examples.'
           }
-        />
-        <meta
-          name="keywords"
-          content="how to find a percentage, percentage calculator, how to calculate percentage, percentage of a number, percentage increase formula, percentage change calculator, discount calculator, reverse percentage"
-        />
-        <link rel="canonical" href="https://globalcalcpro.com/percentage-finder" />
-        <script type="application/ld+json">{JSON.stringify(jsonLdData)}</script>
-      </Helmet>
+        canonicalUrl="/percentage-finder"
+        structuredData={jsonLdData}
+      />
 
       {/* Main Interactive Tool Container */}
       <article className="w-full bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-xs border border-stone-200/80 mb-10">

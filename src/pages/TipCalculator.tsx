@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import Decimal from 'decimal.js';
 import { useI18n } from '../contexts/i18n';
 import Breadcrumbs from '../components/Breadcrumbs';
@@ -53,11 +53,20 @@ export default function TipCalculator() {
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
       <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.tipTitle }]} />
       <article className="w-full bg-white rounded-2xl p-6 md:p-8 shadow-xs border border-stone-200/80">
-        <Helmet>
-          <link rel="canonical" href="https://globalcalcpro.com/tip-calculator" />
-          <title>{t.tipTitle} | {t.title}</title>
-          <meta name="description" content={t.tipDesc} />
-        </Helmet>
+        <SEO
+        title={t.tipTitle}
+        description={t.tipDesc}
+        canonicalUrl="/tip-calculator"
+        structuredData={{
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: t.tipTitle,
+          description: t.tipDesc,
+          applicationCategory: 'CalculatorApplication',
+          operatingSystem: 'Any',
+          url: `https://globalcalcpro.com${"/tip-calculator"}`
+        }}
+      />
         <div className="mb-8">
           <h1 className="text-2xl md:text-3xl font-headline font-bold text-stone-900 tracking-tight mb-2">{t.tipTitle}</h1>
           <p className="text-stone-500 text-sm md:text-base leading-relaxed max-w-lg">{t.tipExplanation}</p>
