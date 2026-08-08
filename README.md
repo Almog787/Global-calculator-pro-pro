@@ -42,4 +42,23 @@
 * Chart.js + Recharts for Data Visualization
 * Decimal.js for precise financial math
 
+<!-- QA_SUMMARY_START -->
+## 📊 Automated QA & Test Report
+*This section is automatically updated by GitHub Actions during automated QA runs.*
+
+### 🏗️ Build & Code Quality Status
+- **Application Build**: ✅ Success
+- **TypeScript & ESLint**: ✅ Passed without errors
+
+### 🔗 Link Checker Summary (Lychee)
+#### 📋 Excluded Patterns & Reasons:
+- `fonts.googleapis.com` / `fonts.gstatic.com`: External Google Fonts (prevents external network traffic in CI)
+- `https://globalcalcpro.com.*`: Production URL
+- `http://localhost.*`: Dynamic Vite JS bundle assets generated during static prerendering
+- `http://127.0.0.1.*`: Local server routes used during test execution
+
+#### 📝 Latest Lychee Report:
+_Run QA workflow to generate latest report._
+<!-- QA_SUMMARY_END -->
+
 © **Global Calc Pro** — Precision Mathematical Tools for Everyone.
