@@ -125,12 +125,12 @@ export default function SalaryCalculator() {
 
   return (
     <div className="w-full">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.salaryTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.salaryTitle }]} />
       <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
       <SEO
         title={t.salaryTitle}
         description={t.salaryDesc}
-        canonicalUrl="/salary-calculator"
+        canonicalUrl={`/${lang}/salary-calculator`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
@@ -138,7 +138,7 @@ export default function SalaryCalculator() {
           description: t.salaryDesc,
           applicationCategory: 'CalculatorApplication',
           operatingSystem: 'Any',
-          url: `https://globalcalcpro.com${"/salary-calculator"}`
+          url: `https://globalcalcpro.com/${lang}/salary-calculator`
         }}
       />
       

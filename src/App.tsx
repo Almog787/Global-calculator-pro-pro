@@ -73,9 +73,9 @@ function App() {
                   const newLang = e.target.value as any;
                   const currentPath = location.pathname;
                   const match = currentPath.match(/^\/(en|he|es|fr|ar)(\/|$)/);
-                  let newPath = currentPath;
+                  let newPath: string;
                   if (match) {
-                    newPath = currentPath.replace(/^\/[^\/]+/, `/${newLang}`);
+                    newPath = currentPath.replace(/^\/[^/]+/, `/${newLang}`);
                   } else {
                     newPath = `/${newLang}${currentPath}`;
                   }

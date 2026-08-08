@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { searchCalculators, CalculatorMeta } from "../data/calculators";
+import { searchCalculators, getCalculatorTitle, getCalculatorDescription, CalculatorMeta } from "../data/calculators";
 import { useI18n } from "../contexts/i18n";
 
 export default function SearchBar() {
@@ -9,7 +9,7 @@ export default function SearchBar() {
   const [results, setResults] = useState<CalculatorMeta[]>([]);
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -23,24 +23,17 @@ export default function SearchBar() {
 
   useEffect(() => {
     if (query.trim().length > 1) {
-      setResults(searchCalculators(query));
+      setResults(searchCalculators(query, t, lang));
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
-  }, [query]);
+  }, [query, t, lang]);
 
   const handleSelect = (path: string) => {
     setQuery("");
     setIsOpen(false);
-    navigate(path);
-  };
-
-  const getTitle = (calc: CalculatorMeta) => {
-    if (calc.titleKey && t[calc.titleKey as keyof typeof t]) {
-      return t[calc.titleKey as keyof typeof t] as string;
-    }
-    return calc.fallbackTitle;
+    navigate(`/${lang}${path}`);
   };
 
   const placeholderText = t.dir === 'rtl' ? 'חפש מחשבון...' : 'Search calculators...';
@@ -74,10 +67,10 @@ export default function SearchBar() {
                     className="w-full text-left rtl:text-right px-4 py-2 hover:bg-surface-container focus:bg-surface-container outline-none flex flex-col gap-0.5 transition-colors cursor-pointer"
                   >
                     <span className="font-label-bold text-label-bold text-on-surface">
-                      {getTitle(calc)}
+                      {getCalculatorTitle(calc, t, lang)}
                     </span>
                     <span className="font-label-sm text-label-sm text-on-surface-variant truncate">
-                      {calc.description}
+                      {getCalculatorDescription(calc, t, lang)}
                     </span>
                   </button>
                 </li>

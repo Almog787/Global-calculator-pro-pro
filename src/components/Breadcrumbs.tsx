@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { useI18n } from "../contexts/i18n";
 
 type BreadcrumbItem = {
   label: string;
@@ -8,13 +9,24 @@ type BreadcrumbItem = {
 
 export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
   const baseUrl = 'https://globalcalcpro.com';
+  const { lang } = useI18n();
+
+  const homeLabels: Record<string, string> = {
+    he: 'ראשי',
+    en: 'Home',
+    es: 'Inicio',
+    fr: 'Accueil',
+    ar: 'الرئيسية'
+  };
+
+  const homeLabel = homeLabels[lang] || 'Home';
 
   const schemaItems = [
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Home",
-      "item": baseUrl
+      "name": homeLabel,
+      "item": `${baseUrl}/${lang}`
     },
     ...items.map((item, index) => ({
       "@type": "ListItem",
@@ -42,11 +54,11 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
         aria-label="Breadcrumb"
       >
         <Link
-          to="/"
+          to={`/${lang}`}
           className="hover:text-blue-600 transition-colors inline-flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[14px]">home</span>
-          <span>Home</span>
+          <span>{homeLabel}</span>
         </Link>
         {items.map((item, index) => (
           <div

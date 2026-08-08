@@ -174,12 +174,12 @@ export default function CompoundInterest() {
 
   return (
     <div className="w-full">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.compoundTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.compoundTitle }]} />
       <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
       <SEO
         title={t.compoundTitle}
         description={t.compoundDesc}
-        canonicalUrl="/compound-interest"
+        canonicalUrl={`/${lang}/compound-interest`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
@@ -187,7 +187,7 @@ export default function CompoundInterest() {
           description: t.compoundDesc,
           applicationCategory: 'CalculatorApplication',
           operatingSystem: 'Any',
-          url: `https://globalcalcpro.com${"/compound-interest"}`
+          url: `https://globalcalcpro.com/${lang}/compound-interest`
         }}
       />
       

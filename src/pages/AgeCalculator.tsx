@@ -55,12 +55,12 @@ export default function AgeCalculator() {
 
   return (
     <div className="w-full">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.ageTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.ageTitle }]} />
       <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
       <SEO
         title={t.ageTitle}
         description={t.ageDesc}
-        canonicalUrl="/age-calculator"
+        canonicalUrl={`/${lang}/age-calculator`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
@@ -68,7 +68,7 @@ export default function AgeCalculator() {
           description: t.ageDesc,
           applicationCategory: 'CalculatorApplication',
           operatingSystem: 'Any',
-          url: `https://globalcalcpro.com${"/age-calculator"}`
+          url: `https://globalcalcpro.com/${lang}/age-calculator`
         }}
       />
       <div className="mb-10">

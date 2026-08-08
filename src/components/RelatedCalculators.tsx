@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getRelatedCalculators, CalculatorMeta } from "../data/calculators";
+import { getRelatedCalculators, getCalculatorTitle, getCalculatorDescription } from "../data/calculators";
 import { useI18n } from "../contexts/i18n";
 
 export default function RelatedCalculators({
@@ -7,17 +7,10 @@ export default function RelatedCalculators({
 }: {
   currentId: string;
 }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const related = getRelatedCalculators(currentId, 3);
 
   if (related.length === 0) return null;
-
-  const getTitle = (calc: CalculatorMeta) => {
-    if (calc.titleKey && t[calc.titleKey as keyof typeof t]) {
-      return t[calc.titleKey as keyof typeof t] as string;
-    }
-    return calc.fallbackTitle;
-  };
 
   const sectionHeading = t.dir === 'rtl' ? 'מחשבונים קשורים' : 'Related Calculators';
 
@@ -30,19 +23,19 @@ export default function RelatedCalculators({
         {related.map((calc) => (
           <Link
             key={calc.id}
-            to={calc.path}
+            to={`/${lang}${calc.path}`}
             className="group flex flex-col p-4 bg-white rounded-xl border border-stone-200 shadow-xs hover:shadow-md hover:border-blue-200 transition-all"
           >
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm font-bold text-stone-900 group-hover:text-blue-600 transition-colors">
-                {getTitle(calc)}
+                {getCalculatorTitle(calc, t, lang)}
               </span>
               <span className="material-symbols-outlined text-[16px] text-stone-400 group-hover:text-blue-500 rtl:rotate-180">
                 arrow_forward
               </span>
             </div>
             <p className="text-xs text-stone-500 line-clamp-2 leading-relaxed">
-              {calc.description}
+              {getCalculatorDescription(calc, t, lang)}
             </p>
           </Link>
         ))}

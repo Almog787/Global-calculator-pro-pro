@@ -39,12 +39,12 @@ export default function BmiCalculator() {
 
   return (
     <div className="w-full">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.bmiTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.bmiTitle }]} />
       <article className="w-full h-full flex flex-col bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200">
       <SEO
         title={t.bmiTitle}
         description={t.bmiDesc}
-        canonicalUrl="/bmi-calculator"
+        canonicalUrl={`/${lang}/bmi-calculator`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
@@ -52,7 +52,7 @@ export default function BmiCalculator() {
           description: t.bmiDesc,
           applicationCategory: 'CalculatorApplication',
           operatingSystem: 'Any',
-          url: `https://globalcalcpro.com${"/bmi-calculator"}`
+          url: `https://globalcalcpro.com/${lang}/bmi-calculator`
         }}
       />
       <div className="mb-10">

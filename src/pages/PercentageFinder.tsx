@@ -203,7 +203,7 @@ export default function PercentageFinder() {
 
   return (
     <div className="w-full max-w-5xl mx-auto px-2 sm:px-4 py-2">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.percFinderTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.percFinderTitle }]} />
 
       <SEO
         title={isHebrew ? 'מחשבון אחוזים - איך לחשב אחוזים בקלות' : 'Percentage Calculator - How to Find a Percentage Easily'}
@@ -212,7 +212,7 @@ export default function PercentageFinder() {
               ? 'מחשבון אחוזים חינמי ומדויק. למדו איך לחשב אחוזים, שינוי באחוזים, הנחות ומחיר סופי עם נוסחאות והסברים שלב אחר שלב.'
               : 'Free online percentage calculator. Calculate percentage of a number, percentage change, discount prices, and learn how to find percentages with formulas and examples.'
           }
-        canonicalUrl="/percentage-finder"
+        canonicalUrl={`/${lang}/percentage-finder`}
         structuredData={jsonLdData}
       />
 

@@ -101,12 +101,12 @@ export default function MortgageCalculator() {
 
   return (
     <div className="w-full">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.mortgageTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.mortgageTitle }]} />
       <article className="w-full h-full flex flex-col lg:flex-row bg-white rounded-2xl p-6 md:p-10 shadow-sm border border-stone-200 gap-10">
       <SEO
         title={t.mortgageTitle}
         description={t.mortgageDesc}
-        canonicalUrl="/mortgage-calculator"
+        canonicalUrl={`/${lang}/mortgage-calculator`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
@@ -114,7 +114,7 @@ export default function MortgageCalculator() {
           description: t.mortgageDesc,
           applicationCategory: 'CalculatorApplication',
           operatingSystem: 'Any',
-          url: `https://globalcalcpro.com${"/mortgage-calculator"}`
+          url: `https://globalcalcpro.com/${lang}/mortgage-calculator`
         }}
       />
       

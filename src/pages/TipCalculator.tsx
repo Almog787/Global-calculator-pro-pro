@@ -51,12 +51,12 @@ export default function TipCalculator() {
 
   return (
     <div className="w-full max-w-4xl mx-auto px-2 sm:px-4 py-2">
-      <Breadcrumbs items={[{ label: 'Library', path: '/all' }, { label: t.tipTitle }]} />
+      <Breadcrumbs items={[{ label: t.catAll || 'Library', path: `/${lang}/all` }, { label: t.tipTitle }]} />
       <article className="w-full bg-white rounded-2xl p-6 md:p-8 shadow-xs border border-stone-200/80">
         <SEO
         title={t.tipTitle}
         description={t.tipDesc}
-        canonicalUrl="/tip-calculator"
+        canonicalUrl={`/${lang}/tip-calculator`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'WebApplication',
@@ -64,7 +64,7 @@ export default function TipCalculator() {
           description: t.tipDesc,
           applicationCategory: 'CalculatorApplication',
           operatingSystem: 'Any',
-          url: `https://globalcalcpro.com${"/tip-calculator"}`
+          url: `https://globalcalcpro.com/${lang}/tip-calculator`
         }}
       />
         <div className="mb-8">

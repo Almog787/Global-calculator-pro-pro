@@ -1,88 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { calculators } from "../data/calculators";
+import { calculators, getCalculatorTitle, getCalculatorDescription } from "../data/calculators";
 import SEO from "../components/SEO";
 import { useI18n } from "../contexts/i18n";
-
-const dynamicTitles: Record<string, Record<string, string>> = {
-  "auto-loan": {
-    he: "מחשבון הלוואה לרכב",
-    en: "Auto Loan Calculator",
-    es: "Calculadora de Préstamo de Auto",
-    fr: "Calculatrice de Prêt Auto",
-    ar: "حاسبة قروض السيارات",
-  },
-  roi: {
-    he: "מחשבון החזר השקעה (ROI)",
-    en: "ROI Calculator",
-    es: "Calculadora de ROI",
-    fr: "Calculatrice de ROI",
-    ar: "حاسبة العائد على الاستثمار",
-  },
-  margin: {
-    he: "מחשבון רווח ושולי רווח",
-    en: "Margin Calculator",
-    es: "Calculadora de Margen",
-    fr: "Calculatrice de Marge",
-    ar: "حاسبة الهامش والربح",
-  },
-  "cap-rate": {
-    he: "מחשבון שיעור תשואה נטו (Cap Rate)",
-    en: "Cap Rate Calculator",
-    es: "Calculadora de Cap Rate",
-    fr: "Calculatrice de Taux de Capitalisation",
-    ar: "حاسبة معدل الرأسمالية",
-  },
-  "freelance-net-income": {
-    he: "מחשבון הכנסה נטו לפרילנסרים",
-    en: "Freelance Net Income",
-    es: "Ingreso Neto Freelance",
-    fr: "Revenu Net Freelance",
-    ar: "صافي الدخل للمستقلين",
-  },
-  "debt-snowball": {
-    he: "מחשבון סילוק חובות (כדור שלג)",
-    en: "Debt Snowball",
-    es: "Bola de Nieve de Deudas",
-    fr: "Boule de Neige de Dettes",
-    ar: "كرة الثلج لسداد الديون",
-  },
-  "fuel-split": {
-    he: "מחשבון השתתפות בדלק",
-    en: "Fuel Split",
-    es: "División de Combustible",
-    fr: "Partage de Carburant",
-    ar: "تقاسم الوقود",
-  },
-  "goal-savings": {
-    he: "מחשבון חיסכון ליעד",
-    en: "Goal Savings",
-    es: "Ahorro para Meta",
-    fr: "Épargne Objectif",
-    ar: "الادخار للهدف",
-  },
-  "download-time": {
-    he: "מחשבון זמן הורדה",
-    en: "Download Time",
-    es: "Tiempo de Descarga",
-    fr: "Temps de Téléchargement",
-    ar: "وقت التنزيل",
-  },
-  "peltier-cooling": {
-    he: "מחשבון קירור פלטייה (Peltier)",
-    en: "Peltier Cooling",
-    es: "Enfriamiento Peltier",
-    fr: "Refroidissement Peltier",
-    ar: "التبريد بعنصر بيلتير",
-  },
-  "rent-vs-buy": {
-    he: "מחשבון קנייה או שכירות",
-    en: "Rent vs Buy Calculator",
-    es: "Alquilar vs Comprar",
-    fr: "Louer vs Acheter",
-    ar: "الإيجار مقابل الشراء",
-  },
-};
 
 export default function AllCalculators() {
   const { t, lang } = useI18n();
@@ -114,28 +34,18 @@ export default function AllCalculators() {
       ? calculators
       : calculators.filter((c) => c.category === activeCategory);
 
-  const getTitle = (calc: (typeof calculators)[0]) => {
-    if (calc.titleKey && t[calc.titleKey as keyof typeof t]) {
-      return t[calc.titleKey as keyof typeof t] as string;
-    }
-    if (dynamicTitles[calc.id]?.[lang]) {
-      return dynamicTitles[calc.id][lang];
-    }
-    return calc.fallbackTitle;
-  };
-
   return (
     <div className="w-full">
       <SEO
         title={t.libraryTitle}
         description={t.librarySubtitle}
-        canonicalUrl="/all"
+        canonicalUrl={`/${lang}/all`}
         structuredData={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
           name: t.libraryTitle,
           description: t.librarySubtitle,
-          url: 'https://globalcalcpro.com/all'
+          url: `https://globalcalcpro.com/${lang}/all`
         }}
       />
 
@@ -211,11 +121,12 @@ export default function AllCalculators() {
       {/* Calculator Grid */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
         {filtered.map((calc) => {
-          const title = getTitle(calc);
+          const title = getCalculatorTitle(calc, t, lang);
+          const description = getCalculatorDescription(calc, t, lang);
           return (
             <Link
               key={calc.id}
-              to={calc.path}
+              to={`/${lang}${calc.path}`}
               className="group block bg-surface-container-lowest rounded-xl p-6 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 border border-outline-variant hover:border-secondary relative overflow-hidden flex flex-col h-full"
             >
               <div className="flex justify-between items-start mb-4">
@@ -227,7 +138,7 @@ export default function AllCalculators() {
                 </span>
               </div>
               <p className="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
-                {calc.description}
+                {description}
               </p>
               <div className="flex flex-wrap gap-2 mt-auto">
                 {calc.tags.slice(0, 3).map((tag) => (

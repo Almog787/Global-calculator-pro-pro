@@ -3,14 +3,16 @@ import { Suspense, lazy, useMemo } from 'react';
 import NotFound from './NotFound';
 import Breadcrumbs from '../components/Breadcrumbs';
 import RelatedCalculators from '../components/RelatedCalculators';
-import { calculators } from '../data/calculators';
+import { calculators, getCalculatorTitle } from '../data/calculators';
 import SkeletonLoader from '../components/SkeletonLoader';
+import { useI18n } from '../contexts/i18n';
 
 // Using Vite's import.meta.glob to dynamically discover all calculators in the folder.
 const modules = import.meta.glob('./calculators/*.tsx');
 
 export default function CalculatorWrapper() {
   const { slug } = useParams<{ slug: string }>();
+  const { t, lang } = useI18n();
 
   const Component = useMemo(() => {
     if (!slug) return null;
@@ -39,8 +41,8 @@ export default function CalculatorWrapper() {
   return (
     <div className="w-full">
       <Breadcrumbs items={[
-        { label: 'Library', path: '/all' },
-        { label: calcData?.fallbackTitle || slug || 'Calculator' }
+        { label: t.catAll || 'Library', path: `/${lang}/all` },
+        { label: calcData ? getCalculatorTitle(calcData, t, lang) : slug || 'Calculator' }
       ]} />
       
       <Suspense fallback={<SkeletonLoader />}>
