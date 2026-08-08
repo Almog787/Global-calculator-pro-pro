@@ -4,6 +4,10 @@ import Decimal from 'decimal.js';
 import { Doughnut } from 'react-chartjs-2';
 import { useI18n } from '../../contexts/i18n';
 
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
+ChartJS.register(ArcElement, Tooltip, Legend);
+
 // Localized dictionary for true independence
 const localDict = {
   en: {

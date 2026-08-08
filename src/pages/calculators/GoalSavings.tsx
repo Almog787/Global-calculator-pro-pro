@@ -4,6 +4,10 @@ import Decimal from 'decimal.js';
 import { Line } from 'react-chartjs-2';
 import { useI18n } from '../../contexts/i18n';
 
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip as ChartTooltip, Legend, Filler } from 'chart.js';
+
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, ChartTooltip, Legend, Filler);
+
 const localDict = {
   en: {
     title: 'Goal Savings Calculator',
