@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useI18n } from '../contexts/i18n';
 
 export default function NotFound() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(7);
 
@@ -12,7 +12,7 @@ export default function NotFound() {
       setCountdown((prev) => {
         if (prev <= 1) {
           clearInterval(timer);
-          navigate('/', { replace: true });
+          navigate(`/${lang}`, { replace: true });
           return 0;
         }
         return prev - 1;
@@ -20,7 +20,7 @@ export default function NotFound() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [navigate]);
+  }, [navigate, lang]);
 
   return (
     <div id="not-found-page" className="min-h-[60vh] flex flex-col items-center justify-center text-center px-4 py-12">
@@ -45,7 +45,7 @@ export default function NotFound() {
         {/* Action Button */}
         <Link
           id="not-found-home-button"
-          to="/"
+          to={`/${lang}`}
           className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all shadow-sm hover:shadow-md text-sm cursor-pointer"
         >
           <span className="material-symbols-outlined text-lg">home</span>

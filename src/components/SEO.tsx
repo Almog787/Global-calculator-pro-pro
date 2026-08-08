@@ -39,6 +39,11 @@ const SEO: React.FC<SEOProps> = ({
     }
   };
 
+  const rawPath = finalCanonicalUrl.replace(baseUrl, '');
+  const pathWithoutLang = rawPath.replace(/^\/(en|he|es|fr|ar)(\/|$)/, '$2');
+  const normalizedPath = pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`;
+  const subPath = normalizedPath === '/' ? '' : normalizedPath;
+
   return (
     <Helmet>
       {/* Primary Meta Tags */}
@@ -71,12 +76,12 @@ const SEO: React.FC<SEOProps> = ({
       </script>
     
       {/* hreflang tags for i18n */}
-      <link rel="alternate" hrefLang="en" href={`${baseUrl}/en${finalCanonicalUrl.replace(baseUrl, '').replace(/^\/(en|he|es|fr|ar)\//, '/')}`} />
-      <link rel="alternate" hrefLang="he" href={`${baseUrl}/he${finalCanonicalUrl.replace(baseUrl, '').replace(/^\/(en|he|es|fr|ar)\//, '/')}`} />
-      <link rel="alternate" hrefLang="es" href={`${baseUrl}/es${finalCanonicalUrl.replace(baseUrl, '').replace(/^\/(en|he|es|fr|ar)\//, '/')}`} />
-      <link rel="alternate" hrefLang="fr" href={`${baseUrl}/fr${finalCanonicalUrl.replace(baseUrl, '').replace(/^\/(en|he|es|fr|ar)\//, '/')}`} />
-      <link rel="alternate" hrefLang="ar" href={`${baseUrl}/ar${finalCanonicalUrl.replace(baseUrl, '').replace(/^\/(en|he|es|fr|ar)\//, '/')}`} />
-      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/en${finalCanonicalUrl.replace(baseUrl, '').replace(/^\/(en|he|es|fr|ar)\//, '/')}`} />
+      <link rel="alternate" hrefLang="en" href={`${baseUrl}/en${subPath}`} />
+      <link rel="alternate" hrefLang="he" href={`${baseUrl}/he${subPath}`} />
+      <link rel="alternate" hrefLang="es" href={`${baseUrl}/es${subPath}`} />
+      <link rel="alternate" hrefLang="fr" href={`${baseUrl}/fr${subPath}`} />
+      <link rel="alternate" hrefLang="ar" href={`${baseUrl}/ar${subPath}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}/en${subPath}`} />
     </Helmet>
   );
 };
