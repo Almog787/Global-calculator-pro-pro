@@ -42,23 +42,35 @@
 * Chart.js + Recharts for Data Visualization
 * Decimal.js for precise financial math
 
+© **Global Calc Pro** — Precision Mathematical Tools for Everyone.
+
 <!-- QA_SUMMARY_START -->
 ## 📊 Automated QA & Test Report
 *This section is automatically updated by GitHub Actions during automated QA runs.*
 
 ### 🏗️ Build & Code Quality Status
-- **Application Build**: ✅ Success
-- **TypeScript & ESLint**: ✅ Passed without errors
+- **Application Build**: ✅ Success (הבנייה עברה בהצלחה)
+- **TypeScript & ESLint**: ✅ Passed without errors (בדיקות טיפוסים ו-Lint עברו)
 
 ### 🔗 Link Checker Summary (Lychee)
-#### 📋 Excluded Patterns & Reasons:
-- `fonts.googleapis.com` / `fonts.gstatic.com`: External Google Fonts (prevents external network traffic in CI)
-- `https://globalcalcpro.com.*`: Production URL
-- `http://localhost.*`: Dynamic Vite JS bundle assets generated during static prerendering
-- `http://127.0.0.1.*`: Local server routes used during test execution
+#### 📋 Excluded Patterns & Reasons / חוקים שהוחרגו וסיבת ההחרגה:
+- `fonts.googleapis.com` / `fonts.gstatic.com`: External Google Fonts (פונטים חיצוניים - מניעת קריאות רשת ב-CI)
+- `https://globalcalcpro.com.*`: Production URL (קישור דומיין חיצוני פתוח)
+- `http://localhost.*`: Dynamic Vite JS bundle assets generated during static prerendering (נכסים דינמיים)
+- `http://127.0.0.1.*`: Local server routes used during test execution (כתובות שרת מקומי בבדיקות)
 
 #### 📝 Latest Lychee Report:
-_Run QA workflow to generate latest report._
-<!-- QA_SUMMARY_END -->
+## Summary
 
-© **Global Calc Pro** — Precision Mathematical Tools for Everyone.
+| Status        | Count |
+|---------------|-------|
+| 🔍 Total      | 1109  |
+| ✅ Successful | 10    |
+| ⏳ Timeouts   | 0     |
+| 🔀 Redirected | 0     |
+| 👻 Excluded   | 1099  |
+| ❓ Unknown    | 0     |
+| 🚫 Errors     | 0     |
+[Full Github Actions output](https://github.com/Almog787/Global-calculator-pro-pro/actions/runs/31271542161?check_suite_focus=true)
+
+<!-- QA_SUMMARY_END -->
