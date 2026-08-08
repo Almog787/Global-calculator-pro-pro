@@ -62,56 +62,61 @@ const server = http.createServer((req, res) => {
   stream.pipe(res);
 });
 
-server.listen(0, async () => {
-  try {
-    const port = server.address().port;
-    console.log(`Static server listening on port ${port}`);
-    
-    let browser;
+server.listen(0, () => {
+  (async () => {
     try {
-      browser = await chromium.launch();
-    } catch (err) {
-      console.log('Playwright chromium executable not found or failed to launch. Attempting auto-installation...');
+      const port = server.address().port;
+      console.log(`Static server listening on port ${port}`);
+      
+      let browser;
       try {
-        const { execSync } = await import('child_process');
-        execSync('npx playwright install --with-deps chromium', { stdio: 'inherit' });
         browser = await chromium.launch();
-      } catch (installErr) {
-        console.warn('Warning: Playwright browser could not be launched/installed for prerendering:', installErr.message);
-        console.warn('Skipping prerendering step and proceeding with SPA build output.');
-        server.close();
-        return;
-      }
-    }
-
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    
-    console.log(`Prerendering ${allPaths.length} pages...`);
-    
-    for (const route of allPaths) {
-      const url = `http://localhost:${port}${route}`;
-      try {
-        await page.goto(url, { waitUntil: 'networkidle' });
-        // Remove any script tags if you want pure static (optional)
-        const html = await page.content();
-        
-        const routeDir = path.join(distPath, route);
-        if (!fs.existsSync(routeDir)) {
-          fs.mkdirSync(routeDir, { recursive: true });
+      } catch (err) {
+        console.log('Playwright chromium executable not found or failed to launch. Attempting auto-installation...');
+        try {
+          const { execSync } = await import('child_process');
+          execSync('npx playwright install --with-deps chromium', { stdio: 'inherit' });
+          browser = await chromium.launch();
+        } catch (installErr) {
+          console.warn('Warning: Playwright browser could not be launched/installed for prerendering:', installErr.message);
+          console.warn('Skipping prerendering step and proceeding with SPA build output.');
+          server.close();
+          return;
         }
-        fs.writeFileSync(path.join(routeDir, 'index.html'), html);
-        console.log(`Prerendered ${route}`);
-      } catch (e) {
-        console.error(`Failed to prerender ${route}:`, e);
       }
+
+      const context = await browser.newContext();
+      const page = await context.newPage();
+      
+      console.log(`Prerendering ${allPaths.length} pages...`);
+      
+      for (const route of allPaths) {
+        const url = `http://localhost:${port}${route}`;
+        try {
+          await page.goto(url, { waitUntil: 'networkidle' });
+          // Remove any script tags if you want pure static (optional)
+          const html = await page.content();
+          
+          const routeDir = path.join(distPath, route);
+          if (!fs.existsSync(routeDir)) {
+            fs.mkdirSync(routeDir, { recursive: true });
+          }
+          fs.writeFileSync(path.join(routeDir, 'index.html'), html);
+          console.log(`Prerendered ${route}`);
+        } catch (e) {
+          console.error(`Failed to prerender ${route}:`, e);
+        }
+      }
+      
+      await browser.close();
+      server.close();
+      console.log('Prerendering complete!');
+    } catch (globalErr) {
+      console.warn('Unexpected error during prerender:', globalErr?.message || globalErr);
+      server.close();
     }
-    
-    await browser.close();
-    server.close();
-    console.log('Prerendering complete!');
-  } catch (globalErr) {
-    console.warn('Unexpected error during prerender:', globalErr.message);
-    server.close();
-  }
+  })().catch((err) => {
+    console.warn('Unhandled promise error in prerender:', err?.message || err);
+    try { server.close(); } catch (_) {}
+  });
 });
