@@ -1,5 +1,6 @@
 import { useState, useDeferredValue, useEffect, useMemo } from 'react';
 import SEO from '../components/SEO';
+import FAQ from '../components/FAQ';
 import Decimal from 'decimal.js';
 import {
   Chart as ChartJS,
@@ -158,6 +159,22 @@ export default function MortgageCalculator() {
         </div>
       </div>
     </article>
+      
+      <FAQ items={[
+        {
+          question: t.lang === 'he' ? 'מהו החזר חודשי?' : 'What is a monthly payment?',
+          answer: t.lang === 'he' ? 'הסכום שתצטרך לשלם מדי חודש לבנק. הוא מורכב מקרן (הסכום שלווית) וריבית (העלות על ההלוואה).' : 'The amount you need to pay the bank each month. It consists of the principal (amount borrowed) and interest (cost of borrowing).'
+        },
+        {
+          question: t.lang === 'he' ? 'איך הריבית משפיעה על המשכנתא?' : 'How does the interest rate affect the mortgage?',
+          answer: t.lang === 'he' ? 'ככל שהריבית גבוהה יותר, תשלם יותר כסף לבנק לאורך חיי ההלוואה. הריבית נקבעת לפי סיכון הלווה ומדדי הכלכלה.' : 'The higher the interest rate, the more money you will pay the bank over the life of the loan. It is determined by borrower risk and economic indicators.'
+        },
+        {
+          question: t.lang === 'he' ? 'האם כדאי לקחת משכנתא ל-30 שנה?' : 'Should I take a 30-year mortgage?',
+          answer: t.lang === 'he' ? 'משכנתא ארוכה מקטינה את ההחזר החודשי אך מגדילה מאוד את סך הריבית שתשלם לבנק. מומלץ לקצר במידת האפשר.' : 'A longer mortgage reduces the monthly payment but significantly increases the total interest you will pay. It is recommended to shorten it if possible.'
+        }
+      ]} />
+      
       <RelatedCalculators currentId="mortgage" />
     </div>
   );

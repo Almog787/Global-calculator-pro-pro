@@ -10,6 +10,8 @@ export type Translations = {
     result: string;
     allTools: string;
     
+    faqTitle: string;
+    
     // Percentage Finder
     percFinderTitle: string;
     percFinderDesc: string;
@@ -160,6 +162,7 @@ export const translations: Translations = {
     calculate: 'Calculate',
     result: 'Result',
     allTools: 'All Tools',
+    faqTitle: 'Frequently Asked Questions',
 
     percFinderTitle: 'Percentage Finder',
     percFinderDesc: 'Fast and precise percentage calculations for everyday needs.',
@@ -296,6 +299,7 @@ export const translations: Translations = {
     calculate: 'חשב',
     result: 'תוצאה',
     allTools: 'כל הכלים',
+    faqTitle: 'שאלות ותשובות',
 
     percFinderTitle: 'מחשבון אחוזים',
     percFinderDesc: 'חישוב אחוזים מהיר ומדויק לצרכים יומיומיים.',
@@ -846,6 +850,12 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
 function getInitialLanguage(): Language {
   if (typeof window === 'undefined') return 'en';
+  
+  const path = window.location.pathname;
+  const match = path.match(/^\/(en|he|es|fr|ar)(\/|$)/);
+  if (match) {
+    return match[1] as Language;
+  }
   
   const savedLang = localStorage.getItem('globalcalc_lang') as Language;
   if (savedLang && translations[savedLang]) return savedLang;

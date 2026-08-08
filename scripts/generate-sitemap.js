@@ -16,7 +16,7 @@ while ((match = pathRegex.exec(content)) !== null) {
 
 // Predefined general paths
 const staticPaths = [
-  '/',
+  '/all',
   '/contact',
   '/privacy-policy',
   '/terms-of-service',
@@ -24,21 +24,39 @@ const staticPaths = [
   '/suggest'
 ];
 
-const allPaths = Array.from(new Set([...staticPaths, ...dynamicPaths]));
+const rawPaths = Array.from(new Set([...staticPaths, ...dynamicPaths]));
+const languages = ['en', 'he', 'es', 'fr', 'ar'];
 
 const baseUrl = 'https://globalcalcpro.com';
 const lastmod = new Date().toISOString().split('T')[0];
 
-const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allPaths.map(p => `  <url>
-    <loc>${baseUrl}${p}</loc>
+const urlEntries = [];
+
+for (const lang of languages) {
+  for (const p of rawPaths) {
+    const loc = `${baseUrl}/${lang}${p === '/' ? '' : p}`;
+    
+    // Generate hreflang links for this path
+    let hreflangLinks = '';
+    for (const altLang of languages) {
+      hreflangLinks += `\n    <xhtml:link rel="alternate" hreflang="${altLang}" href="${baseUrl}/${altLang}${p === '/' ? '' : p}"/>`;
+    }
+    hreflangLinks += `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}/en${p === '/' ? '' : p}"/>`;
+
+    urlEntries.push(`  <url>
+    <loc>${loc}</loc>${hreflangLinks}
     <lastmod>${lastmod}</lastmod>
-    <changefreq>${p === '/' ? 'weekly' : 'monthly'}</changefreq>
-    <priority>${p === '/' ? '1.0' : p.startsWith('/calculators') ? '0.8' : '0.9'}</priority>
-  </url>`).join('\n')}
+    <changefreq>${p === '/all' ? 'weekly' : 'monthly'}</changefreq>
+    <priority>${p === '/all' ? '1.0' : p.startsWith('/calculators') ? '0.8' : '0.9'}</priority>
+  </url>`);
+  }
+}
+
+const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urlEntries.join('\n')}
 </urlset>
 `;
 
 fs.writeFileSync(path.resolve('public/sitemap.xml'), sitemapContent);
-console.log(`Generated sitemap with ${allPaths.length} URLs.`);
+console.log(`Generated sitemap with ${urlEntries.length} URLs (Multilingual).`);
